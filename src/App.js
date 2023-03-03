@@ -28,10 +28,10 @@ function App() {
         <Routes>
 
 
-          <Route path="/" element={<Home />} />
+          <Route exact path="/" element={<Home />} />
 
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/register' element={<Register />} />
 
 
           <Route path='/create' element={<Create />} />
