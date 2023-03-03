@@ -10,7 +10,7 @@ export default function Catalog({
     return (
 
         <section id="gallery">
-            <h1>Gallery</h1>
+            <h1>Wood Gallery</h1>
             <article class="gallery-container">
 
                 {/* <!--If there are art publications in the database, show each of them--> */}
@@ -22,7 +22,9 @@ export default function Catalog({
             {{/each}}
             {{else}} */}
 
-                <Publication data={...data} />
+
+                <Publication data={data} />
+
 
                 {/* <!--If there are still no art publications in the database display:--> */}
                 <article class="no-available-publications">
@@ -32,7 +34,7 @@ export default function Catalog({
                 {/* {{/if}} */}
 
 
-            </article>
-        </section>
+            </article >
+        </section >
     )
 }

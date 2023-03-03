@@ -8,6 +8,7 @@ export default function Details({
     title,
     description,
     picture,
+    price
 }) {
 
     const onEdit = e => {
@@ -38,7 +39,7 @@ export default function Details({
                     <h2>Title:{title}<br /> </h2>
                     {/* <h3>Author: </h3> */}
                     <h3>Description:{description}</h3>
-                    {/* <h3>Certificate of authenticity: </h3> */}
+                    <h3>Price:{price} </h3>
 
                     {/* <!-- If there is no registered user, do not display buttons--> */}
                     {/* {{#if isAuthenticated}} */}
@@ -56,7 +57,7 @@ export default function Details({
                         {/* <!-- logged in user who has not yet shared the publication--> */}
                         <a href="/artGallerys/{{publication._id}}/shared" className="btn-share">Share publication</a>
                         {/* ${isOwner == false && hasUser == true &&  hasLiked == 0  ? html`<a type='submit' onClick={onLike} className="btn-like" href="#">Like</a>` : nothing} */}
-
+                        <a type='submit' onClick={onLike} className="btn-like" href="#">Like</a>
                         <p className="likes">Likes: </p>
 
                         {/* {{/if}}

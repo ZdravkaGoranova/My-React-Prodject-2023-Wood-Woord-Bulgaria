@@ -115,7 +115,7 @@
     border-color: #ffffff;
     border-style: outset;
     border-width: 3px;
-    background-color: rgb(113, 81, 155);
+    background-color:to right, #e6e451, #8c4414;
 }
 
 .btn-edit,
@@ -150,7 +150,7 @@
 }
 
 .btn-edit {
-    background-color: #542405;
+    background-color: #1ea0cb;
 }
 
 .btn-edit:hover {
@@ -158,7 +158,7 @@
 }
 
 .btn-delete {
-    background-color: #f15505;
+    background-color: #f50404;
 }
 
 .btn-delete:hover {
@@ -166,9 +166,17 @@
 }
 
 .btn-share {
-    background-color: #595c61;
+    background-color: #f3a735;
 }
 
 .btn-share:hover {
+    background-color: #4b4d50;
+}
+
+.btn-like {
+    background-color: #f3a735;
+}
+
+.btn-like:hover {
     background-color: #4b4d50;
 }

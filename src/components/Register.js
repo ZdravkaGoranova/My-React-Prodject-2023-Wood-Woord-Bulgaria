@@ -2,11 +2,11 @@ import '../css/register-login.css'
 import '../css/site.css'
 
 
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 
 export default function Register() {
-    const navigate = useNavigate ();
+    //const navigate = useNavigate ();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 

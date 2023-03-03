@@ -1,7 +1,7 @@
 import '../css/profile.css'
 import '../css/site.css'
 
-export default function Profile() {
+export default function Profile({}) {
     return (
         <section id="profile-page">
         <h1>Full Profile Information</h1>
@@ -29,7 +29,7 @@ export default function Profile() {
 
             <article className="profile-card-icon">
                 {/* <!-- Do not forget to change the path to the image --> */}
-                <img src="/img/profile.jpg" alt="art-image1" />
+                <img src="/img/profile.jpg" alt="profile" />
             </article>
 
         </article>

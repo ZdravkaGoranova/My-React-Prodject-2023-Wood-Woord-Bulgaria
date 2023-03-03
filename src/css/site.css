@@ -70,13 +70,13 @@
     nav ul li {
         display: inline-block;
         margin: 0 0.8em;
-        font-size: 21px;
+        font-size: 25px;
         font-family: 'Barlow', sans-serif;
     }
     
     nav a {
         text-decoration: none;
-        padding: 0.5em;
+        padding: 0.9em;
         color: white;
         /* text-transform: uppercase;*/
     }
@@ -91,7 +91,7 @@
     nav a:hover {
         font-weight: normal;
         border-radius: 1%;
-        background-color: #c47d04;
+        background-color: #c79236;
     }
     
     nav>a {

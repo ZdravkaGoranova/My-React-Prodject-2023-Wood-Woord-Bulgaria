@@ -40,9 +40,9 @@
     height: 230px;
     border-width: 1em;
     border-left-color: rgb(119, 59, 9);
-    border-right-color: rgb(234, 119, 25);
-    border-bottom-color: rgb(234, 119, 25);
-    border-top-color: rgb(234, 119, 25);
+    border-right-color: rgb(242, 210, 184);
+    border-bottom-color: rgb(224, 160, 107);
+    border-top-color: rgb(224, 160, 107);
     border-style: ridge;
 }
 
@@ -82,13 +82,13 @@
     margin-left: 3.2em;
     font-size: 0.9rem;
     cursor: pointer;
-    font-family: 'Barlow', sans-serif;  
+    font-family: 'Barlow', sans-serif;
     box-shadow: 0 0px 13px #742f1194;
 }
 
 .details-btn:hover {
-    box-shadow: none;
     background-image: linear-gradient(to right, #e6e451, #8c4414);
+    box-shadow: none;
 }
 
 .no-available-publications {

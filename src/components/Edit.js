@@ -7,6 +7,7 @@ export default function Edit({
     title,
     description,
     picture,
+    price
 }) {
 
     const onEdit = e => {
@@ -34,7 +35,9 @@ export default function Edit({
                     <label htmlFor="picture">Wood picture:</label>
                     <input type="text" id="picture" name="picture" value={picture} />
 
-                    
+                    <label htmlFor="certificate">Price:</label>
+                    <input type="text" id="certificate" placeholder="Yes" name="price" value={price} />
+
                     <button class="edit-btn" onClick={onEdit}>Edit</button>
                 </form>
 
