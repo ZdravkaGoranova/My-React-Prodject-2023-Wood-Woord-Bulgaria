@@ -4,6 +4,14 @@
 
 
 export default function Create() {
+
+
+    const create = e => {
+        e.preventDefault();
+
+     
+    }
+
     return (
         <section id="create-container">
                 <div className="create-container-info">
@@ -19,7 +27,7 @@ export default function Create() {
                         <input type="text" id="title" placeholder="Spring in the garden" name="title" value="" />
 
                         <label htmlFor="painting-tech">Description:</label>
-                        <input type="text" id="painting-tech" placeholder="Oil paints" name="technique" value="" />
+                        <input type="text" id="painting-tech" placeholder="Oil paints" name="description" value="" />
 
                         <label htmlFor="picture">Wood picture:</label>
                         <input type="text" id="picture" placeholder="http://..." name="picture" value="" />
@@ -27,7 +35,7 @@ export default function Create() {
                         {/* <label htmlFor="certificate">Certificate of authenticity:</label>
                         <input type="text" id="certificate" placeholder="Yes" name="certificate" value="" /> */}
 
-                        <button className="create-btn">Create</button>
+                        <button className="create-btn" type='submit' onClick={create}>Create</button>
 
                     </form>
 
