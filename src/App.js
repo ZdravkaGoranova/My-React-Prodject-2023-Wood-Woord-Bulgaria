@@ -10,17 +10,49 @@ import Profile from './components/Profile.js';
 import Register from './components/Register.js';
 
 
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   BrowserRouter,
+
+// } from 'react-router-dom';
+
+
+
+
 function App() {
   return (
     <>
-      <Home />
-      <Login />
-      <Register />
-      <Create />
-      <Catalog />
-      <Details />
-      <PageNotFound />
-      <Profile />
+      {/* <BrowserRouter>
+        <Routes>
+
+
+          <Route path="/" element={<Home />} />
+
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+
+
+          <Route path='/create' element={<Create />} />
+          <Route path='/catalog' element={<Catalog />} />
+          <Route path='/404' element={<PageNotFound />} />
+          <Route path='/profile' element={<Profile />} />
+ */}
+
+
+
+          <Home />
+          <Login />
+          <Register />
+          <Create />
+          <Catalog />
+          <Details />
+          <PageNotFound />
+          <Profile />
+
+        {/* </Routes>
+      </BrowserRouter> */}
     </>
   );
 }
