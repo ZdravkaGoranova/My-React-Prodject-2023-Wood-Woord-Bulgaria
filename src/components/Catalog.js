@@ -1,32 +1,38 @@
- import '../css/gallery.css'
- import '../css/site.css'
+import '../css/gallery.css'
+import '../css/site.css'
+import Publication from './Publication.js'
 
-export default function Catalog() {
+import React from "react";
+
+export default function Catalog({
+    data,
+}) {
     return (
-        
+
         <section id="gallery">
-        <h1>Gallery</h1>
-        <article class="gallery-container">
+            <h1>Gallery</h1>
+            <article class="gallery-container">
 
-            {/* <!--If there are art publications in the database, show each of them--> */}
+                {/* <!--If there are art publications in the database, show each of them--> */}
 
-            {/* {{#if publications }}
+                {/* {{#if publications }}
 
             {{#each publications}}
             {{>publication}}
             {{/each}}
-
             {{else}} */}
 
-            {/* <!--If there are still no art publications in the database display:--> */}
-            <article class="no-available-publications">
-                <h1>No publications created yet.</h1>
-                <a href="/create" class="create-pub">Create publication</a>
+                <Publication data={...data} />
+
+                {/* <!--If there are still no art publications in the database display:--> */}
+                <article class="no-available-publications">
+                    <h1>No publications created yet.</h1>
+                    <a href="/create" class="create-pub">Create publication</a>
+                </article>
+                {/* {{/if}} */}
+
+
             </article>
-            {/* {{/if}} */}
-
-
-        </article>
-    </section>
+        </section>
     )
 }
