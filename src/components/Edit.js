@@ -2,34 +2,43 @@ import '../create-edit.css'
 import '../css/site.css'
 
 
-export default function Edit() {
+export default function Edit({
+    id,
+    title,
+    description,
+    picture,
+}) {
+
+    const onEdit = e => {
+        e.preventDefault();
+
+
+    };
     return (
-        
+
         <section id="edit-container">
-        <div class="edit-container-info">
-           
-            <img src="/static/img/logreg.jpg" alt="image" />
+            <div class="edit-container-info">
 
-            <form  method="POST" class="container-text">
-                <h2>Edit</h2>
-                <p>Edit your masterpiece!</p>
+                <img src="/static/img/logreg.jpg" alt="image" />
 
-                <label htmlFor="title">Title:</label>
-                <input type="text" id="title" name="title" value="{{book.title}}" />
+                <form method="POST" class="container-text">
+                    <h2>Edit</h2>
+                    <p>Edit your masterpiece!</p>
 
-                <label htmlFor="painting-tech">Painting technique:</label>
-                <input type="text" id="painting-tech" name="technique" value="{{book.technique}}" />
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" id="title" name="title" value={title} />
 
-                <label htmlFor="picture">Art picture:</label>
-                <input type="text" id="picture" name="picture" value="{{book.picture}}" />
+                    <label htmlFor="painting-tech">Description:</label>
+                    <input type="text" id="painting-tech" name="description" value={description} />
 
-                <label htmlFor="certificate">Certificate of authenticity:</label>
-                <input type="text" id="certificate" name="certificate" value="{{book.certificate}}" />
+                    <label htmlFor="picture">Wood picture:</label>
+                    <input type="text" id="picture" name="picture" value={picture} />
 
-                <button class="edit-btn">Edit</button>
-            </form>
+                    
+                    <button class="edit-btn" onClick={onEdit}>Edit</button>
+                </form>
 
-        </div>
-    </section>
+            </div>
+        </section>
     )
 }
