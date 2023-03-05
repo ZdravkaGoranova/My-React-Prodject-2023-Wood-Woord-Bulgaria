@@ -1,6 +1,6 @@
 
- import '../css/create-edit.css'
- import '../css/site.css'
+import '../css/create-edit.css'
+import '../css/site.css'
 
 
 export default function Create({
@@ -12,40 +12,46 @@ export default function Create({
 
 
     const create = e => {
-        e.preventDefault();
+        // e.preventDefault();//да не прзаревда страницата
 
-     
+        // const formData = new FormData(e.curentTarget);
+
+        // const data = Object.fromEntries(formData)
+        // console.log(data);
+
+userS
+
     }
 
     return (
         <section id="create-container">
-                <div className="create-container-info">
-                 
-                    <img src="/img/tools.jpg" alt="image" />
+            <div className="create-container-info">
 
-                    <form method="POST" className="container-text">
+                <img src="/img/tools.jpg" alt="image" />
 
-                        <h2>Create Publication</h2>
-                        <p>Add your own masterpiece!</p>
+                <form method="POST" className="container-text">
 
-                        <label htmlFor="title">Title:</label>
-                        <input type="text" id="title" placeholder="Spring in the garden" name="title" value={title} />
+                    <h2>Create Publication</h2>
+                    <p>Add your own masterpiece!</p>
 
-                        <label htmlFor="painting-tech">Description:</label>
-                        <input type="text" id="painting-tech" placeholder="Oil paints" name="description" value={description} />
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" id="title" placeholder="Spring in the garden" name="title" value={title} />
 
-                        <label htmlFor="picture">Wood picture:</label>
-                        <input type="text" id="picture" placeholder="http://..." name="picture" value={picture} />
+                    <label htmlFor="painting-tech">Description:</label>
+                    <input type="text" id="painting-tech" placeholder="Oil paints" name="description" value={description} />
 
-                        <label htmlFor="certificate">Price:</label>
-                        <input type="text" id="certificate" placeholder="Yes" name="price" value="" />
+                    <label htmlFor="picture">Wood picture:</label>
+                    <input type="text" id="picture" placeholder="http://..." name="picture" value={picture} />
 
-                        <button className="create-btn" type='submit' onClick={create}>Create</button>
+                    <label htmlFor="certificate">Price:</label>
+                    <input type="text" id="certificate" placeholder="Yes" name="price" value="" />
 
-                    </form>
+                    <button className="create-btn" type='submit' onClick={create}>Create</button>
 
-                </div>
-            </section>
-     
+                </form>
+
+            </div>
+        </section>
+
     )
 }
