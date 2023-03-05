@@ -11,8 +11,14 @@ export default function Register() {
     const [password, setPassword] = useState('');
 
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+    }
+    const userChangeHandler = (e) => {
+        setUsername(e.target.value)
+    }
 
-    const register = e => {
+    const register = (e) => {
         e.preventDefault();
 
         // auth
@@ -33,15 +39,15 @@ export default function Register() {
 
                 <img src="/img/24.jpeg" alt="image" />
 
-                <form method="POST" className="container-text">
+                <form onSubmmit={ submitHandler} className="container-text">
                     <h2>Register</h2>
                     <p>Register to get ideas and view the latest masterpieces.</p>
 
                     <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" placeholder="ivan_00" name="username" value={username} />
+                    <input type="text" id="username" placeholder="ivan_00" name="username" value={username} onChange={userChangeHandler}/>
 
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" placeholder="*****" name="password"  value={password}/>
+                    <input type="password" id="password" placeholder="*****" name="password" value={password} />
 
                     <label htmlFor="re-password">Repeat password:</label>
                     <input type="password" id="re-password" placeholder="*****" name="confirmPassword" />
