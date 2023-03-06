@@ -2,8 +2,9 @@
 #profile-page {
     padding-top: 60px;
     padding-bottom: 50px;
-    box-shadow: 0px 0px 10px 2px rgb(111, 44, 122);
+    box-shadow: 0px 0px 10px 2px rgb(211, 142, 39);
 }
+
 
 #profile-page>h1 {
     font-size: 44px;
@@ -19,21 +20,21 @@
     width: 1200px;
     position: relative;
     left: 28%;
-    width: 620px;
-    height: 350px;
+    width: 660px;
+    height: 400px;
     display: flex;
     margin-left: 1.5em;
     /*background-color: #db4a86;*/
     margin-bottom: 1.5em;
-    box-shadow: 0px 0px 20px 4px rgb(211, 142, 39);
+    box-shadow: 0px 0px 20px 4px rgb(227, 178, 104);
 }
 
 .profile-card-icon>img {
-    width: 330px;
+    width: 350px;
     padding: 30px;
     margin-top: -1em;
     margin-left: 0.2em;
-    height: 350px;
+    height: 380px;
 }
 
 .profile-card-info {
@@ -43,7 +44,7 @@
 }
 
 .profile-card-info>h2 {
-    font-size: 23px;
+    font-size: 30px;
     text-align: center;
     line-height: 1.6em;
     word-wrap: break-word;
@@ -79,7 +80,7 @@
     text-align: center;
     width: 100px;
     padding: 3px 3px 3px 3px;
-    background-image: linear-gradient(to right, violet, rgb(41, 151, 151));
+    background-image: linear-gradient(to right, #c5c4a6, #9e582a);
     display: block;
     color: rgb(22, 6, 6);
     font-weight: bold;
@@ -92,7 +93,7 @@
 
 .details-btn:hover {
     box-shadow: none;
-    background-image: linear-gradient(to left, violet, rgb(41, 151, 151));
+    background-image: linear-gradient(to right, #e6e451, #8c4414);
 }
 
 .buttons {

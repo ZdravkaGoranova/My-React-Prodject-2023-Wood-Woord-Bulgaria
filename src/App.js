@@ -41,15 +41,14 @@ function App() {
  */}
 
 
-
-          <Home />
-          <Login />
+            <Home />
+         <Login />
           <Register />
           <Create />
           <Catalog />
           <Details />
-          <PageNotFound />
-          <Profile />
+          <PageNotFound />   
+          <Profile />  
 
         {/* </Routes>
       </BrowserRouter> */}

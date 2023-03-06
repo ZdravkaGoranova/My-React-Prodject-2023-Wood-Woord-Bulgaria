@@ -10,7 +10,7 @@ export default function Home() {
 <img src="/img/2.jpg" alt="logo" />
 <a href="/">Wood World Bulgaria</a>
 
-<ul class="menu">
+<ul clasName="menu">
     <li><a href="/catalog">Gallery</a></li>
     {/* <!-- Logged users -->
          {{#if isAuthenticated}} */}
@@ -29,7 +29,7 @@ export default function Home() {
 {/* {{#if error}} */}
 
 <div>
-<div class="error-box">
+<div clasName="error-box">
     <p></p>
 </div>
 </div>
