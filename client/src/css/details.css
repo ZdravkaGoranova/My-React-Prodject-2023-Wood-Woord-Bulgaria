@@ -8,7 +8,7 @@
 #details-page>h1 {
     font-size: 44px;
     text-align: center;
-    color: rgb(10, 10, 10);
+    color: rgb(255, 255, 255);
     margin-top: -1em;
     margin-bottom: 0.1em;
     padding: 5px;
@@ -170,7 +170,7 @@
 }
 
 .btn-share:hover {
-    background-color: #4b4d50;
+    background-color:  #a83e05;
 }
 
 .btn-like {
@@ -178,5 +178,5 @@
 }
 
 .btn-like:hover {
-    background-color: #4b4d50;
+    background-color: #a83e05;
 }
