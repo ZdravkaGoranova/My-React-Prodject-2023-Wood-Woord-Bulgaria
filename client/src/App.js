@@ -2,7 +2,9 @@
 import './App.css';
 
 import { useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 
+import  Navigation  from './components/Navigation.js'
 import Catalog from './components/Catalog.js';
 import Create from './components/Create.js';
 import Details from './components/Details.js';
@@ -43,33 +45,20 @@ function App() {
 
   return (
     <>
-      {/* <BrowserRouter>
-        <Routes>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path='/create' element={<Create />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/create' element={<Create />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='*' element={<PageNotFound />} />
+        <Route path='/details' element={<Details />} />
+        <Route path='/edit' element={<Edit />} />
 
+      </Routes>
 
-          <Route exact path="/" element={<Home />} />
-
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/register' element={<Register />} />
-
-
-          <Route path='/create' element={<Create />} />
-          <Route path='/catalog' element={<Catalog />} />
-          <Route path='/404' element={<PageNotFound />} />
-          <Route path='/profile' element={<Profile />} />
- */}
-
-      <Home />
-      <Login />
-      <Register />
-      <Create />
-      <Catalog /> 
-      <Edit />
-       <Details />
-      <PageNotFound />
-
-      {/* </Routes>
-      </BrowserRouter> */}
     </>
   );
 }

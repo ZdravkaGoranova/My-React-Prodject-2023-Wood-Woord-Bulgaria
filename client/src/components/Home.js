@@ -5,27 +5,7 @@ import '../css/site.css'
 export default function Home() {
     return (
         <>
-            <nav>
-{/* <!-- Do not forget to change the path to the image --> */}
-<img src="/img/2.jpg" alt="logo" />
-<a href="/">Wood World Bulgaria</a>
-
-<ul clasName="menu">
-    <li><a href="/catalog">Gallery</a></li>
-    {/* <!-- Logged users -->
-         {{#if isAuthenticated}} */}
-    <li><a href="/create">Create Publication</a></li>
-    <li><a href="/profile">Profile</a></li>
-    <li><a href="/logout">Logout</a></li>
-    {/* <!-- Guest users -->
-         {{else}} */}
-    <li><a href="/login">Login</a></li>
-    <li><a href="/register">Register</a></li>
- {/* {{/if}} */}
-</ul>
-
-</nav>
-
+  
 {/* {{#if error}} */}
 
 <div>
