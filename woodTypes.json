@@ -1,102 +1,50 @@
 {
     "todo_1": {
         "_id": "todo_1",
-        "text": "Give dog a bath",
+        "title":"Handmade tabble",
+        "description":"I make hand carved coffee tables, sofa tables, full beds, headboards, and footboards.  Handmade furniture can be completely customized to your specification.",
+        "picture":"https://images.squarespace-cdn.com/content/v1/53ea704de4b0b06772806624/1408368717423-EGX670GNXLH0UUZFL4SV/IMG_0248.JPG",
+        "price":"990",
         "isCompleted": true
     },
     "todo_2": {
-        "_id": "todo_2",
-        "text": "Do laundry",
+        "_id": "todo_1",
+        "title":"Exquisite Hand Carved Tree Trunk Chair",
+        "description":"I make hand carved coffee tables, sofa tables, full beds, headboards, and footboards.  Handmade furniture can be completely customized to your specification.",
+        "picture":"https://foter.com/photos/280/exquisite-hand-carved-tree-trunk-chair-2.jpg",
+        "price":"990",
         "isCompleted": true
     },
     "todo_3": {
-        "_id": "todo_3",
-        "text": "Vacuum floor",
-        "isCompleted": false
+        "_id": "todo_1",
+        "title":"Making Wooden Spoons",
+        "description":"I make hand carved coffee tables, sofa tables, full beds, headboards, and footboards.  Handmade furniture can be completely customized to your specification.",
+        "picture":"https://s3.amazonaws.com/finewoodworking.s3.tauntoncloud.com/app/uploads/2015/12/30155544/w252gaDSCF0323mp-thumb-16x9.jpg",
+        "price":"300",
+        "isCompleted": true
     },
     "todo_4": {
-        "_id": "todo_4",
-        "text": "Feed cat",
+        "_id": "todo_1",
+        "title":"Spoon to Alaska",
+        "description":"I make hand carved coffee tables, sofa tables, full beds, headboards, and footboards.  Handmade furniture can be completely customized to your specification.",
+        "picture":"http://davidhurwitzoriginals.com/blog/wp-content/uploads/2012/10/vermont_wood_spoon1.jpg",
+        "price":"610",
         "isCompleted": true
     },
     "todo_5": {
-        "_id": "todo_5",
-        "text": "Change light bulbs",
-        "isCompleted": false
+        "_id": "todo_1",
+        "title":"Spoons",
+        "description":"3 three empty handmade wooden spoons from different wood and different sizes on a black wooden background Beautiful homemade spoons in a rustic style Wood carving craft",
+        "picture":"https://www.crushpixel.com/big-static14/preview4/3-three-empty-handmade-wooden-1304316.jpg",
+        "price":"500",
+        "isCompleted": true
     },
     "todo_6": {
-        "_id": "todo_6",
-        "text": "Go to Store",
+        "_id": "todo_1",
+        "title":"Woodworker",
+        "description":"Craftsman Henk Verhoeff brings cartoons to life through his amazing woodworking projects. The pieces boast exaggerated silhouettes with giant cracks fashioned in the center of them, and the results look as though they belong in a Disney or Looney Tunes film. Best of all, these pieces are all completely functional. This makes their “damaged beyond repair” construction even more incredible, as it shows that fun and function can go hand-in-hand.",
+        "picture":"https://mymodernmet.com/wp/wp-content/uploads/2020/06/amazing-woodworking-project-11.jpg",
+        "price":"2990",
         "isCompleted": true
-    },
-    "todo_7": {
-        "_id": "todo_7",
-        "text": "Fill gas tank",
-        "isCompleted": true
-    },
-    "todo_8": {
-        "_id": "todo_8",
-        "text": "Change linens",
-        "isCompleted": false
-    },
-    "todo_9": {
-        "_id": "todo_9",
-        "text": "Rake leaves",
-        "isCompleted": true
-    },
-    "1todo_0": {
-        "_id": "todo_10",
-        "text": "Bake Cookies",
-        "isCompleted": false
-    },
-    "1todo_1": {
-        "_id": "todo_11",
-        "text": "Take nap",
-        "isCompleted": true
-    },
-    "1todo_2": {
-        "_id": "todo_12",
-        "text": "Read book",
-        "isCompleted": true
-    },
-    "1todo_3": {
-        "_id": "todo_13",
-        "text": "Exercise",
-        "isCompleted": false
-    },
-    "1todo_4": {
-        "_id": "todo_14",
-        "text": "Give dog a bath",
-        "isCompleted": false
-    },
-    "1todo_5": {
-        "_id": "todo_15",
-        "text": "Do laundry",
-        "isCompleted": false
-    },
-    "1todo_6": {
-        "_id": "todo_16",
-        "text": "Vacuum floor",
-        "isCompleted": false
-    },
-    "1todo_7": {
-        "_id": "todo_17",
-        "text": "Feed cat",
-        "isCompleted": true
-    },
-    "1todo_8": {
-        "_id": "todo_18",
-        "text": "Change light bulbs",
-        "isCompleted": false
-    },
-    "1todo_9": {
-        "_id": "todo_19",
-        "text": "Go to Store",
-        "isCompleted": false
-    },
-    "2todo_0": {
-        "_id": "todo_20",
-        "text": "Fill gas tank",
-        "isCompleted": false
     }
   }

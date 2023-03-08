@@ -13,19 +13,13 @@ export default function Details({
 
     const onEdit = e => {
         e.preventDefault();
-
-     
     };
 
     const onDelete = e => {
         e.preventDefault();
-
-     
     };
     const onLike = e => {
         e.preventDefault();
-
-     
     };
 
     return (

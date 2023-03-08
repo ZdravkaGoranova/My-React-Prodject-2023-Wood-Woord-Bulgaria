@@ -7,20 +7,33 @@ import React, { useState } from 'react';
 
 export default function Register() {
     //const navigate = useNavigate ();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [username, setUsername] = useState('');
+    // const [password, setPassword] = useState('');
 
+    const [gender, setGender] = useState('male');
 
-    const submitHandler = (e) => {
+    const [formValues, setFormValues] = useState({
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+
+    });
+    const onSubmitHandler = (e) => {
         e.preventDefault();
-    }
-    const userChangeHandler = (e) => {
-        setUsername(e.target.value)
-    }
+        console.log();
+    };
+    const onChangeHandler = (e) => {
+        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+    };
+
+    const onGenderChange = (e) => {
+        setGender(e.target.value)
+    };
 
     const register = (e) => {
         e.preventDefault();
-
         // auth
         //     .createUserWithEmailAndPassword(email, password)
         //     .then((auth) => {
@@ -39,25 +52,79 @@ export default function Register() {
 
                 <img src="/img/24.jpeg" alt="image" />
 
-                <form onSubmmit={ submitHandler} className="container-text">
+                <form onSubmit={onSubmitHandler} className="container-text">
                     <h2>Register</h2>
                     <p>Register to get ideas and view the latest masterpieces.</p>
 
+
                     <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" placeholder="ivan_00" name="username" value={username} onChange={userChangeHandler}/>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="ivan_00"
+                        name="username"
+                        value={formValues.username}
+                        onChange={onChangeHandler} 
+                        />
+
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        type="text"
+                        id="email" placeholder="ivan@abv.bg"
+                        name="email"
+                        value={formValues.email}
+                        onChange={onChangeHandler}
+                    />
 
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" placeholder="*****" name="password" value={password} />
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="*****"
+                        name="password"
+                        value={formValues.password}
+                        onChange={onChangeHandler}
+                    />
 
                     <label htmlFor="re-password">Repeat password:</label>
-                    <input type="password" id="re-password" placeholder="*****" name="confirmPassword" />
+                    <input
+                        type="password"
+                        id="re-password"
+                        placeholder="*****"
+                        name="confirmPassword"
+                        onChange={onChangeHandler}
+                    />
 
-                    {/* <label htmlFor="address">Address:</label>
-                    <input type="text" id="address" placeholder="2572 Orphan Road" name="address" /> */}
 
-                    <button className="register-btn" type='submit' onClick={register}>Register</button>
+                    <div className="gender-container">
+                        <label htmlFor="male">Male</label>
+                        <input
+                            type="radio"
+                            id="male"
+                            value="male"
+                            name="gender"
+                            onChange={onGenderChange}
+                            checked={gender === "male"} />
+                    </div>
+                    <div className="gender-container">
+                        <label htmlFor="female">Female</label>
+                        <input
+                            type="radio"
+                            id="female"
+                            value="female"
+                            onChange={onGenderChange}
+                            checked={gender === "female"} />
+                    </div>
+
+                    <button
+                        className="register-btn"
+                        type='submit'
+                        onClick={register}
+                    >
+                        Register</button>
                     <div className="card-no-account">
-                        <p>Already have an account?<a href="/login" /> Sign in</p>
+                        <p>Already have an account?<a href="/login" > Sign in</a>.</p>
+                     
                     </div>
 
                 </form>
