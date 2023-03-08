@@ -59,15 +59,14 @@ function App() {
           <Route path='/profile' element={<Profile />} />
  */}
 
-      {/* <Home />
+      <Home />
       <Login />
       <Register />
       <Create />
-      <Catalog /> */}
+      <Catalog /> 
       <Edit />
-      {/* <Details />
+       <Details />
       <PageNotFound />
-      <Profile /> */}
 
       {/* </Routes>
       </BrowserRouter> */}
