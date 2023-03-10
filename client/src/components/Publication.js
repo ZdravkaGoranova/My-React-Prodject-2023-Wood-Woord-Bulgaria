@@ -2,23 +2,25 @@ import React from "react";
 import '../css/gallery.css'
 import '../css/site.css'
 
-
+import { Link } from 'react-router-dom'
 
 export default function Publication({
-    id, 
-    title, 
-    description, 
-    picture, 
-   
+    _id,
+    title,
+    description,
+    picture,
+    price,
+    isCompleted
+
 }) {
     return (
-        <article class="card-info">
-            <article class="card-info-image">
+        <article className="card-info">
+            <article className="card-info-image">
                 <img src={picture} alt={title} />
             </article>
-            <article class="card-info-text">
-                <h2>Title: { title }</h2>
-                <a href="/artGallerys/{{_id}}/details" class="details-btn">Details</a>
+            <article className="card-info-text">
+                <h2>Title: {title}</h2>
+                <Link to={`/details/${_id}`}  className="details-btn">Details</Link>
             </article>
         </article>
 
