@@ -9,7 +9,7 @@ export default function Home() {
 {/* {{#if error}} */}
 
 <div>
-<div clasName="error-box">
+<div className="error-box">
     <p></p>
 </div>
 </div>

@@ -2,7 +2,7 @@ import '../css/home.css'
 import '../css/site.css'
 
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 export default function Navigation() {
@@ -13,18 +13,18 @@ export default function Navigation() {
                 <img src="/img/2.jpg" alt="logo" />
                 <a href="/">Wood World Bulgaria</a>
 
-                <ul clasName="menu">
-                    <li><Link to="/catalog">Gallery</Link></li>
-            
+                <ul className="menu">
+                    <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/catalog">Gallery</NavLink></li>
+
                     {/* <!-- Logged users -->
      {{#if isAuthenticated}} */}
-                    <li><Link to="/create">Create Publication</Link></li>
-                    <li><Link to="/profile">Profile</Link></li>
-                    <li><Link to="/logout">Logout</Link></li>
+                    <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/create">Create Publication</NavLink></li>
+                    <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/profile">Profile</NavLink></li>
+                    <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/logout">Logout</NavLink></li>
                     {/* <!-- Guest users -->
      {{else}} */}
-                    <li><Link to="/login">Login</Link></li>
-                    <li><Link to="/register">Register</Link></li>
+                    <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/login">Login</NavLink></li>
+                    <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/register">Register</NavLink></li>
                     {/* {{/if}} */}
                 </ul>
 

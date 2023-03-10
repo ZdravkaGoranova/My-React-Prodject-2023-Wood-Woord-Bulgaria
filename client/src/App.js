@@ -4,7 +4,7 @@ import './App.css';
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import  Navigation  from './components/Navigation.js'
+import Navigation from './components/Navigation.js'
 import Catalog from './components/Catalog.js';
 import Create from './components/Create.js';
 import Details from './components/Details.js';
@@ -14,6 +14,8 @@ import PageNotFound from './components/PageNotFound.js';
 import Profile from './components/Profile.js';
 import Register from './components/Register.js';
 import Edit from './components/Edit.js';
+import Logout from './components/Logout.js';
+import Delete from './components/Delete.js';
 
 
 // import {
@@ -48,14 +50,21 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path='/create' element={<Create />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/create' element={<Create />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path="/logout" element={<Logout />} />
+
+        <Route path='/create' element={<Create />} />
+        <Route path='/profile' element={<Profile />} />
+
+        <Route path='/catalog' element={<Catalog />} />
+
+        <Route path='/edit/:productId' element={<Edit />} />
+        <Route path="/delete/:publicId" element={<Delete />} />
+        <Route path='/details/:productId' element={<Details />} />
+
         <Route path='*' element={<PageNotFound />} />
-        <Route path='/details' element={<Details />} />
-        <Route path='/edit' element={<Edit />} />
+
 
       </Routes>
 

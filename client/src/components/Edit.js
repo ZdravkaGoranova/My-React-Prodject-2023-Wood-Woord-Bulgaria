@@ -1,43 +1,101 @@
 import '../css/create-edit.css'
 import '../css/site.css'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
+
 export default function Edit({
-    id,
-    title,
-    description,
-    picture,
-    price,
-    type
+    // id,
+    // title,
+    // description,
+    // picture,
+    // price,
+    // type
 }) {
-    const [formValues, setFormValues] = useState({
+
+    const { productId } = useParams();
+    console.log(productId);
+
+    const navigate = useNavigate();
+    const [product, setProduct] = useState({
         title: "",
         description: "",
         picture: "",
-        price: 0,
-        type: "spoons",
-
+        price: "",
+        type: "",
+    
     });
 
-    const onSubmitHandler = (e) => {
+    
+    useEffect(() => {
+        fetch(`${baseUrl}/products/${productId}`)
+            .then(res => res.json())
+            .then(data => {
+                // const product = data['productId'];
+                console.log(data)
+                console.log(':)')
+
+                setProduct(data)
+            })
+    }, [productId]);
+
+
+    const update = async (productId, product) => {
+        const { ...data} = product;
+       
+        const response = await fetch(`${baseUrl}/products/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        return result.user;
+    };
+
+    const onSubmitHandler = (e,productData) => {
         e.preventDefault();
-        console.log();
+
+        console.log(':):):)')
+        if (!productData.picture.startsWith("https://")) {
+            alert("Please enter a valid URL address");
+        } else {
+            try {
+                update(productId, productData)
+                    .then(() => {
+                        navigate(`/details/${productId}`, { replace: true });
+                    });
+            } catch (err) {
+                alert(err);
+            }
+        }
+
+
     };
     const onChangeHandler = (e) => {
-        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+        setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
     };
 
     const onEdit = e => {
         e.preventDefault();
+
+        
     };
     return (
 
         <section id="edit-container">
             <div className="edit-container-info">
 
-                <img src="/img/tools.jpg" alt="image" />
+                <img src={product?.picture} alt="image" />
 
-                <form onSubmit={onSubmitHandler} className="container-text">
+                <form onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
+                
                     <h2>Edit</h2>
                     <p>Edit your masterpiece!</p>
 
@@ -46,7 +104,7 @@ export default function Edit({
                         type="text"
                         id="title"
                         name="title"
-                        value={formValues.title}
+                        value={product?.title}// value={product.title}
                         onChange={onChangeHandler}
                     />
 
@@ -55,7 +113,7 @@ export default function Edit({
                         type="text"
                         id="painting-tech"
                         name="description"
-                        value={formValues.description}
+                        value={product?.description}
                         onChange={onChangeHandler}
                     />
 
@@ -64,7 +122,7 @@ export default function Edit({
                         type="text"
                         id="picture"
                         name="picture"
-                        value={formValues.picture}
+                        value={product?.picture}// value={product.picture}
                         onChange={onChangeHandler}
                     />
 
@@ -73,7 +131,7 @@ export default function Edit({
                         id="certificate"
                         placeholder="Yes"
                         name="price"
-                        value={formValues.price}
+                        value={product?.price}
                         onChange={onChangeHandler}
                     />
                     <label htmlFor="type">Type:</label>
@@ -81,7 +139,7 @@ export default function Edit({
                         type="type"
                         id="certificate"
                         name="type"
-                        value={formValues.type}
+                        value={product?.type}
                         onChange={onChangeHandler}
                     >
                         <option value="spoons">Spoons</option>
@@ -91,7 +149,7 @@ export default function Edit({
                         <option value="toolboxes">Toolboxes</option>
                         <option value="athers">Оther</option>
                     </select>
-                    <button className="edit-btn" onClick={onEdit}>Edit</button>
+                    <button className="edit-btn" >Edit</button>
                 </form>
 
             </div>

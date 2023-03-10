@@ -20,9 +20,35 @@ export default function Register() {
         confirmPassword: "",
 
     });
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        console.log();
+    const onSubmitHandler = (ev, userData) => {
+        ev.preventDefault();
+        // if (userData.password.length < 8
+        //     || !/[A-Z]/.test(userData.password)
+        //     || !/[0-9]/.test(userData.password)
+        // ) {
+        //     alert("Please enter a valid password!");
+        // } else {
+        //     if (userData.password !== userData.rePass) {
+        //         alert("Invalid data provided!");
+        //     } else {
+        //         try {
+        //             const emailRegExp = new RegExp('^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+.[a-zA-Z]{2})$');
+        //             if (emailRegExp.test(userData.email)) {
+        //                 service.registerUser(userData)
+        //                     .then(result => {
+        //                         if (typeof result !== "string") {
+        //                             userLogin(result);
+        //                             navigate("/", { replace: true });
+        //                         } else {
+        //                             alert("User with this name already exists!");
+        //                         }
+        //                     });
+        //             }
+        //         } catch (err) {
+        //             alert(err);
+        //         }
+        //     }
+        // }
     };
     const onChangeHandler = (e) => {
         setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
@@ -64,7 +90,8 @@ export default function Register() {
                         placeholder="ivan_00"
                         name="username"
                         value={formValues.username}
-                        onChange={onChangeHandler} 
+                        onChange={(e) =>onChangeHandler(e)} 
+                      
                         />
 
                     <label htmlFor="email">Email:</label>
@@ -73,7 +100,7 @@ export default function Register() {
                         id="email" placeholder="ivan@abv.bg"
                         name="email"
                         value={formValues.email}
-                        onChange={onChangeHandler}
+                        onChange={(e) =>onChangeHandler(e)} 
                     />
 
                     <label htmlFor="password">Password:</label>
@@ -83,16 +110,34 @@ export default function Register() {
                         placeholder="*****"
                         name="password"
                         value={formValues.password}
-                        onChange={onChangeHandler}
+                        onChange={(e) =>onChangeHandler(e)} 
                     />
 
                     <label htmlFor="re-password">Repeat password:</label>
+                    {/* <ol>
+                            <li 
+                                className={data.password.length >= 8 ? styles["correct"] : styles["wrong"]}
+                            >
+                                At least 8 characters long
+                            </li>
+                            <li
+                                className={/[A-Z]/.test(data.password) ? styles["correct"] : styles["wrong"]}
+                            >
+                                At least 1 upper case character
+                            </li>
+                            <li
+                                className={/[0-9]/.test(data.password) ? styles["correct"] : styles["wrong"]}
+                            >
+                                At least 1 numeric character
+                            </li>
+                        </ol> */}
+                    
                     <input
                         type="password"
                         id="re-password"
                         placeholder="*****"
                         name="confirmPassword"
-                        onChange={onChangeHandler}
+                        onChange={(e) =>onChangeHandler(e)} 
                     />
 
 
