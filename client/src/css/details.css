@@ -120,6 +120,7 @@
 
 .btn-edit,
 .btn-delete,
+.btn-back,
 .btn-share {
     color: #fff;
     font-family: 'EB Garamond', serif;
@@ -141,6 +142,7 @@
 }
 
 .btn-edit:hover,
+.btn-back:hover,
 .btn-delete:hover,
 .vote-up:hover,
 .vote-down:hover {
@@ -165,6 +167,14 @@
     background-color: #da4c06;
 }
 
+
+.btn-back {
+    background-color: #c49065;
+}
+
+.btn-back:hover {
+    background-color: #387183;
+}
 .btn-share {
     background-color: #f3a735;
 }
