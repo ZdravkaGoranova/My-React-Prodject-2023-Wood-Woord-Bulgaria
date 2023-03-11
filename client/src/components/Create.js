@@ -2,30 +2,92 @@
 import '../css/create-edit.css'
 import '../css/site.css'
 
-import React, { useState } from 'react';
+
+import  { useEffect,useState,useContext} from 'react';
+import { useNavigate } from "react-router-dom";
+// import { AuthContext } from "../../contexts/AuthContext";
+
+const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 export default function Create({
-    title,
-    description,
-    picture,
-    price,
-    type,
+    // title,
+    // description,
+    // picture,
+    // price,
+    // type,
 }) {
-    const [formValues, setFormValues] = useState({
-                title: "",
-                description: "",
-                picture: "",
-                price: 0,
-                type: "spoons",
-        
-            });
 
-    const onSubmitHandler = (e) => {
+    // const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    // const token = user.accessToken;
+    // const _ownerId = user._id;
+    
+  
+    const [product, setProduct] = useState({
+     
+        title: "",
+        description: "",
+        picture: "",
+        price: "",
+        type: "",
+    
+    
+    });
+
+    
+    // useEffect(() => {
+    //     fetch(`${baseUrl}/products`)
+    //         .then(res => res.json())
+    //         .then(data => {
+           
+    //             console.log(data)
+    //             console.log(':)')
+
+    //             setProduct(data)
+    //         })
+    // }, []);
+
+    const create = async (productData) => {
+        const {  ...data } = productData;
+        console.log("----------");
+        console.log(productData);
+        const response = await fetch(baseUrl, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+    
+        const result = await response.json();
+        console.log(result);
+       
+        console.log("краи");
+        return result;
+    };
+
+    const onSubmitHandler = (e,productData) => {
         e.preventDefault();
-        console.log();
+      
+        console.log(':):):)')
+   
+        if (!productData.picture.startsWith("https://")) {
+            alert("Please enter a valid URL address");
+        } else {
+            try {
+                      
+        console.log('тук си')
+                create({ ...productData })
+                    .then(() => {
+                        navigate("/catalog", { replace: true });
+                    });
+            } catch (err) {
+                alert(err);
+            }
+        }
     };
     const onChangeHandler = (e) => {
-        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+        setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
     };
 
     const onCreate = (e) => {
@@ -46,7 +108,7 @@ export default function Create({
 
                 <img src="/img/tools.jpg" alt="image" />
 
-                <form onSubmit={onSubmitHandler} className="container-text">
+                <form  onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
 
                     <h2>Create Publication</h2>
                     <p>Add your own masterpiece!</p>
@@ -57,7 +119,7 @@ export default function Create({
                     id="title"
                      placeholder="Handmade product "
                      name="title"
-                     value={formValues.title}
+                     value={product?.title}
                      onChange={onChangeHandler}
                      />
 
@@ -67,7 +129,7 @@ export default function Create({
                      id="painting-tech"
                      placeholder="Wood product..."
                      name="description"
-                     value={formValues.description}
+                     value={product?.description}
                      onChange={onChangeHandler}
                      />
 
@@ -77,7 +139,7 @@ export default function Create({
                      id="picture" 
                     placeholder="http://..."
                      name="picture" 
-                    value={formValues.picture} 
+                    value={product?.picture} 
                     onChange={onChangeHandler}
                     />
 
@@ -85,9 +147,9 @@ export default function Create({
                     <input
                     type="text"
                      id="certificate"
-                     placeholder="Yes" 
+                     placeholder="10" 
                     name="price" 
-                    value={formValues.price} 
+                    value={product?.price} 
                     onChange={onChangeHandler}
                      />
                      <label htmlFor="type">Type:</label>
@@ -95,7 +157,7 @@ export default function Create({
                          type="type"
                          id="certificate"
                          name="type"
-                         value={formValues.type}
+                         value={product?.type}
                          onChange={onChangeHandler}
                      >
                          <option value="spoons">Spoons</option>
@@ -106,7 +168,7 @@ export default function Create({
                         <option value="athers">Оther</option>
                      </select>
 
-                    <button className="create-btn" type='submit' onClick={onCreate}>Create</button>
+                    <button className="create-btn" type='submit' >Create</button>
 
                 </form>
 

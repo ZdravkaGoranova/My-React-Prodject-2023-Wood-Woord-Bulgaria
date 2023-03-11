@@ -74,7 +74,7 @@ export default function Details({
                         <Link to={`/edit/${product._id}`} className="btn-edit" type='submit' >Edit</Link>
                         {/* <Link to={`/edit/${product._id}`} className="btn-edit" type='submit' onClick={onEdit}>Edit</Link> */}
 
-                        <Link to={`/delete/${product._id}`} className="btn-delete" type='submit' onClick={onDelete}>Delete</Link>
+                        <Link to={`/delete/${product._id}`} className="btn-delete" type='submit' >Delete</Link>
                         {/* {{else}}
                     {{#if isWished}} */}
                         {/* <!-- logged in user who has already shared the publication--> */}
