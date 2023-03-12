@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
-
+console.log("delelee :):):)")
 export default function Delete ()  {
     const { productId } = useParams();
     const navigate = useNavigate();

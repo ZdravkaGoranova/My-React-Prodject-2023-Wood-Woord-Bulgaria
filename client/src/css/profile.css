@@ -17,24 +17,24 @@
 }
 
 .profile-card {
-    width: 1200px;
+  
     position: relative;
     left: 28%;
-    width: 660px;
+    width: 620px;
     height: 400px;
     display: flex;
     margin-left: 1.5em;
-    /*background-color: #db4a86;*/
+    background-color: #ffffff;
     margin-bottom: 1.5em;
     box-shadow: 0px 0px 20px 4px rgb(227, 178, 104);
 }
 
 .profile-card-icon>img {
-    width: 350px;
+    width: 320px;
     padding: 30px;
     margin-top: -1em;
     margin-left: 0.2em;
-    height: 380px;
+    height: 340px;
 }
 
 .profile-card-info {
@@ -51,7 +51,7 @@
     margin-top: 1em;
     margin-bottom: 0.5em;
     font-family: 'EB Garamond', serif;
-    color: white;
+    color: rgb(13, 0, 0);
 }
 
 .profile-card-info>h3 {
@@ -60,7 +60,7 @@
     word-wrap: break-word;
     padding-left: 10px;
     margin-left: 1em;
-    color: rgb(233, 232, 225);
+    color: rgb(16, 14, 0);
     font-family: 'EB Garamond', serif;
 }
 
@@ -70,7 +70,7 @@
     word-wrap: break-word;
     padding-left: 10px;
     margin-top: 0.2em;
-    color: rgb(233, 232, 225);
+    color: rgb(16, 14, 0);
     margin-left: 1em;
     margin-top: 3em;
     font-family: 'EB Garamond', serif;

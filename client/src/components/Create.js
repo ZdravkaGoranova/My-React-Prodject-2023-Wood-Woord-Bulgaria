@@ -24,14 +24,13 @@ export default function Create({
     
 
     const [product, setProduct] = useState({
-     
+    
         title: "",
         description: "",
         picture: "",
         price: "",
         type: "",
-    
-    
+
     });
 
     const create = async (productData) => {

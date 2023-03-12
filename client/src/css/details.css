@@ -16,23 +16,27 @@
 }
 
 .details-card {
+ 
     width: 1200px;
     position: relative;
     left: 25%;
-    width: 680px;
-    height: 360px;
+    width: 600px;
+    height: 400px;
     display: flex;
     margin-left: 1.5em;
     background-color: #f5f2f0;
     margin-bottom: 1.5em;
+    border: 8px solid white
 }
 
 .details-card-image>img {
-    width: 390px;
-    height: 360px;
+  
+    width: 300px;
+    height: 345px;
 }
 
 .details-card-text {
+  
     width: 290px;
     position: relative;
     height: auto;
@@ -44,11 +48,13 @@
     height: auto;
     text-align: center;
     margin-left: 15px;
-    padding-left: 10px;
+    padding-left: 20px;
     box-shadow: 0px 0px 20px 0px #0e1313;
 }
 
 .details-card-text>h2 {
+    border: 1px solid black;
+    padding: 10px;
     font-size: 23px;
     text-align: center;
     line-height: 1.6em;
@@ -60,6 +66,8 @@
 }
 
 .details-card-text>h3 {
+    border: 1px solid black;
+    padding: 10px;
     font-size: 14.5px;
     line-height: 1.5em;
     word-wrap: break-word;
@@ -93,9 +101,12 @@
     margin-top: 5em;
     position: relative;
     text-align: center;
+   
+    top: -110px;
 }
 
 .buttons>.shared-pub {
+    
     color: #fff;
     font-family: 'EB Garamond', serif;
     border: none;
@@ -116,12 +127,14 @@
     border-style: outset;
     border-width: 3px;
     background-color:to right, #e6e451, #8c4414;
+  
 }
 
 .btn-edit,
 .btn-delete,
 .btn-back,
 .btn-share {
+  
     color: #fff;
     font-family: 'EB Garamond', serif;
     border: none;
@@ -156,15 +169,15 @@
 }
 
 .btn-edit:hover {
-    background-color: #387183;
+    background-color: #056987;
 }
 
 .btn-delete {
-    background-color: #f50404;
+    background-color: #da6565;
 }
 
 .btn-delete:hover {
-    background-color: #da4c06;
+    background-color: #e42c0c;
 }
 
 
@@ -173,7 +186,7 @@
 }
 
 .btn-back:hover {
-    background-color: #387183;
+    background-color: #cb7e3e;
 }
 .btn-share {
     background-color: #f3a735;
