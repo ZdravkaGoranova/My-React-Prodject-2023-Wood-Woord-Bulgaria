@@ -26,10 +26,10 @@ export default function Edit({
         picture: "",
         price: "",
         type: "",
-    
+
     });
 
-    
+
     useEffect(() => {
         fetch(`${baseUrl}/products/${productId}`)
             .then(res => res.json())
@@ -44,8 +44,8 @@ export default function Edit({
 
 
     const update = async (productId, product) => {
-        const { ...data} = product;
-       
+        const { ...data } = product;
+
         const response = await fetch(`${baseUrl}/products/${productId}`, {
             method: 'PUT',
             headers: {
@@ -59,7 +59,7 @@ export default function Edit({
         return result.user;
     };
 
-    const onSubmitHandler = (e,productData) => {
+    const onSubmitHandler = (e, productData) => {
         e.preventDefault();
 
         console.log(':):):)')
@@ -85,7 +85,7 @@ export default function Edit({
     const onEdit = e => {
         e.preventDefault();
 
-        
+
     };
     return (
 
@@ -95,7 +95,7 @@ export default function Edit({
                 <img src={product?.picture} alt="image" />
 
                 <form onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
-                
+
                     <h2>Edit</h2>
                     <p>Edit your masterpiece!</p>
 
@@ -142,12 +142,13 @@ export default function Edit({
                         value={product?.type}
                         onChange={onChangeHandler}
                     >
-                        <option value="spoons">Spoons</option>
-                        <option value="crockery">Crockery</option>
-                        <option value="sculptures">Sculptures</option>
-                        <option value="furnitures">Furnitures</option>
-                        <option value="toolboxes">Toolboxes</option>
-                        <option value="athers">Оther</option>
+                        <option value="spoons" name="spoons">Spoons</option>
+                        <option value="chairs" name="chairs">Chairs</option>
+                        <option value="ladles" name="ladles">Ladles</option>
+                        <option value="furnitures" name="furnitures">Furnitures</option>
+                        <option value="toolboxes" name="toolboxes">Toolboxes</option>
+                        <option value="handtools" name="handtools">Handtools</option>
+                        <option value="other" name="other">Оther</option>
                     </select>
                     <button className="edit-btn" >Edit</button>
                 </form>

@@ -146,12 +146,13 @@ export default function Create({
                          value={product?.type}
                          onChange={onChangeHandler}
                      >
-                         <option value="spoons">Spoons</option>
-                         <option value="crockery">Crockery</option>
-                         <option value="sculptures">Sculptures</option>
-                         <option value="furnitures">Furnitures</option>
-                         <option value="toolboxes">Toolboxes</option>
-                        <option value="athers">Оther</option>
+                          <option value="spoons" name="spoons">Spoons</option>
+                        <option value="chairs" name="chairs">Chairs</option>
+                        <option value="ladles" name="ladles">Ladles</option>
+                        <option value="furnitures" name="furnitures">Furnitures</option>
+                        <option value="toolboxes" name="toolboxes">Toolboxes</option>
+                        <option value="handtools" name="handtools">Handtools</option>
+                        <option value="other" name="other">Оther</option>
                      </select>
 
                     <button className="create-btn" type='submit' >Create</button>

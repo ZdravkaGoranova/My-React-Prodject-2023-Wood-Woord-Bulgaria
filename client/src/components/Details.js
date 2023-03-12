@@ -26,8 +26,8 @@ export default function Details({
             .then(res => res.json())
             .then(data => {
                 // const product = data['productId'];
-                console.log(data)
-                console.log(':)')
+                // console.log(data)
+                // console.log(':)')
 
                 setProduct(data)
             })
@@ -61,7 +61,7 @@ export default function Details({
                     {/* <h3>Author: </h3> */}
                     <h3>Description:     {product.description}</h3>
                     <h3>Price:   {product.price} </h3>
-
+                    <h3>Type:   {product.type} </h3>
                     {/* <!-- If there is no registered user, do not display buttons--> */}
                     {/* {{#if isAuthenticated}} */}
                     <div className="buttons">

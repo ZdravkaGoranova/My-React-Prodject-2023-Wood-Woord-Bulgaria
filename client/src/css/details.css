@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 #details-page {
     padding-top: 60px;
     padding-bottom: 50px;
-  
+
 }
 
 #details-page>h1 {
@@ -16,7 +17,7 @@
 }
 
 .details-card {
- 
+
     width: 1200px;
     position: relative;
     left: 25%;
@@ -30,13 +31,13 @@
 }
 
 .details-card-image>img {
-  
+
     width: 300px;
     height: 345px;
 }
 
 .details-card-text {
-  
+
     width: 290px;
     position: relative;
     height: auto;
@@ -101,12 +102,12 @@
     margin-top: 5em;
     position: relative;
     text-align: center;
-   
+
     top: -110px;
 }
 
 .buttons>.shared-pub {
-    
+
     color: #fff;
     font-family: 'EB Garamond', serif;
     border: none;
@@ -126,15 +127,16 @@
     border-color: #ffffff;
     border-style: outset;
     border-width: 3px;
-    background-color:to right, #e6e451, #8c4414;
-  
+    background-color: to right, #e6e451, #8c4414;
+
 }
 
 .btn-edit,
 .btn-delete,
 .btn-back,
-.btn-share {
-  
+.btn-share
+ {
+
     color: #fff;
     font-family: 'EB Garamond', serif;
     border: none;
@@ -157,6 +159,7 @@
 .btn-edit:hover,
 .btn-back:hover,
 .btn-delete:hover,
+
 .vote-up:hover,
 .vote-down:hover {
     -webkit-transform: scale(1.1);
@@ -188,12 +191,13 @@
 .btn-back:hover {
     background-color: #cb7e3e;
 }
+
 .btn-share {
     background-color: #f3a735;
 }
 
 .btn-share:hover {
-    background-color:  #a83e05;
+    background-color: #a83e05;
 }
 
 .btn-like {
@@ -202,4 +206,37 @@
 
 .btn-like:hover {
     background-color: #a83e05;
+}
+
+
+.btn-catalog {
+    background-color: #f3a735;
+}
+
+.btn-catalog {
+    background-color: #a26528;
+}
+
+
+.btn-catalog {
+
+    color: #fff;
+    font-family: 'EB Garamond', serif;
+    border: none;
+    padding: 9px;
+    outline: none;
+    font-size: 15.3px;
+    font-weight:20;
+    margin-top: 10px;
+    margin-bottom: 1em;
+    border-radius: 9px;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    -webkit-transition: 300ms ease-in-out;
+    -o-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+    border-color: #ffffff;
+    border-style: outset;
+    border-width: 3px;
+   
 }

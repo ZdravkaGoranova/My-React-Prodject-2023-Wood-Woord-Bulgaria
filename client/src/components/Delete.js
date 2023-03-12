@@ -25,7 +25,7 @@ export default function Delete ()  {
 
 
     useEffect(() => {
-        deleteProduct(productId, )
+        deleteProduct(productId )
             .then(() => {
                 navigate("/catalog", { replace: true });
             })

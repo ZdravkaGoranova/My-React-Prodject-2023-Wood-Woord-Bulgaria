@@ -1,3 +1,5 @@
+
+
 import '../css/gallery.css'
 import '../css/site.css'
 
@@ -7,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:3030/jsonstore';
 
-export default function Catalog({
+export default function Toolboxes({
     //data,
 }) {
     console.log(':)')
@@ -26,18 +28,16 @@ export default function Catalog({
     }, []);
 
     console.log(products)
-
     const filteredItems = products.filter(item => item.type === 'toolboxes');
+
     console.log(filteredItems);
-
-
-    //console.log(typeof products)
+    console.log(filteredItems.length);
     return (
 
         < section id="gallery" >
             <h1>Wood Gallery</h1>
             <article className="gallery-container">
-                <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
+            <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
                 <Link to={`/catalog/Chairs`} className="btn-catalog" type='submit' >Chairs</Link>
                 <Link to={`/catalog/Ladles`} className="btn-catalog" type='submit' >Ladles</Link>
                 <Link to={`/catalog/Furnitures`} className="btn-catalog" type='submit' >Furnitures </Link>
@@ -45,24 +45,22 @@ export default function Catalog({
                 <Link to={`/catalog/Handtools`} className="btn-catalog" type='submit' >Handtools </Link>
                 <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link>
 
-
                 <ul >
-                    {products
-                        ? Object.values(products).map(product =>
+                    {filteredItems.length > 0
+                        ? Object.values(filteredItems).map(product =>
                             <li key={product._id}>
                                 <Publication {...product} />
                             </li>)
-                        :
-                        <article className="no-available-publications">
-                            <h1>No publications created yet.</h1>
-                            <a href="/create" className="create-pub">Create publication</a>
-                        </article>
+                        : products.length === 0
+                            ? <article className="no-available-publications">
+                                <h1>No product created yet.</h1>
+                                <a href="/create" className="create-pub">Create product</a>
+                            </article>
+                            : null
                     }
                 </ul>
-
-
-
             </article >
         </section >
     )
 }
+

@@ -16,7 +16,13 @@ import Register from './components/Register.js';
 import Edit from './components/Edit.js';
 import Logout from './components/Logout.js';
 import Delete from './components/Delete.js';
-
+import Spoons from './components/Spoons.js';
+import Chairs from './components/Chairs.js';
+import Ladles from './components/Ladles.js';
+import Furnitures from './components/Furnitures.js';
+import Toolboxes from './components/Toolboxes.js';
+import Handtools from './components/Handtools.js';
+import Other from './components/Оther.js';
 
 // import {
 //   BrowserRouter as Router,
@@ -59,8 +65,16 @@ function App() {
 
         <Route path='/catalog' element={<Catalog />} />
 
+        <Route path='/catalog/Spoons' element={<Spoons />} />
+        <Route path='/catalog/Chairs' element={<Chairs />} />
+        <Route path='/catalog/Ladles' element={<Ladles />} />
+        <Route path='/catalog/Furnitures' element={<Furnitures />} />
+        <Route path='/catalog/Toolboxes' element={<Toolboxes />} />
+        <Route path='/catalog/Handtools' element={<Handtools />} />
+        <Route path='/catalog/Оther' element={<Other />} />
+
         <Route path='/edit/:productId' element={<Edit />} />
-        <Route path="/delete/:publicId" element={<Delete />} />
+        <Route path="/delete/:productId" element={<Delete />} />
         <Route path='/details/:productId' element={<Details />} />
 
         <Route path='*' element={<PageNotFound />} />
