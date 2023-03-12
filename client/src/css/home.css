@@ -1,10 +1,10 @@
 #home-page {
-   
+
     background-position: 100% 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: local;
-   height:500px;
+    height: 500px;
 }
 
 .auto-content {
@@ -31,11 +31,13 @@
 
 #home-page-content>h1 {
     text-align: center;
-    font-size: 45px;
-    margin-top: 0.5em;
-    color: white;
+    font-size: 60px;
+    color: rgb(19, 12, 5);
     font-family: 'Barlow', sans-serif;
+    -webkit-text-stroke: 1px rgb(243, 235, 235);
+  
 }
+
 
 #home-page-content {
     margin: auto;
@@ -64,10 +66,11 @@
     margin-bottom: 1em;
     left: 10%;
     text-align: center;
+
     box-shadow: 0px 0px 20px 10px rgb(202, 101, 51);
 }
 
-.content-publication {
+/* .content-publication {
     display: inline;
     width: 750px;
     border-style: double;
@@ -115,13 +118,13 @@
     word-wrap: break-word;
     font-family: 'Barlow', sans-serif;
     margin-bottom: 0.5em;
-}
+} */
 
 .image-details,
 .create-pub,
 .view-gallery {
     background-color: #da894b;
-    color: #fff;    
+    color: #fff;
     padding: 6px;
     font-size: 13px;
     border-radius: 10px;

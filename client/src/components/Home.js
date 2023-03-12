@@ -1,33 +1,54 @@
 
 import '../css/home.css'
 import '../css/site.css'
+import React, { useState, useEffect } from "react";
+import Publication from './Publication.js'
+
+const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 export default function Home() {
+    const [products, setProducts] = useState([])
+    useEffect(() => {
+        fetch(`${baseUrl}`)
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                // console.log(data.products)
+                console.log(Object.values(data.products))
+                setProducts(Object.values(data.products))
+
+            })
+    }, []);
+
+    const lastTwoProducts = products.slice(-2)
+    console.log(lastTwoProducts);
+
     return (
         <>
-
             <div>
                 <div className="error-box">
                     <p></p>
                 </div>
             </div>
-
-
-
             <section id="home-page">
                 <article className="auto-content">
                     <h1>Woor Woord Bulgaria</h1>
-
                 </article>
             </section>
-            <section id="home-page-content">                         <h1>Statistics of shared publication</h1>                         <article className="home-page-content-publications">
-                {/* <!--If there are publications in the database, show the following view for each created publication--> */}                             {/* {{#each publicationData}} */}                             <article className="content-publication">                                 <h1>Title: </h1>
-                    {/* <!--If no one has shared the post yet, the number should be zero --> */}                                 <p>Number of people shared the publication:</p>                                 <a href="/artGallerys/{{_id}}/details" className="image-details">View publication</a>                             </article>
-
-                {/* <!--If there are no publications yet, show:-->
-                    {{else}} */}
-                <article className="no-publication">                                 <h1>There are no publications yet.</h1>                                 <a href="/catalog" className="view-gallery">View Gallery</a>                             </article>                             {/* {{/each}} */}
-            </article>
+            <section id="home-page-content">
+                <h1>Statistics of last two Products publication</h1>
+                <article className="home-page-content-publications">
+                    <ul >
+                        {lastTwoProducts
+                            ? Object.values(lastTwoProducts).map(product =>
+                                <li key={product._id}>
+                                    <Publication {...product} />
+                                </li>)
+                            :
+                            null
+                        }
+                    </ul>
+                </article>
             </section>
         </>
     )

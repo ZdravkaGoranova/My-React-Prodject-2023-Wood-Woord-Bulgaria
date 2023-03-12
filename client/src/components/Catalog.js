@@ -5,7 +5,7 @@ import Publication from './Publication.js'
 import React, { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 
-const baseUrl = 'http://localhost:3030/jsonstore';
+const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 export default function Catalog({
     //data,
@@ -14,7 +14,7 @@ export default function Catalog({
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch(`${baseUrl}/woodTypes`)
+        fetch(`${baseUrl}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -27,9 +27,15 @@ export default function Catalog({
 
     console.log(products)
 
-    const filteredItems = products.filter(item => item.type === 'toolboxes');
-    console.log(filteredItems);
+    // const filteredItems = products.filter(item => item.type === 'toolboxes');
+    // console.log(filteredItems);
 
+    // const sortedObjects = products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    // // използваме slice(), за да вземем първите 3 елемента от сортирания масив и reverse(), за да ги обърнем в правилния ред
+    // const lastThreeObjects = sortedObjects.slice(0, 3).reverse();
+    const lastThreeObjects = products.slice(-3)
+    console.log(lastThreeObjects);
 
     //console.log(typeof products)
     return (
