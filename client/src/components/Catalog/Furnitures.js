@@ -1,20 +1,22 @@
-import '../css/gallery.css'
-import '../css/site.css'
+
+    
+import '../Catalog/gallery.css'
+
 
 import Publication from './Publication.js'
 import React, { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 
-const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
+const baseUrl = 'http://localhost:3030/jsonstore';
 
-export default function Catalog({
+export default function Furnitures({
     //data,
 }) {
     console.log(':)')
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        fetch(`${baseUrl}`)
+        fetch(`${baseUrl}/woodTypes`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -25,38 +27,26 @@ export default function Catalog({
             })
     }, []);
 
-    console.log(Object.values(products))
-    console.log(typeof products)
+    console.log(products)
+    const filteredItems = products.filter(item => item.type === 'furnitures');
 
-    // const filteredItems = products.filter(item => item.type === 'toolboxes');
-    // console.log(filteredItems);
-
-    // const sortedObjects = products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-    // // използваме slice(), за да вземем първите 3 елемента от сортирания масив и reverse(), за да ги обърнем в правилния ред
-    // const lastThreeObjects = sortedObjects.slice(0, 3).reverse();
-    // const lastThreeObjects = products.slice(-3)
-    // console.log(lastThreeObjects);
-
-    //console.log(typeof products)
+    console.log(filteredItems);
+    console.log(filteredItems.length);
     return (
 
         < section id="gallery" >
             <h1>Wood Gallery</h1>
             <article className="gallery-container">
-                <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
+            <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
                 <Link to={`/catalog/Chairs`} className="btn-catalog" type='submit' >Chairs</Link>
                 <Link to={`/catalog/Ladles`} className="btn-catalog" type='submit' >Ladles</Link>
                 <Link to={`/catalog/Furnitures`} className="btn-catalog" type='submit' >Furnitures </Link>
                 <Link to={`/catalog/Toolboxes`} className="btn-catalog" type='submit' >Toolboxes</Link>
                 <Link to={`/catalog/Handtools`} className="btn-catalog" type='submit' >Handtools </Link>
                 <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link>
-
-
                 <ul >
-                 
-                    {products.length  > 0
-                        ? products.map(product =>
+                {filteredItems.length > 0
+                        ? Object.values(filteredItems).map(product =>
                             <li key={product._id}>
                                 <Publication {...product} />
                             </li>)
@@ -68,9 +58,6 @@ export default function Catalog({
                          
                     }
                 </ul>
-
-
-
             </article >
         </section >
     )

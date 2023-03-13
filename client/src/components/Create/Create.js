@@ -1,6 +1,6 @@
 
-import '../css/create-edit.css'
-import '../css/site.css'
+import '../Create/create-edit.css'
+
 
 
 import  { useEffect,useState,useContext} from 'react';
@@ -96,8 +96,8 @@ export default function Create({
 
                 <form  onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
 
-                    <h2>Create Publication</h2>
-                    <p>Add your own masterpiece!</p>
+                    <h2>Create Product</h2>
+                    <p>Add your own wood product!</p>
 
                     <label htmlFor="title">Title:</label>
                     <input 

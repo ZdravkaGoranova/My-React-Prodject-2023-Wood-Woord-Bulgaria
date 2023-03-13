@@ -1,5 +1,5 @@
-import '../css/register-login.css'
-import '../css/site.css'
+import '../Register/register-login.css'
+
 
 
 // import { Link, useNavigate } from "react-router-dom";
@@ -80,7 +80,7 @@ export default function Register() {
 
                 <form onSubmit={onSubmitHandler} className="container-text">
                     <h2>Register</h2>
-                    <p>Register to get ideas and view the latest masterpieces.</p>
+                    <p>Register to get ideas and view the latest wood products and tools.</p>
 
 
                     <label htmlFor="username">Username:</label>

@@ -1,5 +1,5 @@
-import '../css/details.css'
-import '../css/site.css'
+import '../Details/details.css'
+
 
 import React from "react";
 import { useParams, useNavigate } from 'react-router-dom'

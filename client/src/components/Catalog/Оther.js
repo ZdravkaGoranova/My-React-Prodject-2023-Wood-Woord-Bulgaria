@@ -1,6 +1,6 @@
 
-import '../css/gallery.css'
-import '../css/site.css'
+import '../Catalog/gallery.css'
+
 
 import Publication from './Publication.js'
 import React, { useEffect, useState } from "react"
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:3030/jsonstore';
 
-export default function Chairs({
+export default function Оther({
     //data,
 }) {
     console.log(':)')
@@ -27,7 +27,7 @@ export default function Chairs({
     }, []);
 
     console.log(products)
-    const filteredItems = products.filter(item => item.type === 'chairs');
+    const filteredItems = products.filter(item => item.type === 'other');
 
     console.log(filteredItems);
     console.log(filteredItems.length);
@@ -57,10 +57,8 @@ export default function Chairs({
                          
                     }
                 </ul>
-
-
-
             </article >
         </section >
     )
 }
+

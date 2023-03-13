@@ -1,5 +1,5 @@
-import '../css/404.css'
-import '../css/site.css'
+import '../PageNotFound/404.css'
+
 
 export default function PageNotFound() {
     return (

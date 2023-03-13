@@ -1,5 +1,5 @@
-import '../css/create-edit.css'
-import '../css/site.css'
+import '../Edit/create-edit.css'
+
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -97,7 +97,7 @@ export default function Edit({
                 <form onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
 
                     <h2>Edit</h2>
-                    <p>Edit your masterpiece!</p>
+                    <p>Edit your wood product!</p>
 
                     <label htmlFor="title">Title:</label>
                     <input

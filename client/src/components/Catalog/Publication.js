@@ -1,6 +1,6 @@
 import React from "react";
-import '../css/gallery.css'
-import '../css/site.css'
+import '../Catalog/gallery.css'
+
 
 import { Link } from 'react-router-dom'
 

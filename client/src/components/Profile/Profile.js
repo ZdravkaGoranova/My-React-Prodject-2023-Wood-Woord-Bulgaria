@@ -1,5 +1,5 @@
-import '../css/profile.css'
-import '../css/site.css'
+import '../Profile/profile.css'
+
 
 export default function Profile({ }) {
     return (

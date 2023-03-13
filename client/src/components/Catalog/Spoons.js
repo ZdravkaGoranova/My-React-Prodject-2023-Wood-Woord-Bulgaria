@@ -1,6 +1,6 @@
 
-import '../css/gallery.css'
-import '../css/site.css'
+import '../Catalog/gallery.css'
+
 
 import Publication from './Publication.js'
 import React, { useEffect, useState } from "react"

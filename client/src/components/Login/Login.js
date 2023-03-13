@@ -1,5 +1,5 @@
-import '../css/register-login.css'
-import '../css/site.css'
+import '../Login/register-login.css'
+
 
 // import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
@@ -46,7 +46,7 @@ export default function Login() {
 
                 <form onSubmit={onSubmitHandler} className="container-text">
                     <h2>Login</h2>
-                    <p>Welcome, see the new masterpieces!</p>
+                    <p>Welcome, see the new  wood products!</p>
 
                     <label htmlFor="username">Username:</label>
                     <input

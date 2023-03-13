@@ -1,28 +1,29 @@
 
 import './App.css';
+import './css/site.css';
 
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import Navigation from './components/Navigation.js'
-import Catalog from './components/Catalog.js';
-import Create from './components/Create.js';
-import Details from './components/Details.js';
-import Home from './components/Home.js';
-import Login from './components/Login.js';
-import PageNotFound from './components/PageNotFound.js';
-import Profile from './components/Profile.js';
-import Register from './components/Register.js';
-import Edit from './components/Edit.js';
-import Logout from './components/Logout.js';
-import Delete from './components/Delete.js';
-import Spoons from './components/Spoons.js';
-import Chairs from './components/Chairs.js';
-import Ladles from './components/Ladles.js';
-import Furnitures from './components/Furnitures.js';
-import Toolboxes from './components/Toolboxes.js';
-import Handtools from './components/Handtools.js';
-import Other from './components/Оther.js';
+import Navigation from './components/Navigation/Navigation.js'
+import Catalog from './components/Catalog/Catalog.js';
+import Create from './components/Create/Create.js';
+import Details from './components/Details/Details.js';
+import Home from './components/Home/Home.js';
+import Login from './components/Login/Login.js';
+import PageNotFound from './components/PageNotFound/PageNotFound.js';
+import Profile from './components/Profile/Profile.js';
+import Register from './components/Register/Register.js';
+import Edit from './components/Edit/Edit.js';
+import Logout from './components/Logout/Logout.js';
+import Delete from './components/Delete/Delete.js';
+import Spoons from './components/Catalog/Spoons.js';
+import Chairs from './components/Catalog/Chairs.js';
+import Ladles from './components/Catalog/Ladles.js';
+import Furnitures from './components/Catalog/Furnitures.js';
+import Toolboxes from './components/Catalog/Toolboxes.js';
+import Handtools from './components/Catalog/Handtools.js';
+import Other from './components/Catalog/Оther.js';
 
 // import {
 //   BrowserRouter as Router,
@@ -64,7 +65,6 @@ function App() {
         <Route path='/profile' element={<Profile />} />
 
         <Route path='/catalog' element={<Catalog />} />
-
         <Route path='/catalog/Spoons' element={<Spoons />} />
         <Route path='/catalog/Chairs' element={<Chairs />} />
         <Route path='/catalog/Ladles' element={<Ladles />} />
@@ -79,11 +79,8 @@ function App() {
 
         <Route path='*' element={<PageNotFound />} />
 
-
       </Routes>
-
     </>
   );
 }
-
 export default App;
