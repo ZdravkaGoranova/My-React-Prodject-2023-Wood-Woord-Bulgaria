@@ -25,7 +25,8 @@ export default function Catalog({
             })
     }, []);
 
-    console.log(products)
+    console.log(Object.values(products))
+    console.log(typeof products)
 
     // const filteredItems = products.filter(item => item.type === 'toolboxes');
     // console.log(filteredItems);
@@ -34,8 +35,8 @@ export default function Catalog({
 
     // // използваме slice(), за да вземем първите 3 елемента от сортирания масив и reverse(), за да ги обърнем в правилния ред
     // const lastThreeObjects = sortedObjects.slice(0, 3).reverse();
-    const lastThreeObjects = products.slice(-3)
-    console.log(lastThreeObjects);
+    // const lastThreeObjects = products.slice(-3)
+    // console.log(lastThreeObjects);
 
     //console.log(typeof products)
     return (
@@ -53,16 +54,18 @@ export default function Catalog({
 
 
                 <ul >
-                    {products
-                        ? Object.values(products).map(product =>
+                 
+                    {products.length  > 0
+                        ? products.map(product =>
                             <li key={product._id}>
                                 <Publication {...product} />
                             </li>)
-                        :
-                        <article className="no-available-publications">
-                            <h1>No publications created yet.</h1>
-                            <a href="/create" className="create-pub">Create publication</a>
-                        </article>
+                        : 
+                             <article className="no-available-publications">
+                                <h1>No product created yet.</h1>
+                                <a href="/create" className="create-pub">Create product</a>
+                            </article>
+                         
                     }
                 </ul>
 

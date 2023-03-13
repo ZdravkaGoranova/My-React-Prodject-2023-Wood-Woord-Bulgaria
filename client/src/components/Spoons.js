@@ -28,33 +28,40 @@ export default function Spoons({
 
     console.log(products)
     const filteredItems = products.filter(item => item.type === 'spoons');
-
     console.log(filteredItems);
-    console.log(filteredItems.length);
+    
+    console.log(filteredItems.length );
+    console.log('тук си');
+    console.log(typeof Object.values(filteredItems));
+
     return (
 
         < section id="gallery" >
             <h1>Wood Gallery</h1>
+            
             <article className="gallery-container">
-            <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
+               
+                <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
                 <Link to={`/catalog/Chairs`} className="btn-catalog" type='submit' >Chairs</Link>
                 <Link to={`/catalog/Ladles`} className="btn-catalog" type='submit' >Ladles</Link>
                 <Link to={`/catalog/Furnitures`} className="btn-catalog" type='submit' >Furnitures </Link>
                 <Link to={`/catalog/Toolboxes`} className="btn-catalog" type='submit' >Toolboxes</Link>
                 <Link to={`/catalog/Handtools`} className="btn-catalog" type='submit' >Handtools </Link>
                 <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link>
+                
+                
                 <ul >
                     {filteredItems.length > 0
                         ? Object.values(filteredItems).map(product =>
                             <li key={product._id}>
                                 <Publication {...product} />
                             </li>)
-                        : filteredItems.length === 0
-                            ? <article className="no-available-publications">
+                        : 
+                             <article className="no-available-publications">
                                 <h1>No product created yet.</h1>
                                 <a href="/create" className="create-pub">Create product</a>
                             </article>
-                            : null
+                         
                     }
                 </ul>
             </article >

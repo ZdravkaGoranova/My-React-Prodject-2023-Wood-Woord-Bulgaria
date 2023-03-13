@@ -44,17 +44,18 @@
                 <Link to={`/catalog/Handtools`} className="btn-catalog" type='submit' >Handtools </Link>
                 <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link>
                     <ul >
-                        {filteredItems.length > 0
-                            ? Object.values(filteredItems).map(product =>
-                                <li key={product._id}>
-                                    <Publication {...product} />
-                                </li>)
-                            :
-                            <article className="no-available-publications">
+                    {filteredItems.length > 0
+                        ? Object.values(filteredItems).map(product =>
+                            <li key={product._id}>
+                                <Publication {...product} />
+                            </li>)
+                        : 
+                             <article className="no-available-publications">
                                 <h1>No product created yet.</h1>
                                 <a href="/create" className="create-pub">Create product</a>
                             </article>
-                        }
+                         
+                    }
                     </ul>
                 </article >
             </section >

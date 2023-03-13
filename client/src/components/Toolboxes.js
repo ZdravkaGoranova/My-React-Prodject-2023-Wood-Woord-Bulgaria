@@ -46,17 +46,17 @@ export default function Toolboxes({
                 <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link>
 
                 <ul >
-                    {filteredItems.length > 0
+                {filteredItems.length > 0
                         ? Object.values(filteredItems).map(product =>
                             <li key={product._id}>
                                 <Publication {...product} />
                             </li>)
-                        : products.length === 0
-                            ? <article className="no-available-publications">
+                        : 
+                             <article className="no-available-publications">
                                 <h1>No product created yet.</h1>
                                 <a href="/create" className="create-pub">Create product</a>
                             </article>
-                            : null
+                         
                     }
                 </ul>
             </article >
