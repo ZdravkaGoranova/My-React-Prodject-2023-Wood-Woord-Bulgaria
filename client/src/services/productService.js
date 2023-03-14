@@ -1,20 +1,46 @@
-const baseUrl = "http://localhost:3030/publications";
 
-export const createFilm = (filmData, accessToken) => {
-    return fetch(`${baseUrl}/create`, {
-        method: "POST",
+import * as request from './requester.js'
+const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
+
+
+export const create = async (productData) => {
+    const {  ...data } = productData;
+    console.log("----------");
+    console.log(productData);
+    const response = await fetch(`${baseUrl}`, {
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': accessToken
+            'content-type': 'application/json',
         },
-        body: JSON.stringify(filmData)
-    })
-        .then(res => res.json());
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    console.log("result");
+    console.log(result);
+  
+    return result;
 };
 
-export const getAll = () => fetch(`${baseUrl}/all`).then(res => res.json());
+export const getAll = async () => {
+    const result = await request.get(baseUrl);
+    const products =Object.values(result);
+
+    return products;
+};
+
+export const getByCategory = async (category) => {
+    const result = await getAll();
+    let filteredProducts = result.filter(product => product.type === category)
+
+    return filteredProducts
+}
+
 export const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json());
+
 export const getOne = (publicId) => fetch(`${baseUrl}/${publicId}`).then(res => res.json());
+
+
 
 export const deletePublication = (publicId, accessToken) => {
     return fetch(`${baseUrl}/delete/${publicId}`, {
