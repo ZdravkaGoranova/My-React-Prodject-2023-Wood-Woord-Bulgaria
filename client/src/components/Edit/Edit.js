@@ -31,7 +31,7 @@ export default function Edit({
 
 
     useEffect(() => {
-        fetch(`${baseUrl}/products/${productId}`)
+        fetch(`${baseUrl}/${productId}`)
             .then(res => res.json())
             .then(data => {
                 // const product = data['productId'];
@@ -46,7 +46,7 @@ export default function Edit({
     const update = async (productId, product) => {
         const { ...data } = product;
 
-        const response = await fetch(`${baseUrl}/products/${productId}`, {
+        const response = await fetch(`${baseUrl}/${productId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -75,7 +75,6 @@ export default function Edit({
                 alert(err);
             }
         }
-
 
     };
     const onChangeHandler = (e) => {
