@@ -1,5 +1,5 @@
-import '../Details/details.css'
-
+import '../Details/details.css';
+import '../Details/comments.css';
 
 import React from "react";
 import { useParams, useNavigate } from 'react-router-dom'
@@ -22,36 +22,24 @@ export default function Details({
     const navigate = useNavigate();
     console.log(`${baseUrl}/${productId}`)
     useEffect(() => {
-        fetch(`${baseUrl}/products/${productId}`)
+        fetch(`${baseUrl}/${productId}`)
             .then(res => res.json())
             .then(data => {
                 // const product = data['productId'];
                 // console.log(data)
                 // console.log(':)')
-
                 setProduct(data)
             })
     }, [productId]);
 
-
-    const onEdit = e => {
-        e.preventDefault();
-    };
-
-    const onDelete = e => {
-        e.preventDefault();
-    };
     const onLike = e => {
         e.preventDefault();
     };
-
     const onBackButtonClick = e => {
         navigate('/catalog');
     };
 
     return (
-
-
         <section id="details-page">
             <h1>Details</h1>
             <article className="details-card">
@@ -86,16 +74,36 @@ export default function Details({
                         {/* ${isOwner == false && hasUser == true &&  hasLiked == 0  ? html`<a type='submit' onClick={onLike} className="btn-like" href="#">Like</a>` : nothing} */}
                         <a type='submit' onClick={onLike} className="btn-like" href="#">Like</a>
                         <p className="likes">Likes: </p>
-
-                        
+                      
                     </div>
+                    {/* <!-- Bonus ( for Guests and Users ) --> */}
+                <div class="details-comments">
+                    <h2>Comments:</h2>
+                    <ul>
+                        {/* <!-- list all comments for current game (If any) --> */}
+                        <li class="comment">
+                            <p>Content: I rate this one quite highly.</p>
+                        </li>
+                        <li class="comment">
+                            <p>Content: The best game.</p>
+                        </li>
+                    </ul>
+                    {/* <!-- Display paragraph: If there are no games in the database --> */}
+                    <p class="no-comment">No comments.</p>
+                </div>
+                <article className="create-comment">
+                            <label>Add new comment:</label>
+                            <form className="form">
+                            <textarea name="username" placeholder="Username"></textarea>
+                                <textarea name="comment" placeholder="Comment......"></textarea>
+                                <input className="btn submit" type="submit" value="Add Comment" />
+                            </form>
+                        </article>
 
                 </article>
-
                 <article className="details-card-image">
                     <img src={product.picture} alt={product.title} />
                 </article>
-
             </article>
         </section>
 
