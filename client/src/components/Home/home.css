@@ -54,6 +54,7 @@
 .home-page-left-container>img {
     height: 270px;
     width: 500px;
+
     box-shadow: 0px 0px 20px 10px rgb(242, 242, 242);
 }
 
@@ -61,8 +62,8 @@
     flex-wrap: wrap;
     display: flex;
     position: relative;
-    width: 80%;
-    margin-top: 2.5em;
+    width: 78%;
+    margin-top: 20px;
     margin-bottom: 1em;
     left: 10%;
     text-align: center;

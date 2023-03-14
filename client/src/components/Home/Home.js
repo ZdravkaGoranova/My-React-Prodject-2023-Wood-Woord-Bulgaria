@@ -1,27 +1,16 @@
 
 import '../Home/home.css'
 
-
 import React, { useState, useEffect } from "react";
-import Publication from '../Catalog/Publication.js'
+import Publication from '../Catalog/Publication/Publication.js'
 
-const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
+export default function Home({
+    products,
+}) {
 
-export default function Home() {
-    const [products, setProducts] = useState([])
-    useEffect(() => {
-        fetch(`${baseUrl}`)
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data)
-                // console.log(data.products)
-                console.log(Object.values(data.products))
-                setProducts(Object.values(data.products))
+    console.log(products);
 
-            })
-    }, []);
-
-    const lastTwoProducts = products.slice(-2)
+    const lastTwoProducts = products.slice(-2);
     console.log(lastTwoProducts);
 
     return (
@@ -38,19 +27,15 @@ export default function Home() {
             </section>
             <section id="home-page-content">
                 <h1>Latest Products publication</h1>
-                <article className="home-page-content-publications">
-                    <ul >
-                        {lastTwoProducts
-                            ? Object.values(lastTwoProducts).map(product =>
-                                <li key={product._id}>
-                                    <Publication {...product} />
-                                </li>)
-                            :
-                            null
-                        }
-                    </ul>
-                </article>
-            </section>
+                <div className="home-page-content-publications">
+                    {lastTwoProducts
+                        ? lastTwoProducts.map(product =>
+                            <Publication key={product._id} {...product} />)
+                        :
+                        null
+                    }
+                </div>
+        </section>
         </>
     )
 }
