@@ -1,20 +1,15 @@
 
 import '../Create/create-edit.css'
 
-
-
 import  { useEffect,useState,useContext} from 'react';
 import { useNavigate } from "react-router-dom";
 // import { AuthContext } from "../../contexts/AuthContext";
+import * as productService from '../../services/productService.js'
 
 const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 export default function Create({
-    // title,
-    // description,
-    // picture,
-    // price,
-    // type,
+    onSubmitCreateProduct,
 }) {
 
     // const { user } = useContext(AuthContext);
@@ -22,71 +17,45 @@ export default function Create({
     // const token = user.accessToken;
     // const _ownerId = user._id;
     
-
     const [product, setProduct] = useState({
-    
         title: "",
         description: "",
         picture: "",
         price: "",
         type: "",
-
     });
 
-    const create = async (productData) => {
-        const {  ...data } = productData;
-        console.log("----------");
-        console.log(productData);
-        const response = await fetch(`${baseUrl}/products/`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-    
-        const result = await response.json();
-        console.log(result);
-       
-        console.log("краи");
-        return result;
-    };
-
-    const onSubmitHandler = (e,productData) => {
+    const onSubmit = (e) => {
         e.preventDefault();
+        onSubmitCreateProduct(product)
+}
+    // const onSubmitCreateProduct = (e,productData) => {
+    //     e.preventDefault();
       
-        console.log(':):):)')
-   
-        if (!productData.picture.startsWith("https://")) {
-            alert("Please enter a valid URL address");
-        } else {
-            try {
+    //     console.log(':):):)');
+        
+    //   const newProduct=  productService.create({ ...productData })
+    //     setProduct(state=>[...state,newProduct])
+    //     navigate("/catalog", { replace: true });
+
+    //     // if (!productData.picture.startsWith("https://")) {
+    //     //     alert("Please enter a valid URL address");
+    //     // } else {
+    //     //     try {
                       
-        console.log('тук си')
-                create({ ...productData })
-                    .then(() => {
-                        navigate("/catalog", { replace: true });
-                    });
-            } catch (err) {
-                alert(err);
-            }
-        }
-    };
+    //     // console.log('тук си')
+    //     //         create({ ...productData })
+    //     //             .then(() => {
+    //     //                 navigate("/catalog", { replace: true });
+    //     //             });
+    //     //     } catch (err) {
+    //     //         alert(err);
+    //     //     }
+    //     // }
+    // };
     const onChangeHandler = (e) => {
         setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
     };
-
-    const onCreate = (e) => {
-        // e.preventDefault();//да не прзаревда страницата
-
-        // const formData = new FormData(e.curentTarget);
-
-        // const data = Object.fromEntries(formData)
-        // console.log(data);
-
-
-
-    }
 
     return (
         <section id="create-container">
@@ -94,7 +63,7 @@ export default function Create({
 
                 <img src="/img/tools.jpg" alt="image" />
 
-                <form  onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
+                <form  onSubmit={onSubmit} className="container-text">
 
                     <h2>Create Product</h2>
                     <p>Add your own wood product!</p>
