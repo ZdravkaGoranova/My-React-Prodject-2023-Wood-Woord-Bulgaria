@@ -1,5 +1,5 @@
 {
-    "products": {
+    
         "1": {
             "_id": "1",
             "title": "Handmade tabble",
@@ -49,4 +49,3 @@
             "isCompleted": true
         }
     }
-}

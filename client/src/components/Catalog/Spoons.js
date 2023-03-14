@@ -1,37 +1,17 @@
 
-import '../Catalog/gallery.css'
+import '../Catalog/gallery.css';
 
-
-import Publication from './Publication.js'
-import React, { useEffect, useState } from "react"
+import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
 
-const baseUrl = 'http://localhost:3030/jsonstore';
-
 export default function Spoons({
-    //data,
+    products,
 }) {
-    console.log(':)')
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        fetch(`${baseUrl}/woodTypes`)
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data)
-                // console.log(data.products)
-                console.log(Object.values(data.products))
-                setProducts(Object.values(data.products))
-
-            })
-    }, []);
 
     console.log(products)
     const filteredItems = products.filter(item => item.type === 'spoons');
     console.log(filteredItems);
-    
     console.log(filteredItems.length );
-    console.log('тук си');
     console.log(typeof Object.values(filteredItems));
 
     return (
