@@ -77,21 +77,21 @@ export default function Details({
                       
                     </div>
                     {/* <!-- Bonus ( for Guests and Users ) --> */}
-                <div class="details-comments">
+                <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
                         {/* <!-- list all comments for current game (If any) --> */}
-                        <li class="comment">
+                        <li className="comment">
                             <p>Content: I rate this one quite highly.</p>
                         </li>
-                        <li class="comment">
+                        <li className="comment">
                             <p>Content: The best game.</p>
                         </li>
                     </ul>
                     {/* <!-- Display paragraph: If there are no games in the database --> */}
-                    <p class="no-comment">No comments.</p>
+                    <p className="no-comment">No comments.</p>
                 </div>
-                <article className="create-comment">
+  <article className="create-comment">
                             <label>Add new comment:</label>
                             <form className="form">
                             <textarea name="username" placeholder="Username"></textarea>
