@@ -2,8 +2,10 @@
 import './App.css';
 import './css/site.css';
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import * as productService from './services/productService.js'
+import { useNavigate } from "react-router-dom";
 
 import Navigation from './components/Navigation/Navigation.js'
 import Catalog from './components/Catalog/Catalog.js';
@@ -25,62 +27,91 @@ import Toolboxes from './components/Catalog/Toolboxes.js';
 import Handtools from './components/Catalog/Handtools.js';
 import Other from './components/Catalog/Оther.js';
 
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route,
-//   BrowserRouter,
-
-// } from 'react-router-dom';
-
-
-
+const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 function App() {
 
-  // useEffect(()=>{
-  //   fetch(`http://localhost:3030/jsonstore/woodTypes`)
-  //   .then(res => res.json())
-  //   .then(data => {
+    const [products, setProducts] = useState([])
+    const navigate = useNavigate();
 
-  //       const result = Object.keys(data).map(id => ({ id, ...data[id] }))
-  //       console.log(data)
-  //       console.log(data)
+    useEffect(() => {
+        productService.getAll()
+            .then(data => {
+                console.log(data) //console.log(Object.values(data.products))
+                setProducts(data)
 
-  //       // setTodos(result)
-  //       // setIsLoading(false)
-  //   })
-  // }, []);
+                //или
+                // await fetch(`${baseUrl}`)
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         // console.log(data) // console.log(data.products)
+                //         // console.log(Object.values(data.products))
+                //         setProducts(Object.values(data.products))
+            })
+    }, []);//първия път като се изпълни тази функция
+    
+    let newProduct = '';
+    useEffect(() => {
+        productService.getAll()
+            .then(data => {
+                setProducts(data);
+            });
+    }, [newProduct]);
 
-  return (
-    <>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path="/logout" element={<Logout />} />
+    const onSubmitCreateProduct = async (productData) => {
 
-        <Route path='/create' element={<Create />} />
-        <Route path='/profile' element={<Profile />} />
+        console.log('onSubmitCreateProduct');
 
-        <Route path='/catalog' element={<Catalog />} />
-        <Route path='/catalog/Spoons' element={<Spoons />} />
-        <Route path='/catalog/Chairs' element={<Chairs />} />
-        <Route path='/catalog/Ladles' element={<Ladles />} />
-        <Route path='/catalog/Furnitures' element={<Furnitures />} />
-        <Route path='/catalog/Toolboxes' element={<Toolboxes />} />
-        <Route path='/catalog/Handtools' element={<Handtools />} />
-        <Route path='/catalog/Оther' element={<Other />} />
+        newProduct = await productService.create({ ...productData });
+        setProducts(state => [...state, newProduct]);
 
-        <Route path='/edit/:productId' element={<Edit />} />
-        <Route path="/delete/:productId" element={<Delete />} />
-        <Route path='/details/:productId' element={<Details />} />
+        navigate("/catalog", { replace: true });
 
-        <Route path='*' element={<PageNotFound />} />
+        // if (!productData.picture.startsWith("https://")) {
+        //     alert("Please enter a valid URL address");
+        // } else {
+        //     try {
 
-      </Routes>
-    </>
-  );
+        // console.log('тук си')
+        //         create({ ...productData })
+        //             .then(() => {
+        //                 navigate("/catalog", { replace: true });
+        //             });
+        //     } catch (err) {
+        //         alert(err);
+        //     }
+        // }
+    };
+
+    return (
+        <>
+            <Navigation />
+            <Routes>
+                <Route path="/" element={<Home products={products} />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route path="/logout" element={<Logout />} />
+
+                <Route path='/create' element={<Create onSubmitCreateProduct={onSubmitCreateProduct} />} />
+                <Route path='/profile' element={<Profile />} />
+
+                <Route path='/catalog' element={<Catalog products={products} />} />
+                <Route path='/catalog/Spoons' element={<Spoons products={products} />} />
+                <Route path='/catalog/Chairs' element={<Chairs products={products} />} />
+                <Route path='/catalog/Ladles' element={<Ladles products={products} />} />
+                <Route path='/catalog/Furnitures' element={<Furnitures products={products} />} />
+                <Route path='/catalog/Toolboxes' element={<Toolboxes products={products} />} />
+                <Route path='/catalog/Handtools' element={<Handtools products={products} />} />
+                <Route path='/catalog/Оther' element={<Other products={products} />} />
+
+                <Route path='/edit/:productId' element={<Edit />} />
+                <Route path="/delete/:productId" element={<Delete />} />
+                <Route path='/details/:productId' element={<Details />} />
+
+                <Route path='*' element={<PageNotFound />} />
+
+            </Routes>
+        </>
+    );
 }
 export default App;
