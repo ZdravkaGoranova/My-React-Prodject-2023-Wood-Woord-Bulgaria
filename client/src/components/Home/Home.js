@@ -7,7 +7,6 @@ import Publication from '../Catalog/Publication/Publication.js'
 export default function Home({
     products,
 }) {
-
     console.log(products);
 
     const lastTwoProducts = products.slice(-2);
