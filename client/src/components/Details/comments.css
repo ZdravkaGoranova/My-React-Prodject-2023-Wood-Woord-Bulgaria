@@ -1,7 +1,7 @@
 .create-comment>.form>textarea {
     resize: none;
-    width: 100px;
-    height: 100px;
+    width: 400px;
+    height: 200px;
     margin-top: 22px;
     margin-bottom: 28px;
     padding: 5px;
@@ -12,16 +12,16 @@
 }
 
 .create-comment {
-    margin-top: 60px;
+    margin-top: 50px;
     position: relative;
     text-align: center;
-    width: 700px;
+    width: 500px;
     height: auto;
     border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
-    background: #df982f;
-    box-shadow: 0px 0px 32px 0px #b94304, -14px -14px 20px #191c21;
+    background:  #e4be8c;
+    box-shadow: 0px 0px 32px 0px #32485e, -14px -14px 20px #191c21;
 }
 
 .create-comment>label {
@@ -33,14 +33,14 @@
 }
 
 .info-section>.details-comments li {
-    width: 400px;
+    width: 300px;
     display: inline-block;
     position: static;
-    margin: 20px auto 25px auto;
+    margin: 10px auto 20px auto;
     box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 16px;
     margin-left: 60px;
-    background: #a7330d;
+    background:#dfc09a;
     color: white;
 }
 
@@ -50,7 +50,7 @@
 
 
 .create-comment>.button:hover {
-    background-color: #e1a646;
+    background-color: #7e4a04;;
     color: white;
     cursor: pointer;
 }

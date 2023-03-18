@@ -352,7 +352,7 @@
         delete: (context, tokens, query, body) => {
             tokens = [context.params.collection, ...tokens];
             let responseData = data;
-
+console.log(data)
             for (let i = 0; i < tokens.length; i++) {
                 const token = tokens[i];
                 if (responseData.hasOwnProperty(token) == false) {
