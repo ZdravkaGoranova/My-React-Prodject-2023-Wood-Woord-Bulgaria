@@ -2,16 +2,16 @@
 import '../Catalog/gallery.css';
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
+import { getByCategory } from '../../services/productService.js';
 
 const baseUrl = 'http://localhost:3030/jsonstore';
 
-export default function Оther({
+export default async function Оther({
     products,
 }) {
 
     console.log(products)
-    const filteredItems = products.filter(item => item.type === 'other');
-
+    const filteredItems = await getByCategory('toolboxes')
     console.log(filteredItems);
     console.log(filteredItems.length);
     return (

@@ -3,13 +3,18 @@ import '../Catalog/gallery.css'
 
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
+import { getByCategory } from '../../services/productService.js';
 
-export default function Furnitures({
+export default async function Furnitures(
     products,
-}) {
+) {
     console.log(products);
 
-    const filteredItems = products.filter(item => item.type === 'furnitures');
+    const items = await getByCategory('furnitures')
+    let filteredItems = []
+    for (let item in Object.values(items)) {
+        filteredItems.push(item)
+    }
     console.log(filteredItems);
     console.log(filteredItems.length);
 
@@ -26,7 +31,7 @@ export default function Furnitures({
                 <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link>
                 <ul >
                 {filteredItems.length > 0
-                        ? Object.values(filteredItems).map(product =>
+                        ? filteredItems.map(product =>
                             <li key={product._id}>
                                 <Publication {...product} />
                             </li>)

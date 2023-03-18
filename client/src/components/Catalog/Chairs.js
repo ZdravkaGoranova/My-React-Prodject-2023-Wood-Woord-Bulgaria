@@ -3,13 +3,13 @@ import '../Catalog/gallery.css'
 
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
+import * as productService from '../../services/productService.js';
 
-export default function Chairs({
+export default async function Chairs(
     products,
-}) {
+) {
     console.log(products);
-
-    const filteredItems = products.filter(item => item.type === 'chairs');
+    const filteredItems = await productService.getByCategory('chairs')
     console.log(filteredItems);
     console.log(filteredItems.length);
     return (
@@ -17,7 +17,7 @@ export default function Chairs({
         < section id="gallery" >
             <h1>Wood Gallery</h1>
             <article className="gallery-container">
-            <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
+                <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' >Spoons</Link>
                 <Link to={`/catalog/Chairs`} className="btn-catalog" type='submit' >Chairs</Link>
                 <Link to={`/catalog/Ladles`} className="btn-catalog" type='submit' >Ladles</Link>
                 <Link to={`/catalog/Furnitures`} className="btn-catalog" type='submit' >Furnitures </Link>
@@ -26,7 +26,7 @@ export default function Chairs({
                 <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link>
                 <ul >
                 {filteredItems.length > 0
-                        ? Object.values(filteredItems).map(product =>
+                        ? filteredItems.map(product =>
                             <li key={product._id}>
                                 <Publication {...product} />
                             </li>)

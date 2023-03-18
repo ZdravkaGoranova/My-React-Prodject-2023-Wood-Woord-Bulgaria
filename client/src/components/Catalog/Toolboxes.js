@@ -3,13 +3,14 @@ import '../Catalog/gallery.css';
 
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
+import { getByCategory } from '../../services/productService.js';
 
-export default function Toolboxes({
+export default async function Toolboxes({
     products,
 }) {
    
     console.log(products)
-    const filteredItems = products.filter(item => item.type === 'toolboxes');
+    const filteredItems = await getByCategory('toolboxes')
 
     console.log(filteredItems);
     console.log(filteredItems.length);

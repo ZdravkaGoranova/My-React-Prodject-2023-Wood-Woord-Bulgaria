@@ -4,15 +4,16 @@ import '../Catalog/gallery.css'
 
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
+import { getByCategory } from '../../services/productService.js';
 
-
-export default function Ladles({
+export default async function Ladles({
     products,
 }) {
-    console.log(products)
-    const filteredItems = products.filter(item => item.type === 'ladles');
+    
+    const filteredItems = await getByCategory('ladles')
 
     console.log(filteredItems);
+    console.log(products);
     console.log(filteredItems.length);
     return (
 
