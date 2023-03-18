@@ -1,111 +1,110 @@
 import '../Details/details.css';
-import '../Details/comments.css';
+import '..//Details/comments.css';
 
 import React from "react";
 import { useParams, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react';
+import { WoodContext } from '../../contexts/WoodContext.js'
+
 import { Link } from 'react-router-dom';
+import * as productService from '../../services/productService.js';
+import * as commentService from '../../services/commentService.js';
 
-const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
+export default function Details() {
+    const { onWoodDeleteClick } = useContext(WoodContext)
 
-export default function Details({
-    // id,
-    // title,
-    // description,
-    // picture,
-    // price
-}) {
     const { productId } = useParams();
-    console.log(productId);
+    //console.log(productId);
 
     const [product, setProduct] = useState({});
+    const [username, setUsername] = useState("");
+    const [comment, setComent] = useState("");
+    const [comments, setComents] = useState([]);
+
     const navigate = useNavigate();
-    console.log(`${baseUrl}/${productId}`)
+
     useEffect(() => {
-        fetch(`${baseUrl}/${productId}`)
-            .then(res => res.json())
+        productService.getOne(productId)
             .then(data => {
-                // const product = data['productId'];
-                // console.log(data)
-                // console.log(':)')
-                setProduct(data)
+                console.log(data);
+                setProduct(data);
+                return commentService.getAll(productId)//промис чейнинг
+            })
+            .then(result => {
+                setComents(result)
             })
     }, [productId]);
 
-    const onLike = e => {
+    const onCommentSubmit = async (e) => {
         e.preventDefault();
+        await commentService.create({
+            productId,
+            username,
+            comment,
+        })
+        setUsername("");
+        setComent("");
     };
-    const onBackButtonClick = e => {
+    const onUsernameChange = (e) => {
+        setUsername(e.target.value)
+
+    };
+    const onCommentChange = (e) => {
+        setComent(e.target.value)
+
+    };
+    const onBackButtonClick = (e) => {
         navigate('/catalog');
     };
-
     return (
-        <section id="details-page">
+        <section id="game-details">
             <h1>Details</h1>
-            <article className="details-card">
+            <div className="info-section">
 
-                <article className="details-card-text">
-                    <h2>Title:{product.title}<br /> </h2>
-                    {/* <h3>Author: </h3> */}
-                    <h3>Description:     {product.description}</h3>
-                    <h3>Price:   {product.price} </h3>
-                    <h3>Type:   {product.type} </h3>
-                    {/* <!-- If there is no registered user, do not display buttons--> */}
-                    {/* {{#if isAuthenticated}} */}
-                    <div className="buttons">
+                <div className="game-header">
+                    <img className="game-img" src={product.picture} />
+                    <h1>{product.title}</h1>
+                    <span className="levels">Type:   {product.type}</span>
 
-                        {/* <!-- Only for registered user and author of the publication --> */}
-                        <button className='btn-back' type='submit' onClick={onBackButtonClick}>Back</button>
+                    <p className="type"> Price:   {product.price}</p>
+                </div>
 
-                        {/* {{#if isOwner}} */}
-
-                        <Link to={`/edit/${product._id}`} className="btn-edit" type='submit' >Edit</Link>
-                        {/* <Link to={`/edit/${product._id}`} className="btn-edit" type='submit' onClick={onEdit}>Edit</Link> */}
-
-                        <Link to={`/delete/${product._id}`} className="btn-delete" type='submit' >Delete</Link>
-                        {/* {{else}}
-                    {{#if isWished}} */}
-                        {/* <!-- logged in user who has already shared the publication--> */}
-                        <p className="shared-pub">You already shared this publication</p>
-                        {/* ${isOwner == false && hasUser == true &&  hasLiked == 0  ? html`<a @click=${onLike} className="btn-like" href="#">Like</a>` : nothing} */}
-                        {/* {{else}} */}
-                        {/* <!-- logged in user who has not yet shared the publication--> */}
-                        <Link to="/catalog/${product._id}}/shared" className="btn-share">Share publication</Link>
-                        {/* ${isOwner == false && hasUser == true &&  hasLiked == 0  ? html`<a type='submit' onClick={onLike} className="btn-like" href="#">Like</a>` : nothing} */}
-                        <a type='submit' onClick={onLike} className="btn-like" href="#">Like</a>
-                        <p className="likes">Likes: </p>
-                      
-                    </div>
-                    {/* <!-- Bonus ( for Guests and Users ) --> */}
+                <p className="text">
+                    {product.description}.
+                </p>
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        {/* <!-- list all comments for current game (If any) --> */}
-                        <li className="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: The best game.</p>
-                        </li>
-                    </ul>
-                    {/* <!-- Display paragraph: If there are no games in the database --> */}
-                    <p className="no-comment">No comments.</p>
-                </div>
-  <article className="create-comment">
-                            <label>Add new comment:</label>
-                            <form className="form">
-                            <textarea name="username" placeholder="Username"></textarea>
-                                <textarea name="comment" placeholder="Comment......"></textarea>
-                                <input className="btn submit" type="submit" value="Add Comment" />
-                            </form>
-                        </article>
+                        {comments.map(x => (
+                            <li className="comment">
+                                <p>{x.username}: {x.comment}</p>
+                            </li>
+                        ))}
 
-                </article>
-                <article className="details-card-image">
-                    <img src={product.picture} alt={product.title} />
-                </article>
+                    </ul>
+                    {comments.length === 0 &&
+                        (<p className="no-comment">No comments.</p>)}
+                </div>
+                <div className="buttons">
+                    <Link to="/catalog/${product._id}}/shared" className="button">Likes</Link>
+                    <button className='button' type='submit' onClick={onBackButtonClick}>Back</button>
+                    <Link to={`/edit/${product._id}`} className="button">Edit</Link>
+                    {/* <Link to={`/delete/${product._id}`}  className="button">Delete</Link> */}
+                    <button className='button' type='submit'onClick={() => onWoodDeleteClick(productId)} >Delete</button>
+                    {/* onClick={() => onWoodDeleteClick(productId)} */}
+                </div>
+            </div>
+
+            <article className="create-comment">
+                <label>Add new comment:</label>
+                <form className="form" onSubmit={onCommentSubmit}>
+                    {/* <input type="text" name="username" placeholder="Ivan" value={username} onChange={onUsernameChange}> </input> */}
+                    <textarea name="comment" placeholder="Comment......" value={comment} onChange={onCommentChange}></textarea>
+                </form>
+                <Link to={`/coments/${product._id}`} className="button">Add Comment</Link>
             </article>
         </section>
-
     )
 }
+
+
