@@ -25,7 +25,7 @@ export default function Profile() {
                 <div class="board">
                     {/* <!--If there are event--> */}
                     {products.length == 0 && <div class="no-events">
-                        <p>This user has no events yet!</p>
+                        <p>This user has no products yet!</p>
                     </div>}
 
                     {products.length > 0 &&

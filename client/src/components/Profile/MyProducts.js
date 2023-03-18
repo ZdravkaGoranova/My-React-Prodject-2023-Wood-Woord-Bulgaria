@@ -16,7 +16,6 @@ export default function MyProducts({
             <div class="event-info">
                 <img src={picture} />
                 <h2>Title:  {title}</h2>
-
                 <Link to={`/details/${_id}`} class="details-button">Details</Link>
             </div>
         </div>
