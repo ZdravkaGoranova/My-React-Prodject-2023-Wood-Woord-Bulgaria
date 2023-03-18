@@ -29,7 +29,7 @@
 
 .card-info {
     width: 470px;
-    height: 210px;
+    height: 200px;
     display: flex;
     background-blend-mode: multiply;
     z-index: 2;
