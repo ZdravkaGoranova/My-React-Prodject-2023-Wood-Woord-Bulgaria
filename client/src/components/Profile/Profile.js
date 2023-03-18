@@ -1,42 +1,42 @@
+
+
 import '../Profile/profile.css'
 
+import Publication from '../Catalog/Publication/Publication.js'
+import React, { useEffect, useState, useContext } from "react"
+import { Link } from 'react-router-dom';
+import { WoodContext } from '../../contexts/WoodContext.js'
+import MyProducts from './MyProducts.js';
+export default function Profile() {
 
-export default function Profile({ }) {
+    const { products } = useContext(WoodContext)
+    console.log(products)
+
     return (
-
         <section id="profile-page">
             <h1>Full Profile Information</h1>
-            <article className="profile-card">
+            <section id="profilePage">
+                <div class="userInfo">
+                    <div class="avatar">
+                        <img src="/img/profile.jpg" />
+                    </div>
+                    <h2>Email: {"email"}</h2>
+                </div>
+                <div class="board">
+                    {/* <!--If there are event--> */}
+                    {products.length == 0 && <div class="no-events">
+                        <p>This user has no events yet!</p>
+                    </div>}
 
-                <article className="profile-card-info">
-                    <h2>Username: </h2>
-                    {/* <h3>Address: </h3> */}
-                    {/* {{#if myusersShared}} */}
-                    {/* <!--If the user has shared publications, separate their titles with a comma and a space (, )--> */}
-                    <h4>Titles of shared posts by the user: </h4>
-                    {/* <!--If not display:--> */}
-                    {/* {{else}} */}
-                    <h4>Titles of shared posts by the user: Not yet.</h4>
-                    {/* {{/if}}
-                {{#if myPublications}} */}
-                    {/* <!--If the user has created their own publications, separate their titles with a comma and a space (, )--> */}
-                    <h4>Titles of which the user is the author: </h4>
-                    {/* <!--If not display:--> */}
-                    {/* {{else}} */}
-                    <h4>Titles of which the user is the author: Not yet.</h4>
-                    {/* {{/if}} */}
+                    {products.length > 0 &&
+                        products.map(product =>
+                            <li key={product._id}>
+                                <MyProducts {...product} />
+                            </li>)}
 
-                </article>
-
-                <article className="profile-card-icon">
-                    {/* <!-- Do not forget to change the path to the image --> */}
-                    <img src="/img/profile.jpg" alt="profile" />
-                </article>
-
-            </article>
+                </div>
+            </section>
         </section>
-
-
     )
 }
 
