@@ -39,8 +39,8 @@ export default function Details() {
         e.preventDefault();
         await commentService.create({
             productId,
-            username,
             comment,
+            username,
         })
         setUsername("");
         setComent("");
@@ -90,7 +90,7 @@ export default function Details() {
                     <button className='button' type='submit' onClick={onBackButtonClick}>Back</button>
                     <Link to={`/edit/${product._id}`} className="button">Edit</Link>
                     {/* <Link to={`/delete/${product._id}`}  className="button">Delete</Link> */}
-                    <button className='button' type='submit'onClick={() => onWoodDeleteClick(productId)} >Delete</button>
+                    <button className='button' type='submit' onClick={() => onWoodDeleteClick(productId)} >Delete</button>
                     {/* onClick={() => onWoodDeleteClick(productId)} */}
                 </div>
             </div>
@@ -99,9 +99,11 @@ export default function Details() {
                 <label>Add new comment:</label>
                 <form className="form" onSubmit={onCommentSubmit}>
                     {/* <input type="text" name="username" placeholder="Ivan" value={username} onChange={onUsernameChange}> </input> */}
+                    <input type="text" name="username" placeholder='Ivan'  value={username} onChange={onUsernameChange}></input>
                     <textarea name="comment" placeholder="Comment......" value={comment} onChange={onCommentChange}></textarea>
+                    <input className="button" type="submit" value='Add Comment'></input>
                 </form>
-                <Link to={`/coments/${product._id}`} className="button">Add Comment</Link>
+             
             </article>
         </section>
     )

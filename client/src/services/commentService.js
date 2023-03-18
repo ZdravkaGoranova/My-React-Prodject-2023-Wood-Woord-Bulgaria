@@ -7,11 +7,11 @@ export const create = async (data) => {
     console.log("jsonstore/comments");
 
     const result = await request.post(baseUrl,data)
-   
+    const comments = Object.values(result)
     console.log("result");
     console.log(result);
-
-    return result;
+    console.log(comments);
+    return comments;
 };
 
 

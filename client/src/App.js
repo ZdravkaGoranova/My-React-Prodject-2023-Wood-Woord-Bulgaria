@@ -118,7 +118,6 @@ function App() {
         onWoodDeleteClick,
         onSubmitCreateProduct,
         updateProduct,
-
         products,
     };
 
