@@ -8,7 +8,7 @@ import { Routes, Route } from 'react-router-dom';
 import *as authService from '../src/services/authService.js'
 import * as productService from './services/productService.js'
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate,  } from "react-router-dom";
 
 import { AuthContext } from './contexts/AuthContext.js'
 import { WoodContext } from './contexts/WoodContext'
@@ -34,7 +34,6 @@ import Toolboxes from './components/Catalog/Toolboxes.js';
 import Handtools from './components/Catalog/Handtools.js';
 import Other from './components/Catalog/Оther.js';
 
-const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 function App() {
     const navigate = useNavigate();
