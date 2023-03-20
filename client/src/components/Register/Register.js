@@ -1,25 +1,23 @@
 import '../Register/register-login.css'
 
-
-
-// import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+ import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from 'react';
+import { useForm } from '../../hooks/useForm.js';
+import { AuthContext } from '../../contexts/AuthContext.js';
 
 export default function Register() {
-    //const navigate = useNavigate ();
-    // const [email, setEmail] = useState('');
-    // const [username, setUsername] = useState('');
-    // const [password, setPassword] = useState('');
+
+    const { onRegisterSubmit } = useContext(AuthContext);
+    const { formValues, onChangeHandler, onSubmit } = useForm({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    }, onRegisterSubmit);
 
     const [gender, setGender] = useState('male');
 
-    const [formValues, setFormValues] = useState({
-        email: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
 
-    });
     const onSubmitHandler = (ev, userData) => {
         ev.preventDefault();
         // if (userData.password.length < 8
@@ -50,27 +48,10 @@ export default function Register() {
         //     }
         // }
     };
-    const onChangeHandler = (e) => {
-        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-    };
 
     const onGenderChange = (e) => {
         setGender(e.target.value)
     };
-
-    const register = (e) => {
-        e.preventDefault();
-        // auth
-        //     .createUserWithEmailAndPassword(email, password)
-        //     .then((auth) => {
-        //         if (auth) {
-        //             navigate.push('/');
-        //         }
-        //     })
-        //     .catch(error => alert(error.message))
-
-    }
-
 
     return (
         <section id="register-container">
@@ -78,11 +59,9 @@ export default function Register() {
 
                 <img src="/img/24.jpeg" alt="image" />
 
-                <form onSubmit={onSubmitHandler} className="container-text">
+                <form onSubmit={onSubmit} className="container-text">
                     <h2>Register</h2>
                     <p>Register to get ideas and view the latest wood products and tools.</p>
-
-
                     <label htmlFor="username">Username:</label>
                     <input
                         type="text"
@@ -90,9 +69,9 @@ export default function Register() {
                         placeholder="ivan_00"
                         name="username"
                         value={formValues.username}
-                        onChange={(e) =>onChangeHandler(e)} 
-                      
-                        />
+                        onChange={onChangeHandler}
+
+                    />
 
                     <label htmlFor="email">Email:</label>
                     <input
@@ -100,7 +79,7 @@ export default function Register() {
                         id="email" placeholder="ivan@abv.bg"
                         name="email"
                         value={formValues.email}
-                        onChange={(e) =>onChangeHandler(e)} 
+                        onChange={onChangeHandler}
                     />
 
                     <label htmlFor="password">Password:</label>
@@ -110,10 +89,10 @@ export default function Register() {
                         placeholder="*****"
                         name="password"
                         value={formValues.password}
-                        onChange={(e) =>onChangeHandler(e)} 
+                        onChange={onChangeHandler}
                     />
 
-                    <label htmlFor="re-password">Repeat password:</label>
+                    <label htmlFor="confirmPassword">Confirm password:</label>
                     {/* <ol>
                             <li 
                                 className={data.password.length >= 8 ? styles["correct"] : styles["wrong"]}
@@ -131,15 +110,13 @@ export default function Register() {
                                 At least 1 numeric character
                             </li>
                         </ol> */}
-                    
+
                     <input
                         type="password"
-                        id="re-password"
+                        id="confirmPassword"
                         placeholder="*****"
                         name="confirmPassword"
-                        onChange={(e) =>onChangeHandler(e)} 
-                    />
-
+                        onChange={onChangeHandler} />
 
                     <div className="gender-container">
                         <label htmlFor="male">Male</label>
@@ -161,15 +138,11 @@ export default function Register() {
                             checked={gender === "female"} />
                     </div>
 
-                    <button
-                        className="register-btn"
-                        type='submit'
-                        onClick={register}
-                    >
+                    <button className="register-btn" type='submit'>
                         Register</button>
                     <div className="card-no-account">
-                        <p>Already have an account?<a href="/login" > Sign in</a>.</p>
-                     
+                        <p>Already have an account?<Link to="/login" > Sign in</Link>.</p>
+
                     </div>
 
                 </form>

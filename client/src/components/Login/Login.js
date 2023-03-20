@@ -1,6 +1,7 @@
 import '../Login/register-login.css';
 
 import {  useContext } from 'react';
+import { Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext.js';
 import { useForm } from '../../hooks/useForm.js';
 
@@ -66,7 +67,7 @@ export default function Login() {
 
                     <button className="login-btn" type='submit' >Login</button>
                     <div className="card-no-account">
-                        <p>Don't have an account? <a href="/register">Sign up</a>.</p>
+                        <p>Don't have an account? <Link to="/register">Sign up</Link>.</p>
                     </div>
 
                 </form>
