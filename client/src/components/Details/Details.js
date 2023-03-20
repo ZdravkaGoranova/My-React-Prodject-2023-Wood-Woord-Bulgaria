@@ -9,6 +9,7 @@ import { WoodContext } from '../../contexts/WoodContext.js'
 import { Link } from 'react-router-dom';
 import * as productService from '../../services/productService.js';
 import * as commentService from '../../services/commentService.js';
+import * as likeService from '../../services/likeService.js';
 
 export default function Details() {
     const { onWoodDeleteClick } = useContext(WoodContext)
@@ -17,9 +18,13 @@ export default function Details() {
     //console.log(productId);
 
     const [product, setProduct] = useState({});
+
     const [username, setUsername] = useState("");
     const [comment, setComent] = useState("");
     const [comments, setComents] = useState([]);
+
+    const [like, setLike] = useState(0);
+    const [likes, setLikes] = useState([]);
 
     const navigate = useNavigate();
 
@@ -39,12 +44,25 @@ export default function Details() {
         e.preventDefault();
         await commentService.create({
             productId,
-            comment,
+            like,
             username,
         })
         setUsername("");
-        setComent("");
+        setComents("");
     };
+
+    const onLike = async (e) => {
+        e.preventDefault();
+       
+        await likeService.create({
+            productId:productId,
+            like:likes,
+
+        })
+        
+
+    };
+
     const onUsernameChange = (e) => {
         setUsername(e.target.value)
 
@@ -86,7 +104,7 @@ export default function Details() {
                         (<p className="no-comment">No comments.</p>)}
                 </div>
                 <div className="buttons">
-                    <Link to="/catalog/${product._id}}/shared" className="button">Likes</Link>
+                    <button className="button" onClick={onLike} >Likes</button>
                     <button className='button' type='submit' onClick={onBackButtonClick}>Back</button>
                     <Link to={`/edit/${product._id}`} className="button">Edit</Link>
                     {/* <Link to={`/delete/${product._id}`}  className="button">Delete</Link> */}
@@ -99,11 +117,11 @@ export default function Details() {
                 <label>Add new comment:</label>
                 <form className="form" onSubmit={onCommentSubmit}>
                     {/* <input type="text" name="username" placeholder="Ivan" value={username} onChange={onUsernameChange}> </input> */}
-                    <input type="text" name="username" placeholder='Ivan'  value={username} onChange={onUsernameChange}></input>
+                    <input type="text" name="username" placeholder='Ivan' value={username} onChange={onUsernameChange}></input>
                     <textarea name="comment" placeholder="Comment......" value={comment} onChange={onCommentChange}></textarea>
                     <input className="button" type="submit" value='Add Comment'></input>
                 </form>
-             
+
             </article>
         </section>
     )

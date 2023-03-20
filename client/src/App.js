@@ -2,14 +2,17 @@
 import './App.css';
 import './css/site.css';
 
-import { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import *as authService from '../src/services/authService.js'
 import * as productService from './services/productService.js'
+
 import { useNavigate, useParams } from "react-router-dom";
 
-// import { AuthContext } from './contexts/AuthContext.js'
+import { AuthContext } from './contexts/AuthContext.js'
 import { WoodContext } from './contexts/WoodContext'
-
+import { useForm } from '../src/hooks/useForm.js';
 
 import Navigation from './components/Navigation/Navigation.js'
 import Catalog from './components/Catalog/Catalog.js';
@@ -30,13 +33,15 @@ import Furnitures from './components/Catalog/Furnitures.js';
 import Toolboxes from './components/Catalog/Toolboxes.js';
 import Handtools from './components/Catalog/Handtools.js';
 import Other from './components/Catalog/Оther.js';
+
 const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 function App() {
+    const navigate = useNavigate();
 
     const [products, setProducts] = useState([])
-
-    const navigate = useNavigate();
+    const [auth, setAuth] = useState({});
+    //console.log(auth);
 
     useEffect(() => {
         productService.getAll()
@@ -62,8 +67,45 @@ function App() {
             });
     }, [newProduct]);
 
-    const onSubmitCreateProduct = async (productData) => {
+    const userLogin = async (data) => {
+        setAuth(data);
+    };
+    const onLoginSubmit = async (data) => {
+        //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
+        try {
+            const result = await authService.login(data)
+                .then(authData => {
+                    console.log(authData);
+                    userLogin(authData);
+                    navigate('/catalog');
+                })
+        } catch (error) {
+            console.log('Error:' + error)
+            navigate('/404');
+        }
+    };
 
+    const onRegisterSubmit = async (values) => {
+        const { confirmPassword, ...registerData } = values;
+        if (confirmPassword !== registerData.password) {
+            return;
+        }
+        try {
+            const result = await authService.register(registerData)
+            setAuth(result);
+            navigate('/catalog');
+            //или
+            // .then(authData => {
+            //     console.log(authData);
+            //     setAuth(authData);
+            //     navigate('/catalog');
+            // })
+        } catch (error) {
+            console.log('Error:' + error)
+            navigate('/404');
+        }
+    };
+    const onSubmitCreateProduct = async (productData) => {
         console.log('onSubmitCreateProduct');
 
         newProduct = await productService.create({ ...productData });
@@ -93,7 +135,7 @@ function App() {
         // const result=  await fetch(`${baseUrl}/${productId}`, { method: 'DELETE' });
 
         setProducts(state => state.filter(x => x._id !== productId));
-        //console.log(products)
+
         navigate("/catalog", { replace: true });
     };
 
@@ -103,7 +145,7 @@ function App() {
         } else {
             try {
                 const updateNewProduct = await productService.update(productId, product)
-          
+
                 const updatedProducts = await productService.getAll();
                 setProducts(updatedProducts);
 
@@ -113,46 +155,59 @@ function App() {
             }
         }
     };
-
+    const onLogout = async () => {
+        await authService.logout();
+        setAuth({});
+    };
     const contextValue = {
         onWoodDeleteClick,
         onSubmitCreateProduct,
         updateProduct,
+        onLogout,
         products,
     };
-
+    const context = {
+        userLogin,
+        onLoginSubmit,
+        onRegisterSubmit,
+        onLogout,
+        userId: auth._id,
+        token: auth.accessToken,
+        userEmail: auth.email,
+        isAuthenticated: !!auth.accessToken,
+    };
     return (
-        <WoodContext.Provider value={contextValue}>
+        <AuthContext.Provider value={context}>
+            <WoodContext.Provider value={contextValue}>
+                <>
+                    <Navigation />
+                    <Routes>
+                        <Route path="/" element={<Home products={products} />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path="/logout" element={<Logout />} />
 
-            <>
-                <Navigation />
-                <Routes>
-                    <Route path="/" element={<Home products={products} />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path="/logout" element={<Logout />} />
+                        <Route path='/create' element={<Create />} />
+                        <Route path='/profile' element={<Profile />} />
 
-                    <Route path='/create' element={<Create />} />
-                    <Route path='/profile' element={<Profile />} />
+                        <Route path='/catalog' element={<Catalog products={products} />} />
+                        <Route path='/catalog/Spoons' element={<Spoons products={products} />} />
+                        <Route path='/catalog/Chairs' element={<Chairs products={products} />} />
+                        <Route path='/catalog/Ladles' element={<Ladles products={products} />} />
+                        <Route path='/catalog/Furnitures' element={<Furnitures products={products} />} />
+                        <Route path='/catalog/Toolboxes' element={<Toolboxes products={products} />} />
+                        <Route path='/catalog/Handtools' element={<Handtools products={products} />} />
+                        <Route path='/catalog/Оther' element={<Other products={products} />} />
 
-                    <Route path='/catalog' element={<Catalog products={products} />} />
-                    <Route path='/catalog/Spoons' element={<Spoons products={products} />} />
-                    <Route path='/catalog/Chairs' element={<Chairs products={products} />} />
-                    <Route path='/catalog/Ladles' element={<Ladles products={products} />} />
-                    <Route path='/catalog/Furnitures' element={<Furnitures products={products} />} />
-                    <Route path='/catalog/Toolboxes' element={<Toolboxes products={products} />} />
-                    <Route path='/catalog/Handtools' element={<Handtools products={products} />} />
-                    <Route path='/catalog/Оther' element={<Other products={products} />} />
+                        <Route path='/edit/:productId' element={<Edit />} />
 
-                    <Route path='/edit/:productId' element={<Edit />} />
-
-                    <Route path='/details/:productId' element={<Details />} />
-
-                    <Route path='*' element={<PageNotFound />} />
-                </Routes>
-            </>
-        </WoodContext.Provider>
-
+                        <Route path='/details/:productId' element={<Details />} />
+                        <Route path='/404' element={<PageNotFound />} />
+                        <Route path='*' element={<PageNotFound />} />
+                    </Routes>
+                </>
+            </WoodContext.Provider>
+        </AuthContext.Provider>
     );
 }
 export default App;

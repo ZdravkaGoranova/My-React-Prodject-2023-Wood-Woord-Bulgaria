@@ -1,13 +1,11 @@
 
 import '../Profile/profile.css'
 
-import Publication from '../Catalog/Publication/Publication.js'
 import React, { useEffect, useState, useContext } from "react"
-import { Link } from 'react-router-dom';
+
 import { WoodContext } from '../../contexts/WoodContext.js'
 import MyProducts from './MyProducts.js';
 import { AuthContext } from '../../contexts/AuthContext.js'
-
 
 export default function Profile() {
     const {  userEmail } = useContext(AuthContext)
