@@ -1,50 +1,39 @@
-import '../Login/register-login.css'
+import '../Login/register-login.css';
 
-
-// import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
-
+import {  useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext.js';
+import { useForm } from '../../hooks/useForm.js';
 
 export default function Login() {
+    const {  onLoginSubmit } = useContext(AuthContext);
 
-    //const navigate = useNavigate();
-    // const [username, setUsername] = useState('');
-    // const [password, setPassword] = useState('');
 
-    const [formValues, setFormValues] = useState({
-        email: "",
+    const { formValues, onChangeHandler,onSubmit } = useForm({
         username: "",
+        email: "",
         password: "",
+    }, onLoginSubmit);
 
-    });
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        console.log();
-    };
-    const onChangeHandler = (e) => {
-        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-    };
+    // const onSubmitHandler = async (e) => {
+    //     e.preventDefault();
+    //     const { username, email, password } = Object.fromEntries(new FormData(e.target))
 
-
-    const login = e => {
-        e.preventDefault();
-
-        // auth
-        //     .signInWithEmailAndPassword(email, password)
-        //     .then(auth => {
-        //         navigate.push('/');
-        //     })
-        //     .catch(error => alert(error.message))
-
-    }
-
+    //     await authService.login(username, email, password)
+    //         .then(authData => {
+    //             console.log(authData);
+    //             userLogin(authData);
+    //             navigate('/');
+    //         })
+    //         .catch(() => {
+    //             navigate('/404');
+    //         })
+    // };
     return (
         <section id="login-container">
             <div className="container">
-
                 <img src="/img/23.jpg" alt="image" />
 
-                <form onSubmit={onSubmitHandler} className="container-text">
+                <form onSubmit={onSubmit} className="container-text">
                     <h2>Login</h2>
                     <p>Welcome, see the new  wood products!</p>
 
@@ -75,7 +64,7 @@ export default function Login() {
                         onChange={onChangeHandler}
                     />
 
-                    <button className="login-btn" type='submit' onClick={login} >Login</button>
+                    <button className="login-btn" type='submit' >Login</button>
                     <div className="card-no-account">
                         <p>Don't have an account? <a href="/register">Sign up</a>.</p>
                     </div>
@@ -84,4 +73,5 @@ export default function Login() {
             </div>
         </section>
     )
-}
+};
+////   <form onSubmit={(e) => onSubmitHandler(e)} className="container-text"></form>

@@ -12,11 +12,11 @@ export default function MyProducts({
     isCompleted,
 }) {
     return (
-        <div class="eventBoard">
-            <div class="event-info">
+        <div className="eventBoard">
+            <div className="event-info">
                 <img src={picture} />
                 <h2>Title:  {title}</h2>
-                <Link to={`/details/${_id}`} class="details-button">Details</Link>
+                <Link to={`/details/${_id}`} className="details-button">Details</Link>
             </div>
         </div>
     )

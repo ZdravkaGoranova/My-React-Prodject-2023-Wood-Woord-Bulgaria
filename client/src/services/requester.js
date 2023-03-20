@@ -11,16 +11,18 @@ const request = async (method, url, data) => {
             options.body = JSON.stringify(data);
         }
     }
-  
+
     const response = await fetch(url, options);
-    try {
-        const result = await response.json();
-        return result;
-    } catch (err) {
+    if (response.status === 204) {
         return {};
     }
-};
+    const result = await response.json();
+    if (!response.ok) {
+        throw result;
+    }
 
+    return result;
+};
 //partiol aplication
 export const get = request.bind(null, 'GET');
 export const post = request.bind(null, 'POST');
