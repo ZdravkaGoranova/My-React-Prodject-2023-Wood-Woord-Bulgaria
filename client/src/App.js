@@ -155,7 +155,7 @@ function App() {
         }
     };
     const onLogout = async () => {
-        await authService.logout();
+       // await authService.logout();
         setAuth({});
     };
     const contextValue = {

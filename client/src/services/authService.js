@@ -7,7 +7,7 @@ export const register = async (data) => {
     return result;
 };
 
-export const logout = (accessToken) => {
+export const logout = () => {
     request.get(`${baseUrl}/logout`)
 
     // return fetch(`${baseUrl}/logout`, {
