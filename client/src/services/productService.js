@@ -1,111 +1,71 @@
 
-import * as request from './requester.js'
-const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
+import { requestFactory } from './requester.js'
+const baseUrl = 'http://localhost:3030/data/woodTypes';
 
+export const productServiceFactory = (token) => {
+    const request = requestFactory(token)
 
-export const create = async (productData) => {
-    const { ...data } = productData;
-    console.log("----------");
-    console.log(productData);
-    const response = await fetch(`${baseUrl}`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    });
-    const result = await response.json();
-    console.log("result");
-    console.log(result);
+    const create = async (productData) => {
+        const { ...data } = productData;
+        const result = await request.post(baseUrl, data);
+        console.log(result);
+        return result;
+    };
+    const delProduct = async (productId) => {
+        const result = await request.del(`${baseUrl}/${productId}`)
+        return result;
+    };
 
-    return result;
-};
-export const delProduct = async (productId) => {
-   
-    console.log("delProduct");
-    //console.log(productId);
-    const result = await request.del(`${baseUrl}/${productId}`)
-    //console.log(result);
-    return result;
-};
+    const update = async (productId, data) => {
+        console.log("updateProduct");
+        //console.log(productId);
+        const result = await request.put(`${baseUrl}/${productId}`, data)
+        console.log(result);
+        return result;
+    };
 
-export const update = async (productId,data) => {
-   
-    console.log("updateProduct");
-    //console.log(productId);
-    const result = await request.put(`${baseUrl}/${productId}`,data)
-    console.log(result);
-    return result;
-};
+    const getAll = async () => {
+        const result = await request.get(baseUrl);
+        console.log(result);
+        const products = Object.values(result);
+        console.log(result);
+        return products;
+    };
 
-export const getAll = async () => {
-    const result = await request.get(baseUrl);
-    const products = Object.values(result);
+    const getOne = async (productId) => {
+        const result = await request.get(`${baseUrl}/${productId}`);
+        //console.log(result);
+        return result;
+    };
 
-    return products;
-};
+    const getByCategory = async (category) => {
+        const result = await getAll();
+        let filteredProducts = result.filter(product => product.type === category)
+        return filteredProducts
+    }
 
-export const getOne = async (productId) => {
-    const result = await request.get(`${baseUrl}/${productId}`);
-    //console.log(result);
-    return result;
+    // const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json()); const create = async (productData) => {
+    //     const { ...data } = productData;
+
+    //     const result = await request.post(baseUrl, data);
+
+    //     console.log(result);
+    //     return result;
+    // };
+
+    const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json());
+
+    return {
+        create,
+        delProduct,
+        update,
+        getAll,
+        getOne,
+        getByCategory,
+        getMyPublications,
+    }
 }
 
-
-
-export const getByCategory = async (category) => {
-    const result = await getAll();
-    let filteredProducts = result.filter(product => product.type === category)
-
-    return filteredProducts
-}
-
-export const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json());
 
 // export const getOne = (publicId) => fetch(`${baseUrl}/${publicId}`).then(res => res.json());
 
-
-
-// export const deletePublication = (publicId, accessToken) => {
-//     return fetch(`${baseUrl}/delete/${publicId}`, {
-//         method: "DELETE",
-//         headers: {
-//             'X-Authorization': accessToken
-//         }
-//     })
-//         .then(res => res.json());
-// };
-
-// export const editPublication = (publicId, accessToken, data) => {
-//     return fetch(`${baseUrl}/edit/${publicId}`, {
-//         method: "PUT",
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-Authorization': accessToken
-//         },
-//         body: JSON.stringify(data)
-//     })
-//         .then(res => res.json());
-// };
-
-// export const saveFilm = (publicId, userId, token) => {
-//     return fetch(`${baseUrl}/save/${publicId}`, {
-//         method: "POST",
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-Authorization': token
-//         },
-//         body: JSON.stringify({ userId })
-//     })
-//         .then(res => res.json());
-// };
-
-// export const getSavedFilms = (userId, token) => {
-//     return fetch(`${baseUrl}/save/${userId}`, {
-//         method: 'GET',
-//         headers: {
-//             'X-Authorization': token
-//         }
-//     })
-//         .then(res => res.json());
-// }

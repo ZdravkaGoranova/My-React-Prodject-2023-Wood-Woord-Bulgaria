@@ -5,9 +5,10 @@ import React from "react";
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react';
 import { WoodContext } from '../../contexts/WoodContext.js'
+import { useService } from '../../hooks/useService.js';
 
 import { Link } from 'react-router-dom';
-import * as productService from '../../services/productService.js';
+import { productServiceFactory } from '../../services/productService.js';
 import * as commentService from '../../services/commentService.js';
 import * as likeService from '../../services/likeService.js';
 
@@ -16,8 +17,10 @@ export default function Details() {
 
     const { productId } = useParams();
     //console.log(productId);
+    const productService = useService(productServiceFactory)
 
     const [product, setProduct] = useState({});
+
 
     const [username, setUsername] = useState("");
     const [comment, setComent] = useState("");
@@ -53,14 +56,11 @@ export default function Details() {
 
     const onLike = async (e) => {
         e.preventDefault();
-       
+
         await likeService.create({
-            productId:productId,
-            like:likes,
-
+            productId: productId,
+            like: likes,
         })
-        
-
     };
 
     const onUsernameChange = (e) => {

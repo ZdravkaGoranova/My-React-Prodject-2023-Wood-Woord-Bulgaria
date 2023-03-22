@@ -5,10 +5,11 @@ import './css/site.css';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import *as authService from '../src/services/authService.js'
-import * as productService from './services/productService.js'
+import { authServiceFactory } from '../src/services/authService.js'
+import { productServiceFactory } from './services/productService.js'
+import { useService } from './hooks/useService.js';
 
-import { useNavigate,  } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 
 import { AuthContext } from './contexts/AuthContext.js'
 import { WoodContext } from './contexts/WoodContext'
@@ -37,34 +38,29 @@ import Other from './components/Catalog/Оther.js';
 
 function App() {
     const navigate = useNavigate();
-
     const [products, setProducts] = useState([])
     const [auth, setAuth] = useState({});
     //console.log(auth);
 
+    const productService = productServiceFactory(auth.accessToken);
+ 
+    const authService = authServiceFactory(auth.accessToken);
+
     useEffect(() => {
         productService.getAll()
             .then(data => {
-                console.log(data) //console.log(Object.values(data.products))
+                // console.log(data) //console.log(Object.values(data.products))
                 setProducts(data)
-
-                //или
-                // await fetch(`${baseUrl}`)
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         // console.log(data) // console.log(data.products)
-                //         // console.log(Object.values(data.products))
-                //         setProducts(Object.values(data.products))
             })
     }, []);
 
-    let newProduct = '';
-    useEffect(() => {
-        productService.getAll()
-            .then(data => {
-                setProducts(data);
-            });
-    }, [newProduct]);
+    //let newProduct = '';
+    // useEffect(() => {
+    //     productService.getAll()
+    //         .then(data => {
+    //             setProducts(data);
+    //         });
+    // }, [newProduct]);
 
     const userLogin = async (data) => {
         setAuth(data);
@@ -72,10 +68,11 @@ function App() {
     const onLoginSubmit = async (data) => {
         //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
         try {
-            const result = await authService.login(data)
+            console.log(data);
+            const result = await authService.login({ ...data, username: data.username })
                 .then(authData => {
                     console.log(authData);
-                    userLogin(authData);
+                    userLogin({ ...authData, username: data.username });
                     navigate('/catalog');
                 })
         } catch (error) {
@@ -91,6 +88,7 @@ function App() {
         }
         try {
             const result = await authService.register(registerData)
+            console.log(registerData);
             setAuth(result);
             navigate('/catalog');
             //или
@@ -107,7 +105,7 @@ function App() {
     const onSubmitCreateProduct = async (productData) => {
         console.log('onSubmitCreateProduct');
 
-        newProduct = await productService.create({ ...productData });
+        const newProduct = await productService.create(productData);
         setProducts(state => [...state, newProduct]);
 
         navigate("/catalog", { replace: true });
@@ -143,10 +141,11 @@ function App() {
             alert("Please enter a valid URL address");
         } else {
             try {
-                const updateNewProduct = await productService.update(productId, product)
+                const result = await productService.update(productId, product)
 
-                const updatedProducts = await productService.getAll();
-                setProducts(updatedProducts);
+                setProducts(state => state.map(x => x._id === product._id ? result : x))
+                // const updatedProducts = await productService.getAll();
+                // setProducts(updatedProducts);
 
                 navigate(`/details/${productId}`, { replace: true });
             } catch (err) {
@@ -155,14 +154,14 @@ function App() {
         }
     };
     const onLogout = async () => {
-       // await authService.logout();
+        // await authService.logout();
         setAuth({});
     };
     const contextValue = {
         onWoodDeleteClick,
         onSubmitCreateProduct,
         updateProduct,
-        onLogout,
+
         products,
     };
     const context = {
@@ -173,6 +172,7 @@ function App() {
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,
+        username: auth.username,
         isAuthenticated: !!auth.accessToken,
     };
     return (

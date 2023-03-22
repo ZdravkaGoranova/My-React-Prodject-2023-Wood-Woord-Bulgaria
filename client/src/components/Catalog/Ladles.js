@@ -4,13 +4,16 @@ import '../Catalog/gallery.css'
 
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
-import { getByCategory } from '../../services/productService.js';
 
+import { productServiceFactory } from '../../services/productService.js';
+import { useService } from '../../hooks/useService.js'
+
+    
 export default async function Ladles({
     products,
 }) {
-    
-    const filteredItems = await getByCategory('ladles')
+    const productService = useService(productServiceFactory);
+    const filteredItems = await productService.getByCategory('ladles')
 
     console.log(filteredItems);
     console.log(products);

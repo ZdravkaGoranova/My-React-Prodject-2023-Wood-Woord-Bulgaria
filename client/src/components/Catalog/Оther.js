@@ -2,7 +2,8 @@
 import '../Catalog/gallery.css';
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
-import { getByCategory } from '../../services/productService.js';
+import {productServiceFactory} from '../../services/productService.js';
+import { useService } from '../../hooks/useService.js';
 
 const baseUrl = 'http://localhost:3030/jsonstore';
 
@@ -10,8 +11,9 @@ export default async function Оther({
     products,
 }) {
 
+    const productService = useService(productServiceFactory);
     console.log(products)
-    const filteredItems = await getByCategory('toolboxes')
+    const filteredItems = await productService.getByCategory('toolboxes')
     console.log(filteredItems);
     console.log(filteredItems.length);
     return (

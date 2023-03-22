@@ -3,8 +3,7 @@ import '../Create/create-edit.css'
 
 import { useEffect, useState, useContext } from 'react';
 import { WoodContext } from '../../contexts/WoodContext.js'
-
-// import { AuthContext } from "../../contexts/AuthContext";
+import { useForm } from '../../hooks/useForm.js';
 
 export default function Create() {
     const { onSubmitCreateProduct} = useContext(WoodContext)
@@ -14,22 +13,13 @@ export default function Create() {
     // const token = user.accessToken;
     // const _ownerId = user._id;
 
-    const [product, setProduct] = useState({
+    const{product, onChangeHandler,onSubmit} = useForm({
         title: "",
         description: "",
         picture: "",
         price: "",
         type: "",
-    });
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        onSubmitCreateProduct(product)
-    }
-
-    const onChangeHandler = (e) => {
-        setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
-    };
+    },onSubmitCreateProduct);
 
     return (
         <section id="create-container">
@@ -65,9 +55,7 @@ export default function Create() {
                     </select>
 
                     <button className="create-btn" type='submit' >Create</button>
-
                 </form>
-
             </div>
         </section>
 

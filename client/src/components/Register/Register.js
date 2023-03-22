@@ -13,13 +13,14 @@ export default function Register() {
         email: "",
         password: "",
         confirmPassword: "",
+        gender:"",
     }, onRegisterSubmit);
 
     const [gender, setGender] = useState('male');
 
 
-    const onSubmitHandler = (ev, userData) => {
-        ev.preventDefault();
+    // const onSubmitHandler = (ev, userData) => {
+    //     ev.preventDefault();
         // if (userData.password.length < 8
         //     || !/[A-Z]/.test(userData.password)
         //     || !/[0-9]/.test(userData.password)
@@ -47,7 +48,7 @@ export default function Register() {
         //         }
         //     }
         // }
-    };
+    //};
 
     const onGenderChange = (e) => {
         setGender(e.target.value)
@@ -134,6 +135,7 @@ export default function Register() {
                             type="radio"
                             id="female"
                             value="female"
+                            name="gender"
                             onChange={onGenderChange}
                             checked={gender === "female"} />
                     </div>

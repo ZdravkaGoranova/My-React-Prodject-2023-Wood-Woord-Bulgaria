@@ -1,15 +1,16 @@
 import '../Edit/create-edit.css'
 
-
 import React, { useState, useEffect, useContext } from 'react';
-import * as productService from '../../services/productService.js'
+import { productServiceFactory } from '../../services/productService.js'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { useService } from '../../hooks/useService.js';
 
 import { WoodContext } from '../../contexts/WoodContext.js'
 const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 export default function Edit() {
+    const productService = useService(productServiceFactory)
     const { updateProduct } = useContext(WoodContext)
 
     const { productId } = useParams();
@@ -61,7 +62,6 @@ export default function Edit() {
     };
 
     return (
-
         <section id="edit-container">
             <div className="edit-container-info">
 

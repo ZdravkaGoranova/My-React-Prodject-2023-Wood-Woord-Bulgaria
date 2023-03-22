@@ -3,11 +3,13 @@ import '../Catalog/gallery.css'
 
 import Publication from './Publication/Publication.js';
 import { Link } from 'react-router-dom';
-import * as productService from '../../services/productService.js';
+import {productServiceFactory} from '../../services/productService.js';
+import { useService } from '../../hooks/useService.js';
 
 export default async function Chairs(
     products,
 ) {
+    const productService = useService(productServiceFactory);
     console.log(products);
     const filteredItems = await productService.getByCategory('chairs')
     console.log(filteredItems);

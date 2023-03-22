@@ -2,15 +2,19 @@ import '../Catalog/gallery.css'
 
 import Publication from './Publication/Publication.js'
 import { Link } from 'react-router-dom';
-import { getByCategory } from '../../services/productService.js';
 
 
-
+import { productServiceFactory } from '../../services/productService.js';
+import { useService } from '../../hooks/useService.js'
+ 
 export default async function Handtools({
     products,
 }) {
     console.log(products)
-    const filteredItems = await getByCategory('handtools')
+
+    const productService = useService(productServiceFactory);
+
+    const filteredItems = await productService.getByCategory('handtools')
     console.log(filteredItems);
     console.log(filteredItems.length);
     return (

@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { NavLink } from 'react-router-dom';
 
 export default function Navigation() {
-    const { isAuthenticated, userEmail } = useContext(AuthContext)
+    const { isAuthenticated, userEmail,username } = useContext(AuthContext)
     // console.log(isAuthenticated);
     // console.log(userEmail);
     return (
@@ -16,7 +16,7 @@ export default function Navigation() {
                 <ul className="menu">
                     {isAuthenticated ?
                         <>
-                            <NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/profile">Welcome, {userEmail}!</NavLink>
+                            <NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/profile">Welcome, username {username}!</NavLink>
                             <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/catalog">Gallery</NavLink></li>
                             <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/create">Create Product</NavLink></li>
                             <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/profile">Profile</NavLink></li>

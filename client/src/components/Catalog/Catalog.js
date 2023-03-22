@@ -5,14 +5,12 @@ import React, { useEffect, useState, useContext } from "react"
 import { Link } from 'react-router-dom';
 import { WoodContext } from '../../contexts/WoodContext.js'
 export default function Catalog() {
-  
     const { products } = useContext(WoodContext)
     console.log(products)
     //console.log(typeof products)
 
     // const filteredItems = products.filter(item => item.type === 'toolboxes');
     // console.log(filteredItems);
-
     return (
 
         < section id="gallery" >

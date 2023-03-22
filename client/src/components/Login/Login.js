@@ -8,7 +8,6 @@ import { useForm } from '../../hooks/useForm.js';
 export default function Login() {
     const {  onLoginSubmit } = useContext(AuthContext);
 
-
     const { formValues, onChangeHandler,onSubmit } = useForm({
         username: "",
         email: "",
@@ -44,6 +43,7 @@ export default function Login() {
                         id="username"
                         placeholder="ivan_00"
                         name="username"
+                        autoComplete="username"
                         value={formValues.username}
                         onChange={onChangeHandler}
                     />
@@ -61,6 +61,7 @@ export default function Login() {
                         id="password"
                         placeholder="*****"
                         name="password"
+                        autoComplete="current-password"
                         value={formValues.password}
                         onChange={onChangeHandler}
                     />

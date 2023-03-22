@@ -48,7 +48,7 @@
     text-align: center;
     line-height: 1.6em;
     word-wrap: break-word;
-    margin-top: 1em;
+    margin-top: -5em;
     margin-bottom: 0.5em;
     font-family: 'EB Garamond', serif;
     color: rgb(13, 0, 0);
@@ -161,7 +161,7 @@
   }
   
   .userInfo > h2 {
-    padding-top: -20px;
+    padding-top: 0px;
   }
   
   .avatar {
