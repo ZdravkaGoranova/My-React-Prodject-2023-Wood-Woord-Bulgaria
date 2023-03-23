@@ -87,13 +87,19 @@ export default function Details() {
                     <img className="game-img" src={product.picture} />
                     <h1>{product.title}</h1>
                     <span className="levels">Type:   {product.type}</span>
-
+                    <p className="type"> Owner:   {product._ownerId}</p>
                     <p className="type"> Price:   {product.price}</p>
                 </div>
 
                 <p className="text">
                     {product.description}.
                 </p>
+                <div className="details-likes">
+                    <h2>Likes: {comments.length}</h2>
+            
+                    {comments.length === 0 &&
+                        (<p className="no-comment">No comments.</p>)}
+                </div>
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
@@ -102,7 +108,6 @@ export default function Details() {
                                 <p>{x.username}: {x.comment}</p>
                             </li>
                         ))}
-
                     </ul>
                     {comments.length === 0 &&
                         (<p className="no-comment">No comments.</p>)}

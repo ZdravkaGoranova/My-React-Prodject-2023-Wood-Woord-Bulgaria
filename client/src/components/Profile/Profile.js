@@ -23,7 +23,7 @@ export default function Profile() {
 
     return (
         <section id="profile-page">
-            <h1>Full Profile Information</h1>
+            <h1>My Publication Products</h1>
             <section id="profilePage">
                 <div className="userInfo">
                     <div className="avatar">
