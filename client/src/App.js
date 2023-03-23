@@ -43,7 +43,6 @@ function App() {
     //console.log(auth);
 
     const productService = productServiceFactory(auth.accessToken);
- 
     const authService = authServiceFactory(auth.accessToken);
 
     useEffect(() => {
@@ -69,10 +68,10 @@ function App() {
         //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
         try {
             console.log(data);
-            const result = await authService.login({ ...data, username: data.username })
+            const result = await authService.login(data)//({ ...data, username: data.username })
                 .then(authData => {
                     console.log(authData);
-                    userLogin({ ...authData, username: data.username });
+                    userLogin(data);//  userLogin({ ...authData, username: data.username })
                     navigate('/catalog');
                 })
         } catch (error) {

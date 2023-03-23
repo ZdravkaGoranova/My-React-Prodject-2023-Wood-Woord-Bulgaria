@@ -9,11 +9,11 @@ export const authServiceFactory = (token) => {
             const result = request.post(`${baseUrl}/register`, data)
             return result;
         },
-        logout: () => { request.get(`${baseUrl}/logout`) },
+        logout: () =>  request.get(`${baseUrl}/logout`) ,
 
         login: (data) => {
             const result = request.post(`${baseUrl}/login`, data)
-            // console.log(result);
+            console.log(result);
             return result;
         },
     }

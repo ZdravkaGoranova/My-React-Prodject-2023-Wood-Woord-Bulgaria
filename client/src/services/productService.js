@@ -12,7 +12,7 @@ export const productServiceFactory = (token) => {
         return result;
     };
     const delProduct = async (productId) => {
-        const result = await request.del(`${baseUrl}/${productId}`)
+        const result = await request.delete(`${baseUrl}/${productId}`)
         return result;
     };
 
