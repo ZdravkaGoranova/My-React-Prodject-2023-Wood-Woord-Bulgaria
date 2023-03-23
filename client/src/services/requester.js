@@ -18,9 +18,9 @@ const request = async (method, token, url, data) => {
             'X-Authorization': token,
         }
     }
-    console.log(options)
+    
     const response = await fetch(url, options);
-    console.log(response)
+ 
     if (response.status === 204) {
         return {};
     }

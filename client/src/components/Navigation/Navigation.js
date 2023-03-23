@@ -6,8 +6,8 @@ import { NavLink } from 'react-router-dom';
 
 export default function Navigation() {
     const { isAuthenticated, userEmail,username } = useContext(AuthContext)
-    // console.log(isAuthenticated);
-    // console.log(userEmail);
+    //  console.log(isAuthenticated);
+    //  console.log(userEmail);
     return (
         <>
             <nav>

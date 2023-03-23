@@ -13,7 +13,7 @@ export const authServiceFactory = (token) => {
 
         login: (data) => {
             const result = request.post(`${baseUrl}/login`, data)
-            console.log(result);
+    
             return result;
         },
     }

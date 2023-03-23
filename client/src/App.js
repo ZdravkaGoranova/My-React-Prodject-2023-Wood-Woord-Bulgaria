@@ -67,11 +67,11 @@ function App() {
     const onLoginSubmit = async (data) => {
         //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
         try {
-            console.log(data);
+      
             const result = await authService.login(data)//({ ...data, username: data.username })
                 .then(authData => {
                     console.log(authData);
-                    userLogin(data);//  userLogin({ ...authData, username: data.username })
+                    userLogin(authData);//  userLogin({ ...authData, username: data.username })
                     navigate('/catalog');
                 })
         } catch (error) {

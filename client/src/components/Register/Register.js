@@ -18,38 +18,6 @@ export default function Register() {
 
     const [gender, setGender] = useState('male');
 
-
-    // const onSubmitHandler = (ev, userData) => {
-    //     ev.preventDefault();
-        // if (userData.password.length < 8
-        //     || !/[A-Z]/.test(userData.password)
-        //     || !/[0-9]/.test(userData.password)
-        // ) {
-        //     alert("Please enter a valid password!");
-        // } else {
-        //     if (userData.password !== userData.rePass) {
-        //         alert("Invalid data provided!");
-        //     } else {
-        //         try {
-        //             const emailRegExp = new RegExp('^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+.[a-zA-Z]{2})$');
-        //             if (emailRegExp.test(userData.email)) {
-        //                 service.registerUser(userData)
-        //                     .then(result => {
-        //                         if (typeof result !== "string") {
-        //                             userLogin(result);
-        //                             navigate("/", { replace: true });
-        //                         } else {
-        //                             alert("User with this name already exists!");
-        //                         }
-        //                     });
-        //             }
-        //         } catch (err) {
-        //             alert(err);
-        //         }
-        //     }
-        // }
-    //};
-
     const onGenderChange = (e) => {
         setGender(e.target.value)
     };
@@ -71,7 +39,6 @@ export default function Register() {
                         name="username"
                         value={formValues.username}
                         onChange={onChangeHandler}
-
                     />
 
                     <label htmlFor="email">Email:</label>
@@ -153,3 +120,35 @@ export default function Register() {
 
     )
 }
+
+
+    // const onSubmitHandler = (ev, userData) => {
+    //     ev.preventDefault();
+        // if (userData.password.length < 8
+        //     || !/[A-Z]/.test(userData.password)
+        //     || !/[0-9]/.test(userData.password)
+        // ) {
+        //     alert("Please enter a valid password!");
+        // } else {
+        //     if (userData.password !== userData.rePass) {
+        //         alert("Invalid data provided!");
+        //     } else {
+        //         try {
+        //             const emailRegExp = new RegExp('^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+.[a-zA-Z]{2})$');
+        //             if (emailRegExp.test(userData.email)) {
+        //                 service.registerUser(userData)
+        //                     .then(result => {
+        //                         if (typeof result !== "string") {
+        //                             userLogin(result);
+        //                             navigate("/", { replace: true });
+        //                         } else {
+        //                             alert("User with this name already exists!");
+        //                         }
+        //                     });
+        //             }
+        //         } catch (err) {
+        //             alert(err);
+        //         }
+        //     }
+        // }
+    //};
