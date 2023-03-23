@@ -9,16 +9,16 @@ import { useService } from '../../hooks/useService.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
 import { Link } from 'react-router-dom';
 import { productServiceFactory } from '../../services/productService.js';
-import * as commentService from '../../services/commentService.js';
+import { comentServiceFactory } from '../../services/commentService.js';
 import * as likeService from '../../services/likeService.js';
 
 export default function Details() {
     const { onWoodDeleteClick } = useContext(WoodContext);
-    const { userId } = useContext(AuthContext);
+    const { userId, isAuthenticated } = useContext(AuthContext);
     const { productId } = useParams();
     //console.log(productId);
     const productService = useService(productServiceFactory)
-
+    const commentService = useService(comentServiceFactory)
     const [product, setProduct] = useState({});
 
 
@@ -31,7 +31,7 @@ export default function Details() {
 
     const navigate = useNavigate();
     const isOwner = product._ownerId === userId;
-   
+
     console.log(product._ownerId)
     console.log(userId)
     console.log(isOwner)
@@ -111,29 +111,31 @@ export default function Details() {
 
                     <button className='button' type='submit' onClick={onBackButtonClick}>Back</button>
 
-                    {isOwner ?
+                    {isOwner &&
                         <>
                             <Link to={`/edit/${product._id}`} className="button">Edit</Link>
                             {/* <Link to={`/delete/${product._id}`}  className="button">Delete</Link> */}
                             <button className='button' type='submit' onClick={() => onWoodDeleteClick(productId)} >Delete</button>
                             {/* onClick={() => onWoodDeleteClick(productId)} */}
                         </>
-                        :
+                    }
+                    {(isAuthenticated && !isOwner) &&
                         <button className="button" onClick={onLike} >Likes</button>
                     }
                 </div>
             </div>
+            {(!isOwner && isAuthenticated) &&
+                <article className="create-comment">
+                    <label>Add new comment:</label>
+                    <form className="form" onSubmit={onCommentSubmit}>
+                        {/* <input type="text" name="username" placeholder="Ivan" value={username} onChange={onUsernameChange}> </input> */}
+                        
+                        <textarea name="comment" placeholder="Comment......" value={comment} onChange={onCommentChange}></textarea>
+                        <input className="button" type="submit" value='Add Comment'></input>
+                    </form>
 
-            <article className="create-comment">
-                <label>Add new comment:</label>
-                <form className="form" onSubmit={onCommentSubmit}>
-                    {/* <input type="text" name="username" placeholder="Ivan" value={username} onChange={onUsernameChange}> </input> */}
-                    <input type="text" name="username" placeholder='Ivan' value={username} onChange={onUsernameChange}></input>
-                    <textarea name="comment" placeholder="Comment......" value={comment} onChange={onCommentChange}></textarea>
-                    <input className="button" type="submit" value='Add Comment'></input>
-                </form>
-
-            </article>
+                </article>
+            }
         </section>
     )
 }

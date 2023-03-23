@@ -3,7 +3,7 @@ const request = async (method, token, url, data) => {
 
     const options = {};
 
-    if (method != 'GET') {
+    if (method !== 'GET') {
         options.method = method;
         if (data) {
             options.headers = {

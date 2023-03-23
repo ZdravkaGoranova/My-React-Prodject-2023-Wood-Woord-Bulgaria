@@ -17,7 +17,7 @@ export default function Publication({
                 <img src={picture} alt={title} />
             </article>
             <article className="card-info-text">
-                <h2>Title:  <h3>{title}</h3></h2>
+                <h2>Title:  {title}</h2>
                 
                 <Link to={`/details/${_id}`}  className="details-btn">Details</Link>
             </article>

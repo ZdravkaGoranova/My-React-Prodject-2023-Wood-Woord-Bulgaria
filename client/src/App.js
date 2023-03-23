@@ -186,7 +186,7 @@ function App() {
                         <Route path="/logout" element={<Logout />} />
 
                         <Route path='/create' element={<Create />} />
-                        <Route path='/profile' element={<Profile />} />
+                        <Route path='/profile/:userId' element={<Profile />} />
 
                         <Route path='/catalog' element={<Catalog products={products} />} />
                         <Route path='/catalog/Spoons' element={<Spoons products={products} />} />
