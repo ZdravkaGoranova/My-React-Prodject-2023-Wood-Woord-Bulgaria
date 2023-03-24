@@ -27,10 +27,21 @@ export default function Details() {
     const [product, setProduct] = useState({});
 
     const isOwner = product._ownerId === userId;
-    console.log(product);
-    console.log(product._ownerId);
+
+
+    const productLikes = product?.likes
+    console.log(productLikes);
+
+
+    const isLiked = productLikes?.some(item => {
+        return item.author._id === userId || item._ownerId === userId;
+    });
     console.log(userId);
-    console.log(isOwner);
+    console.log(isLiked);
+
+    console.log(product.likes);
+
+    console.log(product);
 
     useEffect(() => {
 
@@ -38,7 +49,7 @@ export default function Details() {
             productService.getOne(productId),
             commentService.getAll(productId),//промис чейнинг
             likeService.getAll(productId)
-        ]).then(([productData, comments,likes]) => {
+        ]).then(([productData, comments, likes]) => {
             const productState = {
                 ...productData,
                 comments,
@@ -55,7 +66,6 @@ export default function Details() {
 
         const response = await commentService.create(
             productId,
-            // like,
             values.comment,
             userEmail,
         )
@@ -65,30 +75,21 @@ export default function Details() {
     };
 
     const onLike = async (values) => {
-  
+
         const response = await likeService.create(
             productId,
             values.like,
             userEmail,
         )
         console.log(response)
-        // setUsername("");
-        // setComents("");
-
-
-        // await likeService.create({
-        //     productId: productId,
-        //     like: likes,
-        // })
     };
-
 
     const onBackButtonClick = (e) => {
         navigate('/catalog');
     };
     return (
         <section id="game-details">
-            <h1>Details</h1>
+            <h1>Product Details </h1>
             <div className="info-section">
 
                 <div className="game-header">
@@ -105,7 +106,10 @@ export default function Details() {
                 <div className="details-likes">
                     <h2>Likes: {product.likes?.length}</h2>
 
+                    {isLiked && <p >You already liked the product!</p>}
+
                     {product.likes?.length === 0 &&
+
                         (<p className="no-comment">No likes.</p>)}
                 </div>
                 <div className="details-comments">
@@ -113,13 +117,14 @@ export default function Details() {
                     <ul>
                         {product.comments && product.comments.map(x => (
                             <li key={x._id} className="comment">
-                                <p>{x._ownerId}: {x.comment}</p>
+                                <p>{x.author.email}: {x.comment}</p>
                             </li>
                         ))}
                     </ul>
                     {product.comments?.length === 0 &&
                         (<p className="no-comment">No comments.</p>)}
                 </div>
+
                 <div className="buttons">
 
                     <button className='button' type='submit' onClick={onBackButtonClick}>Back</button>
@@ -132,9 +137,10 @@ export default function Details() {
                             {/* onClick={() => onWoodDeleteClick(productId)} */}
                         </>
                     }
-                    {(isAuthenticated && !isOwner) &&
+                    {(isAuthenticated && !isOwner && !isLiked) &&
                         <button className="button" onClick={onLike} >Likes</button>
                     }
+
                 </div>
             </div>
 

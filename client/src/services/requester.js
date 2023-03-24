@@ -23,15 +23,15 @@ const requester = async (method, token, url, data) => {
     const response = await fetch(url, options);
 
     if (response.status === 204 || response.status === 404) {
-        return {};
+        return [];
     }
     if ( response === 'undefined' || response === null) {
         throw new Error('Отговорът е null или undefined');
       }
 
 
-    console.log(response)
-    console.log(response.status)
+    // console.log(response)
+    // console.log(response.status)
     
     const result = await response.json();
 
