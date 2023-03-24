@@ -1,32 +1,20 @@
 import { requestFactory } from './requester.js';
-import { useService } from '../hooks/useService.js';
+
 const baseUrl = 'http://localhost:3030/data/comments';
+const request = requestFactory();
 
-export const comentServiceFactory = (token) => {
-    const request = requestFactory(token)
+export const create = async (productId,comment) => {
 
-    const create = async (data) => {
-    
-        console.log("data/comments");
+    const result = await request.post(baseUrl, {productId,comment})
+    console.log(result);
 
-        const result = await request.post(baseUrl, data)
-        const comments = Object.values(result)
-        console.log("result");
-        console.log(result);
-        console.log(comments);
-        return comments;
-    };
+    return result;
+};
 
-    const getAll = async (productId) => {
-        const query = encodeURIComponent(`productId=${productId}`);
-      
-        const result = await request.get(`${baseUrl}?where=${query}`);//search
-        const comments = Object.values(result)
-        return comments;
-    };
-    return {
-        create,
-        getAll,
-    }
-
-}
+export const getAll = async (productId,) => {
+    const searchQuery = encodeURIComponent(`productId="${productId}"`);
+    const relationQuery = encodeURIComponent(`author=_ownerId:users`);
+    const result = await request.get(`${baseUrl}?where=${searchQuery}&load=${relationQuery}`);//search
+    const comments = Object.values(result)
+    return comments;
+};

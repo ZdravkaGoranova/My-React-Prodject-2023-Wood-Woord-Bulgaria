@@ -14,7 +14,7 @@ export default function Edit() {
     const { updateProduct } = useContext(WoodContext)
 
     const { productId } = useParams();
-    console.log(productId);
+    //console.log(productId);
 
     const navigate = useNavigate();
     const [product, setProduct] = useState({

@@ -11,8 +11,10 @@ import { useService } from './hooks/useService.js';
 
 import { useNavigate, } from "react-router-dom";
 
-import { AuthContext } from './contexts/AuthContext.js'
-import { WoodContext } from './contexts/WoodContext'
+import { AuthContext } from './contexts/AuthContext.js';
+import { WoodContext } from './contexts/WoodContext';       
+import {AuthProvider} from '../src/contexts/AuthContext.js'
+
 import { useForm } from '../src/hooks/useForm.js';
 
 import Navigation from './components/Navigation/Navigation.js'
@@ -39,11 +41,8 @@ import Other from './components/Catalog/Оther.js';
 function App() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([])
-    const [auth, setAuth] = useState({});
-    //console.log(auth);
 
-    const productService = productServiceFactory(auth.accessToken);
-    const authService = authServiceFactory(auth.accessToken);
+    const productService = productServiceFactory();//auth.accessToken
 
     useEffect(() => {
         productService.getAll()
@@ -53,54 +52,6 @@ function App() {
             })
     }, []);
 
-    //let newProduct = '';
-    // useEffect(() => {
-    //     productService.getAll()
-    //         .then(data => {
-    //             setProducts(data);
-    //         });
-    // }, [newProduct]);
-
-    const userLogin = async (data) => {
-        setAuth(data);
-    };
-    const onLoginSubmit = async (data) => {
-        //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
-        try {
-      
-            const result = await authService.login(data)//({ ...data, username: data.username })
-                .then(authData => {
-                    console.log(authData);
-                    userLogin(authData);//  userLogin({ ...authData, username: data.username })
-                    navigate('/catalog');
-                })
-        } catch (error) {
-            console.log('Error:' + error)
-            navigate('/404');
-        }
-    };
-
-    const onRegisterSubmit = async (values) => {
-        const { confirmPassword, ...registerData } = values;
-        if (confirmPassword !== registerData.password) {
-            return;
-        }
-        try {
-            const result = await authService.register(registerData)
-            console.log(registerData);
-            setAuth(result);
-            navigate('/catalog');
-            //или
-            // .then(authData => {
-            //     console.log(authData);
-            //     setAuth(authData);
-            //     navigate('/catalog');
-            // })
-        } catch (error) {
-            console.log('Error:' + error)
-            navigate('/404');
-        }
-    };
     const onSubmitCreateProduct = async (productData) => {
         console.log('onSubmitCreateProduct');
 
@@ -152,30 +103,16 @@ function App() {
             }
         }
     };
-    const onLogout = async () => {
-        // await authService.logout();
-        setAuth({});
-    };
+
     const contextValue = {
         onWoodDeleteClick,
         onSubmitCreateProduct,
         updateProduct,
-
         products,
     };
-    const context = {
-        userLogin,
-        onLoginSubmit,
-        onRegisterSubmit,
-        onLogout,
-        userId: auth._id,
-        token: auth.accessToken,
-        userEmail: auth.email,
-        username: auth.username,
-        isAuthenticated: !!auth.accessToken,
-    };
+
     return (
-        <AuthContext.Provider value={context}>
+        <AuthProvider>
             <WoodContext.Provider value={contextValue}>
                 <>
                     <Navigation />
@@ -205,7 +142,7 @@ function App() {
                     </Routes>
                 </>
             </WoodContext.Provider>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 }
 export default App;

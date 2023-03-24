@@ -1,24 +1,26 @@
 import '../Details/details.css';
 
-import React from "react";
+import React, { useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import * as productService from '../../services/productService.js'
+import { AuthContext } from '../../contexts/AuthContext.js';
 
 const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
 
 export default function Details() {
     const { productId } = useParams();
     console.log(productId);
-
+    const { userId } = useContext(AuthContext)
+    console.log(userId);
     const [product, setProduct] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
         productService.getOne(productId)
             .then(data => {
-                 console.log(data)
+                console.log(data)
                 setProduct(data)
             })
     }, [productId]);
@@ -81,7 +83,7 @@ export default function Details() {
                         <p className="btn-like">Likes: </p>
 
                     </div>
-                  
+
 
                     <article className="create-comment">
                         <label>Add new comment:</label>

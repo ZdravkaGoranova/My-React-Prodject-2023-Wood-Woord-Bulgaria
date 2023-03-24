@@ -15,7 +15,7 @@ export default function Navigation() {
                 <ul className="menu">
                     {isAuthenticated ?
                         <>
-                            <NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/profile">Welcome, username {username}{userEmail}!</NavLink>
+                            <NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to={`/profile/${userId}`}>Welcome, username {username}{userEmail}!</NavLink>
                             <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/catalog">Gallery</NavLink></li>
                             <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to="/create">Create Product</NavLink></li>
                             <li><NavLink style={({ isActive }) => ({ color: isActive ? 'brown' : 'black' })} to={`/profile/${userId}`}>Profile</NavLink></li>

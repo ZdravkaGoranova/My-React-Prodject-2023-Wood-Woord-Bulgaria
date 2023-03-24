@@ -18,7 +18,8 @@ export const productServiceFactory = (token) => {
 
     const update = async (productId, data) => {
         console.log("updateProduct");
-        //console.log(productId);
+        console.log(productId);
+
         const result = await request.put(`${baseUrl}/${productId}`, data)
         console.log(result);
         return result;
