@@ -37,10 +37,12 @@ export default function Details() {
         Promise.all([
             productService.getOne(productId),
             commentService.getAll(productId),//промис чейнинг
-        ]).then(([productData, comments]) => {
+            likeService.getAll(productId)
+        ]).then(([productData, comments,likes]) => {
             const productState = {
                 ...productData,
                 comments,
+                likes,
             };
             setProduct(productState)
             // dispatch({type: 'GAME_FETCH', payload: gameState})
@@ -62,8 +64,17 @@ export default function Details() {
         // setComents("");
     };
 
-    const onLike = async (e) => {
-        e.preventDefault();
+    const onLike = async (values) => {
+  
+        const response = await likeService.create(
+            productId,
+            values.like,
+            userEmail,
+        )
+        console.log(response)
+        // setUsername("");
+        // setComents("");
+
 
         // await likeService.create({
         //     productId: productId,
@@ -92,10 +103,10 @@ export default function Details() {
                     {product.description}.
                 </p>
                 <div className="details-likes">
-                    <h2>Likes: {"length"}</h2>
+                    <h2>Likes: {product.likes?.length}</h2>
 
-                    {/* {comments.length === 0 &&
-                        (<p className="no-comment">No comments.</p>)} */}
+                    {product.likes?.length === 0 &&
+                        (<p className="no-comment">No likes.</p>)}
                 </div>
                 <div className="details-comments">
                     <h2>Comments:</h2>
