@@ -24,7 +24,7 @@ export default function Home({
             </div>
             <section id="home-page">
                 <article className="auto-content">
-                    <h1>Woor Woord Bulgaria</h1>
+                    <h1>Wood Woord Bulgaria</h1>
                 </article>
             </section>
             <section id="home-page-content">

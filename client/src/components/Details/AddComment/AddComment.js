@@ -1,6 +1,5 @@
 import { useForm } from "../../../hooks/useForm.js";
 
-
 export const AddComment = ({
     onCommentSubmit,
 }) => {

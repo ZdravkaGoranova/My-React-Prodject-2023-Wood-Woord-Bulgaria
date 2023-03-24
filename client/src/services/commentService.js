@@ -13,7 +13,7 @@ export const create = async (productId,comment) => {
 
 export const getAll = async (productId,) => {
     const searchQuery = encodeURIComponent(`productId="${productId}"`);
-    const relationQuery = encodeURIComponent(`author=_ownerId:users`);
+    const relationQuery = encodeURIComponent(`author={_ownerId:users`);
     const result = await request.get(`${baseUrl}?where=${searchQuery}&load=${relationQuery}`);//search
     const comments = Object.values(result)
     return comments;

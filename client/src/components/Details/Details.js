@@ -11,9 +11,10 @@ import { useService } from '../../hooks/useService.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
 
 import { productServiceFactory } from '../../services/productService.js';
+import { AddComment } from './AddComment/AddComment.js';
 import * as  commentService from '../../services/commentService.js';
 import * as likeService from '../../services/likeService.js';
-import { AddComment } from './AddComment/AddComment.js';
+
 
 export default function Details() {
     const { onWoodDeleteClick } = useContext(WoodContext);
@@ -28,14 +29,13 @@ export default function Details() {
 
     const isOwner = product._ownerId === userId;
 
-
     const productLikes = product?.likes
     console.log(productLikes);
 
-
     const isLiked = productLikes?.some(item => {
-        return item.author._id === userId || item._ownerId === userId;
+        return item.author?._id === userId || item?._ownerId === userId;
     });
+
     console.log(userId);
     console.log(isLiked);
 
@@ -49,39 +49,47 @@ export default function Details() {
             productService.getOne(productId),
             commentService.getAll(productId),//промис чейнинг
             likeService.getAll(productId)
-        ]).then(([productData, comments, likes]) => {
-            const productState = {
-                ...productData,
-                comments,
-                likes,
-            };
-            setProduct(productState)
-            // dispatch({type: 'GAME_FETCH', payload: gameState})
-        });
+        ])
+            .then(([productData, comments, likes]) => {
+                const productState = {
+                    ...productData,
+                    comments,
+                    likes,
+                };
+                setProduct(productState)
+                // dispatch({type: 'GAME_FETCH', payload: gameState})
+            });
 
 
     }, [productId]);
 
     const onCommentSubmit = async (values) => {
-
         const response = await commentService.create(
             productId,
             values.comment,
             userEmail,
         )
         console.log(response)
-        // setUsername("");
-        // setComents("");
+
+        setProduct(state => ({
+            ...state,
+            comments: [...state.comments, response]
+        }))
+
     };
 
     const onLike = async (values) => {
-
         const response = await likeService.create(
             productId,
             values.like,
             userEmail,
         )
         console.log(response)
+
+        setProduct(state => ({
+            ...state,
+            likes: [...state.likes, response]
+        }))
     };
 
     const onBackButtonClick = (e) => {
@@ -107,17 +115,15 @@ export default function Details() {
                     <h2>Likes: {product.likes?.length}</h2>
 
                     {isLiked && <p >You already liked the product!</p>}
-
-                    {product.likes?.length === 0 &&
-
-                        (<p className="no-comment">No likes.</p>)}
+                    {product.likes?.length === 0 && <p className="no-comment">No likes.</p>}
                 </div>
+
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
                         {product.comments && product.comments.map(x => (
                             <li key={x._id} className="comment">
-                                <p>{x.author.email}: {x.comment}</p>
+                                <p>{x._ownerId}: {x.comment}</p>
                             </li>
                         ))}
                     </ul>
