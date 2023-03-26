@@ -66,7 +66,7 @@ export default function Navigation() {
                         :
                         <>
                             <li className="nav-item">
-                                <a className="nav-link" href="/catalog">Gallery</a>
+                                <a className="nav-link" href="/catalog">Catalog</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/register">Register</a>

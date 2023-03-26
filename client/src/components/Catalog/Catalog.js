@@ -2,14 +2,39 @@ import '../Catalog/catalog.css'
 
 import Publication from './Publication/Publication.js'
 
-import React, {  useContext } from "react"
+import React, { useContext, useReducer } from "react"
 import { Link } from 'react-router-dom';
 import { WoodContext } from '../../contexts/WoodContext.js'
+import { productReducer } from '../../reducers/productReducer.js';
+
 
 export default function Catalog() {
-    const { products } = useContext(WoodContext)
-    console.log(products)
+   const { products } = useContext(WoodContext)
+   // console.log(products)
     //console.log(typeof products)
+
+
+    // const products= [
+    //       { id: 1, name: 'Product 1', type: 'Type A' },
+    //       { id: 2, name: 'Product 2', type: 'Type B' },
+    //       { id: 3, name: 'Product 3', type: 'Type A' },
+    //       { id: 4, name: 'Product 4', type: 'Type C' },
+    //       { id: 5, name: 'Product 5', type: 'Type B' },
+    //     ]
+    // const searchType='Type B';
+
+    //const  dispatch ='Type B';
+    const [state, dispatch] = useReducer(productReducer, products);
+
+    function searchProducts(dispatch, searchType) {
+        dispatch({
+            type: 'SEARCH_PRODUCTS',
+            payload: searchType
+        });
+       
+                  console.log(searchType)
+                  //console.log(filteredProducts)
+    }
 
     // const filteredItems = products.filter(item => item.type === 'toolboxes');
     // console.log(filteredItems);
@@ -18,13 +43,23 @@ export default function Catalog() {
         < section id="gallery" >
             <h1>Wood World Gallery</h1>
             <article className="gallery-container">
-                {/* <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' products={products} >Spoons</Link>no-available-publications
-                <Link to={`/catalog/Chairs`} className="btn-catalog" type='submit' >Chairs</Link>
-                <Link to={`/catalog/Ladles`} className="btn-catalog" type='submit' >Ladles</Link>
-                <Link to={`/catalog/Furnitures`} className="btn-catalog" type='submit' >Furnitures </Link>
-                <Link to={`/catalog/Toolboxes`} className="btn-catalog" type='submit' >Toolboxes</Link>
-                <Link to={`/catalog/Handtools`} className="btn-catalog" type='submit' >Handtools </Link>
-                <Link to={`/catalog/Оther`} className="btn-catalog" type='submit' >Оther</Link> */}
+                
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "chairs")}>Chairs</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "ladles")}>Ladles</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "furnitures")}>Furnitures</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "toolboxes")}>Toolboxes</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "handtools")}>Handtools</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "other")}>Оther</button>
+
+                {/* <ul>
+                    {state.filteredProducts.map((product) => {
+                        return (
+                            <li key={product.id}>
+                                {product.name} - {product.type}
+                            </li>
+                        );
+                    })}
+                </ul> */}
 
                 <ul >
                     {products.length > 0

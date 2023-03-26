@@ -33,6 +33,7 @@ export default function Details(
     const isLiked = productLikes?.some(item => {
         return item.author?._id === userId || item?._ownerId === userId;
     });
+    console.log(isLiked)
 
     useEffect(() => {
 
@@ -49,9 +50,12 @@ export default function Details(
                 };
                 setProduct(productState)
                 // dispatch({type: 'GAME_FETCH', payload: gameState})
+
             });
 
     }, [productId]);
+
+    console.log(product)
 
     const onCommentSubmit = async (values) => {
         const response = await commentService.create(
@@ -124,7 +128,7 @@ export default function Details(
 
                                     {product.comments && product.comments.map(x => (
                                         <li key={x._id} className=" d-inline-block position-relative py-2 px-4 btn btn-outline-warning btn-custom border-dark rounded-pill text-dark comment-item" >
-                                            
+
                                             <svg width="1em" height="1em" viewBox="0 0 16 16" className="position-absolute top-100 start-50 translate-middle mt-1 text-dark">
                                                 <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                                             </svg>
@@ -138,15 +142,15 @@ export default function Details(
                             </div>
 
                             <div className="buttons">
-            
+
                                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={onBackButtonClick}>Back</button>
 
                                 {isOwner &&
                                     <>
                                         <Link to={`/edit/${product._id}`} className="btn btn-outline-warning btn-custom">Edit</Link>
-                                     
+
                                         <button className="btn btn-outline-warning btn-custom" onClick={() => onWoodDeleteClick(productId)} >Delete</button>
-                                    
+
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Delete
                                         </button>
@@ -170,11 +174,11 @@ export default function Details(
 
                                     </>
                                 }
-                                
+
                                 {isLiked && <button className="btn btn-outline-warning btn-custom">You already liked the product!</button>}
 
                                 {(isAuthenticated && !isOwner && !isLiked) &&
-                                   
+
                                     <button type="button" className="btn btn-outline-warning btn-custom" onClick={onLike}>Likes </button>
 
                                 }

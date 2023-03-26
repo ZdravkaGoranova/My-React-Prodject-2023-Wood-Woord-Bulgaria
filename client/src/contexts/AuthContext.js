@@ -26,7 +26,7 @@ export const AuthProvider = ({
                     navigate('/catalog');
                 
         } catch (error) {
-            console.log('Error:' + error)
+            console.log(error);
             navigate('/404');
         }
     };
@@ -35,7 +35,7 @@ export const AuthProvider = ({
         const { confirmPassword, ...registerData } = values;
         console.log(registerData)
         if (confirmPassword !== registerData.password) {
-            return;
+            throw new Error("Passwords dont match");
         }
         try {
             const result = await authService.register(registerData)
@@ -44,7 +44,7 @@ export const AuthProvider = ({
             navigate('/catalog');
          
         } catch (error) {
-            console.log('Error:' + error)
+            console.log(error);
             navigate('/404');
         }
     };
@@ -75,30 +75,3 @@ export const AuthProvider = ({
     );
 }
 
-// export const useAuthContext = () => {
-//     const context = useContext(AuthContext);
-
-//     return context;
-// };
-
-
-
-
-
-
-
-
-
-// export const AuthProvider = ({ children }) => {
-//     const [auth, setAuth] = useLocalStorage('session', {});
-//     const userLogin = (userData) => setAuth(userData);
-//     const userLogout = () => setAuth({});
-
-//     return (
-//         <AuthContext.Provider
-//             value={{ user: auth, userLogin, userLogout }}
-//         >
-//             {children}
-//         </AuthContext.Provider>
-//     );
-// }
