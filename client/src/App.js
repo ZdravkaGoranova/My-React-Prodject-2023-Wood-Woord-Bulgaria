@@ -2,7 +2,7 @@
 import './App.css';
 import './css/site.css';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { authServiceFactory } from '../src/services/authService.js'
@@ -44,6 +44,7 @@ function App() {
 
     const productService = productServiceFactory();//auth.accessToken
 
+
     useEffect(() => {
         productService.getAll()
             .then(data => {
@@ -52,6 +53,7 @@ function App() {
             })
     }, []);
 
+  
     const onSubmitCreateProduct = async (productData) => {
         console.log('onSubmitCreateProduct');
 
@@ -84,6 +86,7 @@ function App() {
         setProducts(state => state.filter(x => x._id !== productId));
 
         navigate("/catalog", { replace: true });
+       
     };
 
     const updateProduct = async (productId, product) => {

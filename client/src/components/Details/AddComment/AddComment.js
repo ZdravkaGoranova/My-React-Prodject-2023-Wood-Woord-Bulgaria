@@ -3,11 +3,13 @@ import { useForm } from "../../../hooks/useForm.js";
 export const AddComment = ({
     onCommentSubmit,
 }) => {
-    const { formValues, onChangeHandler,onSubmit } = useForm({
+    const { formValues, onChangeHandler, onSubmit } = useForm({
         comment: ''
     }, onCommentSubmit);
 
     return (
+
+
         <article className="create-comment">
             <label>Add new comment:</label>
             <form className="form" onSubmit={onSubmit}>
@@ -20,3 +22,4 @@ export const AddComment = ({
         </article>
     );
 };
+

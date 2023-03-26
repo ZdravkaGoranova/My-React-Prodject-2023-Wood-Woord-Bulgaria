@@ -128,3 +128,9 @@
     color: white;
 }
 
+.btn-custom {
+    color: rgb(255, 255, 255);
+    background-color:  #efbc7d;
+    border-color:  rgb(255, 255, 255);
+    margin-right: 5px;
+  }

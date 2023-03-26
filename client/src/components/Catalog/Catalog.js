@@ -28,7 +28,9 @@ export default function Catalog() {
                     {products.length > 0
                         ? products.map(product =>
                             <li key={product._id}>
+                               
                                 <Publication {...product} />
+                               
                             </li>)
                         :
                         <article className="no-available-publications">
