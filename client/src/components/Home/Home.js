@@ -17,16 +17,16 @@ export default function Home({
     // console.log(lastThreeObjects);
     return (
         <>
-            <div>
+         <div>
                 <div className="error-box">
                     <p></p>
                 </div>
-            </div>
+            </div> 
             <section id="home-page">
                 <article className="auto-content">
                     <h1>Wood Woord Bulgaria</h1>
                 </article>
-            </section>
+            </section> 
             <section id="home-page-content">
                 <h1>Latest Products publication</h1>
                 <div className="home-page-content-publications">

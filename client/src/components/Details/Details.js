@@ -21,8 +21,9 @@ export default function Details(
 ) {
     const { onWoodDeleteClick } = useContext(WoodContext);
     const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
+
     const { productId } = useParams();
-    //console.log(productId);
+
     const navigate = useNavigate()
     const productService = productServiceFactory();
 
@@ -31,12 +32,11 @@ export default function Details(
     const isOwner = product._ownerId === userId;
 
     const productLikes = product?.likes
-    console.log(productLikes);
+   
 
     const isLiked = productLikes?.some(item => {
         return item.author?._id === userId || item?._ownerId === userId;
     });
-
 
     useEffect(() => {
 
@@ -126,7 +126,7 @@ export default function Details(
                                 <h4>Comments:</h4>
                                 <ul>
                                     {product.comments && product.comments.map(x => (
-                                        <li key={x._id} className="comment">
+                                        <li key={x._id} class="badge rounded-pill text-bg-secondary">
                                             <p>{x.author.email}: {x.comment}</p>
                                         </li>
                                     ))}

@@ -9,7 +9,6 @@ export const AddComment = ({
 
     return (
 
-
         <article className="create-comment">
             <label>Add new comment:</label>
             <form className="form" onSubmit={onSubmit}>
