@@ -15,8 +15,6 @@ import { AuthContext } from './contexts/AuthContext.js';
 import { WoodContext } from './contexts/WoodContext';
 import { AuthProvider } from '../src/contexts/AuthContext.js'
 
-import { useForm } from '../src/hooks/useForm.js';
-
 
 import Navigation from './components/Navigation/Navigation.js'
 import Catalog from './components/Catalog/Catalog.js';
@@ -29,7 +27,6 @@ import Profile from './components/Profile/Profile.js';
 import Register from './components/Register/Register.js';
 import Edit from './components/Edit/Edit.js';
 import Logout from './components/Logout/Logout.js';
-// import Delete from './components/Delete/Delete.js';
 import Spoons from './components/Catalog/Spoons.js';
 import Chairs from './components/Catalog/Chairs.js';
 import Ladles from './components/Catalog/Ladles.js';
@@ -83,8 +80,7 @@ function App() {
 
         const result = await productService.delProduct(productId)
         console.log(productId)
-        // const result=  await fetch(`${baseUrl}/${productId}`, { method: 'DELETE' });
-
+       
         setProducts(state => state.filter(x => x._id !== productId));
 
         navigate("/catalog", { replace: true });

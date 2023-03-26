@@ -12,7 +12,7 @@ export default function Home({
 
     const lastTwoProducts = products.slice(-2);
     console.log(lastTwoProducts);
- // // използваме slice(), за да вземем първите 3 елемента от сортирания масив и reverse(), за да ги обърнем в правилния ред
+
     // const lastThreeObjects = sortedObjects.slice(0, 3).reverse();
     // const lastThreeObjects = products.slice(-3)
     // console.log(lastThreeObjects);
@@ -37,7 +37,6 @@ export default function Home({
                         :
                         null
                     }
-                
         </section>
         </>
     )

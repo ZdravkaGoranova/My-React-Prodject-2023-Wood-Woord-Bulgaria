@@ -1,9 +1,11 @@
-import '../Catalog/gallery.css'
+import '../Catalog/catalog.css'
 
 import Publication from './Publication/Publication.js'
-import React, { useEffect, useState, useContext } from "react"
+
+import React, {  useContext } from "react"
 import { Link } from 'react-router-dom';
 import { WoodContext } from '../../contexts/WoodContext.js'
+
 export default function Catalog() {
     const { products } = useContext(WoodContext)
     console.log(products)

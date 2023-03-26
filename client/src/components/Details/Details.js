@@ -5,9 +5,7 @@ import React from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useEffect, useState, useContext, } from 'react';
 
-
 import { WoodContext } from '../../contexts/WoodContext.js'
-import { useService } from '../../hooks/useService.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
 
 import { productServiceFactory } from '../../services/productService.js';
@@ -15,16 +13,15 @@ import { AddComment } from './AddComment/AddComment.js';
 import * as  commentService from '../../services/commentService.js';
 import * as likeService from '../../services/likeService.js';
 
-
 export default function Details(
 
 ) {
+    const navigate = useNavigate();
+
     const { onWoodDeleteClick } = useContext(WoodContext);
     const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
-
     const { productId } = useParams();
 
-    const navigate = useNavigate()
     const productService = productServiceFactory();
 
     const [product, setProduct] = useState({});
@@ -53,7 +50,6 @@ export default function Details(
                 setProduct(productState)
                 // dispatch({type: 'GAME_FETCH', payload: gameState})
             });
-
 
     }, [productId]);
 
@@ -121,8 +117,11 @@ export default function Details(
                             </button>
 
                             <div className="details-comments">
+
                                 <h4>Comments:</h4>
+
                                 <ul className="list-unstyled comment-list">
+
                                     {product.comments && product.comments.map(x => (
                                         <li key={x._id} className=" d-inline-block position-relative py-2 px-4 btn btn-outline-warning btn-custom border-dark rounded-pill text-dark comment-item" >
                                             
@@ -131,26 +130,23 @@ export default function Details(
                                             </svg>
                                             <p className="ms-5 mb-0">{x.author.email}: {x.comment}</p>
                                         </li>
-                                    ))}
+                                    ))
+                                    }
                                 </ul>
                                 {product.comments?.length === 0 &&
                                     (<p className="no-comment">No comments.</p>)}
                             </div>
 
                             <div className="buttons">
-
-                                {/* <button className='button' type='submit' onClick={onBackButtonClick}>Back</button> */}
+            
                                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={onBackButtonClick}>Back</button>
 
                                 {isOwner &&
                                     <>
                                         <Link to={`/edit/${product._id}`} className="btn btn-outline-warning btn-custom">Edit</Link>
-                                        {/* <Link to={`/edit/${product._id}`} className="button">Edit</Link> */}
-
+                                     
                                         <button className="btn btn-outline-warning btn-custom" onClick={() => onWoodDeleteClick(productId)} >Delete</button>
-                                        {/* <button className='button' type='submit' onClick={() => onWoodDeleteClick(productId)} >Delete</button> */}
-
-
+                                    
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Delete
                                         </button>
@@ -174,19 +170,17 @@ export default function Details(
 
                                     </>
                                 }
+                                
                                 {isLiked && <button className="btn btn-outline-warning btn-custom">You already liked the product!</button>}
 
                                 {(isAuthenticated && !isOwner && !isLiked) &&
-                                    // <button className="btn btn-outline-warning btn-custom" onClick={onLike} >Likes</button>
-
+                                   
                                     <button type="button" className="btn btn-outline-warning btn-custom" onClick={onLike}>Likes </button>
 
                                 }
 
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import '../gallery.css'
+import '../catalog.css'
 
 import { Link } from 'react-router-dom'
 
@@ -21,11 +21,12 @@ export default function Publication({
                 <p className="card-text">Type: {type}</p>
                 <Link to={`/details/${_id}`}  className="details-btn">Details</Link>
             </div>
-            
         </div>
+    )
+}
 
 
-        // <article className="card-info">
+    // <article className="card-info">
         //     <article className="card-info-image">
         //         <img src={picture} alt={title} />
         //     </article>
@@ -35,7 +36,3 @@ export default function Publication({
         //         <Link to={`/details/${_id}`}  className="details-btn">Details</Link>
         //     </article>
         // </article>
-    )
-}
-
-

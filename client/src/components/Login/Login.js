@@ -14,20 +14,6 @@ export default function Login() {
         password: "",
     }, onLoginSubmit);
 
-    // const onSubmitHandler = async (e) => {
-    //     e.preventDefault();
-    //     const { username, email, password } = Object.fromEntries(new FormData(e.target))
-
-    //     await authService.login(username, email, password)
-    //         .then(authData => {
-    //             console.log(authData);
-    //             userLogin(authData);
-    //             navigate('/');
-    //         })
-    //         .catch(() => {
-    //             navigate('/404');
-    //         })
-    // };
     return (
         <section id="login-container">
             <div className="container">

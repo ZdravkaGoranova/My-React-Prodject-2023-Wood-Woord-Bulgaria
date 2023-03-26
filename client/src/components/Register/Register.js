@@ -1,7 +1,7 @@
 import '../Register/register-login.css'
 
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useContext } from 'react';
+import { Link,  } from "react-router-dom";
+import {  useContext } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
 
@@ -16,7 +16,6 @@ export default function Register() {
     }, onRegisterSubmit);
 
 
-
     return (
         <section id="register-container">
             <div className="register-container-info">
@@ -24,6 +23,7 @@ export default function Register() {
                 <img src="/img/24.jpeg" alt="image" />
 
                 <form onSubmit={onSubmit} className="container-text">
+                    
                     <h2>Register</h2>
                     <p>Register to get ideas and view the latest wood products and tools.</p>
                     <div className="mb-3">

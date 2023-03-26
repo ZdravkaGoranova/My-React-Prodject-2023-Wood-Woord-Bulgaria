@@ -6,8 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useService } from '../../hooks/useService.js';
 
-import { WoodContext } from '../../contexts/WoodContext.js'
-const baseUrl = 'http://localhost:3030/jsonstore/woodTypes';
+import { WoodContext } from '../../contexts/WoodContext.js';
 
 export default function Edit() {
     const productService = useService(productServiceFactory)
@@ -31,7 +30,6 @@ export default function Edit() {
             .then(data => {
                 // const product = data['productId'];
                 console.log(data)
-                console.log(':)')
                 setProduct(data)
             })
     }, [productId]);
@@ -74,18 +72,13 @@ export default function Edit() {
                     
                         <label htmlFor="title" className="form-label">Title:</label>
                         <input type="text" id="title" name="title" value={product?.title} onChange={onChangeHandler} />
-             
                     
                         <label htmlFor="painting-tech" className="form-label">Description:</label>
                         <input type="text" id="painting-tech" name="description" value={product?.description} onChange={onChangeHandler} />
-             
-
                     
                         <label htmlFor="picture" className="form-label">Wood picture:</label>
                         <input type="text" id="picture" name="picture" value={product?.picture} onChange={onChangeHandler} />
-             
 
-                    
                         <label htmlFor="certificate" className="form-label">Price:</label>
                         <input type="text" id="certificate" placeholder="Yes" name="price" value={product?.price} onChange={onChangeHandler} />
              

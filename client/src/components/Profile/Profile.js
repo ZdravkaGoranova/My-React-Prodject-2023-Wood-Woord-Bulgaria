@@ -1,17 +1,16 @@
 
 import '../Profile/profile.css'
 
-import React, { useEffect, useState, useContext } from "react"
+import React, { useContext } from "react"
 
 import { WoodContext } from '../../contexts/WoodContext.js'
 import MyProducts from './MyProducts.js';
 import { AuthContext } from '../../contexts/AuthContext.js'
-import { productServiceFactory } from '../../services/productService.js';
-import { useService } from '../../hooks/useService.js';
+
 
 export default function Profile() {
-    const { userEmail, username } = useContext(AuthContext);
-    const productService = useService(productServiceFactory)
+    const { userEmail,  } = useContext(AuthContext);
+
     const { products } = useContext(WoodContext)
     console.log(products)
 

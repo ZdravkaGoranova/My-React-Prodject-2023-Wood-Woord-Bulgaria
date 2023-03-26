@@ -1,17 +1,12 @@
 
 import '../Create/create-edit.css'
 
-import { useEffect, useState, useContext } from 'react';
+import {  useContext } from 'react';
 import { WoodContext } from '../../contexts/WoodContext.js'
 import { useForm } from '../../hooks/useForm.js';
 
 export default function Create() {
     const { onSubmitCreateProduct} = useContext(WoodContext)
-
-    // const { user } = useContext(AuthContext);
-
-    // const token = user.accessToken;
-    // const _ownerId = user._id;
 
     const{product, onChangeHandler,onSubmit} = useForm({
         title: "",

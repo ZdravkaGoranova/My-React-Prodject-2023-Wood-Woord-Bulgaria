@@ -1,5 +1,5 @@
 
-import '../Catalog/gallery.css'
+import '../Catalog/catalog.css'
 
 
 import Publication from './Publication/Publication.js';
