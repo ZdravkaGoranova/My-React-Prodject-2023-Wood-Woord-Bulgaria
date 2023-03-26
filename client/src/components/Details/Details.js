@@ -2,7 +2,7 @@ import '../Details/details.css';
 import '..//Details/comments.css';
 
 import React from "react";
-import { useParams, useNavigate,Link } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useEffect, useState, useContext, } from 'react';
 
 
@@ -32,7 +32,6 @@ export default function Details(
     const isOwner = product._ownerId === userId;
 
     const productLikes = product?.likes
-   
 
     const isLiked = productLikes?.some(item => {
         return item.author?._id === userId || item?._ownerId === userId;
@@ -100,11 +99,11 @@ export default function Details(
             <div className="card mb-3"  >
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img src={product.picture} className="img-fluid rounded-start" alt="..." />
+                        <img src={product.picture} className="img-fluid rounded-start" alt={product.title} />
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
-                            <h5 className="card-title">{product.title}</h5>
+                            <h5 className="card-title">Title: {product.title}</h5>
 
                             {/* <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Type:</strong>  {product.type}</div>
                             <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Owner: </strong>   {product._ownerId}</div>
@@ -114,20 +113,23 @@ export default function Details(
                             <p className="card-text"><small className="text-body-secondary">Owner:   {product._ownerId}</small></p>
                             <p className="card-text"><small className="text-body-secondary">Price:   {product.price}</small></p>
 
-                            <p className="card-text">{product.description}</p>
+                            <p className="card-text">Description: {product.description}</p>
 
 
-                            <span className="btn btn-outline-warning btn-custom">
-                                Likes: {product.likes?.length}
-                                {product.likes?.length === 0 && <p className="no-comment">No likes.</p>}
-                            </span>
+                            <button type="button" className="btn btn-primary position-relative btn btn-outline-warning btn-custom">
+                                Likes <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">{product.likes?.length} <span className="visually-hidden">unread messages</span></span>
+                            </button>
 
                             <div className="details-comments">
                                 <h4>Comments:</h4>
-                                <ul>
+                                <ul className="list-unstyled comment-list">
                                     {product.comments && product.comments.map(x => (
-                                        <li key={x._id} class="badge rounded-pill text-bg-secondary">
-                                            <p>{x.author.email}: {x.comment}</p>
+                                        <li key={x._id} className=" d-inline-block position-relative py-2 px-4 btn btn-outline-warning btn-custom border-dark rounded-pill text-dark comment-item" >
+                                            
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" className="position-absolute top-100 start-50 translate-middle mt-1 text-dark">
+                                                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                            </svg>
+                                            <p className="ms-5 mb-0">{x.author.email}: {x.comment}</p>
                                         </li>
                                     ))}
                                 </ul>
@@ -164,10 +166,10 @@ export default function Details(
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >No</button>
-                                                        <button type="button" className="btn btn-primary"  onClick={() => {onWoodDeleteClick(productId)} }>Yes</button>
+                                                        <button type="button" className="btn btn-primary" onClick={() => { onWoodDeleteClick(productId) }}>Yes</button>
                                                     </div>
                                                 </div>
-                                            </div> 
+                                            </div>for=
                                         </div>
 
                                     </>
@@ -177,9 +179,7 @@ export default function Details(
                                 {(isAuthenticated && !isOwner && !isLiked) &&
                                     // <button className="btn btn-outline-warning btn-custom" onClick={onLike} >Likes</button>
 
-                                    <button type="button" className="btn btn-primary" onClick={onLike}>
-                                        Likes: <span className="badge text-bg-secondary">{product.likes?.length}</span>
-                                    </button>
+                                    <button type="button" className="btn btn-outline-warning btn-custom" onClick={onLike}>Likes </button>
 
                                 }
 

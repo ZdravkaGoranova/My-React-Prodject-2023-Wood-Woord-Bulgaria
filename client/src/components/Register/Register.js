@@ -1,6 +1,6 @@
 import '../Register/register-login.css'
 
- import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
@@ -9,18 +9,13 @@ export default function Register() {
 
     const { onRegisterSubmit } = useContext(AuthContext);
     const { formValues, onChangeHandler, onSubmit } = useForm({
-        username: "",
+
         email: "",
         password: "",
         confirmPassword: "",
-        gender:"",
     }, onRegisterSubmit);
 
-    const [gender, setGender] = useState('male');
 
-    const onGenderChange = (e) => {
-        setGender(e.target.value)
-    };
 
     return (
         <section id="register-container">
@@ -31,95 +26,94 @@ export default function Register() {
                 <form onSubmit={onSubmit} className="container-text">
                     <h2>Register</h2>
                     <p>Register to get ideas and view the latest wood products and tools.</p>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        placeholder="ivan_00"
-                        name="username"
-                        value={formValues.username}
-                        onChange={onChangeHandler}
-                    />
+                    <div className="mb-3">
+                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+                            value={formValues.email}
+                            onChange={onChangeHandler} />
 
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="text"
-                        id="email" placeholder="ivan@abv.bg"
-                        name="email"
-                        value={formValues.email}
-                        onChange={onChangeHandler}
-                    />
-
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="*****"
-                        name="password"
-                        value={formValues.password}
-                        onChange={onChangeHandler}
-                    />
-
-                    <label htmlFor="confirmPassword">Confirm password:</label>
-                    {/* <ol>
-                            <li 
-                                className={data.password.length >= 8 ? styles["correct"] : styles["wrong"]}
-                            >
-                                At least 8 characters long
-                            </li>
-                            <li
-                                className={/[A-Z]/.test(data.password) ? styles["correct"] : styles["wrong"]}
-                            >
-                                At least 1 upper case character
-                            </li>
-                            <li
-                                className={/[0-9]/.test(data.password) ? styles["correct"] : styles["wrong"]}
-                            >
-                                At least 1 numeric character
-                            </li>
-                        </ol> */}
-
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        placeholder="*****"
-                        name="confirmPassword"
-                        onChange={onChangeHandler} />
-
-                    <div className="gender-container">
-                        <label htmlFor="male">Male</label>
-                        <input
-                            type="radio"
-                            id="male"
-                            value="male"
-                            name="gender"
-                            onChange={onGenderChange}
-                            checked={gender === "male"} />
                     </div>
-                    <div className="gender-container">
-                        <label htmlFor="female">Female</label>
-                        <input
-                            type="radio"
-                            id="female"
-                            value="female"
-                            name="gender"
-                            onChange={onGenderChange}
-                            checked={gender === "female"} />
+                    <div className="mb-3">
+                        <label  htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="exampleInputPassword1" name="password"
+                            autoComplete="current-password"
+                            value={formValues.password}
+                            onChange={onChangeHandler} />
                     </div>
 
-                    <button className="register-btn" type='submit'>
-                        Register</button>
+                    <div className="mb-3">
+                        <label  htmlFor="confirmPassword" className="form-label">Confirm password</label>
+                        <input type="password" className="form-control" id="confirmPassword" name="confirmPassword"
+                            value={formValues.confirmPassword}
+                            onChange={onChangeHandler} />
+                    </div>
+
+                    <button type="submit" className="btn btn-outline-warning btn-custom">Submit</button>
                     <div className="card-no-account">
                         <p>Already have an account?<Link to="/login" > Sign in</Link>.</p>
 
                     </div>
-
                 </form>
             </div>
         </section>
 
     )
 }
+
+
+{/* <label htmlFor="email">Email:</label>
+<input
+    type="text"
+    id="email" placeholder="ivan@abv.bg"
+    name="email"
+    value={formValues.email}
+    onChange={onChangeHandler}
+/>
+
+<label htmlFor="password">Password:</label>
+<input
+    type="password"
+    id="password"
+    placeholder="*****"
+    name="password"
+    value={formValues.password}
+    onChange={onChangeHandler}
+/>
+
+<label htmlFor="confirmPassword">Confirm password:</label> */}
+{/* <ol>
+        <li 
+            className={data.password.length >= 8 ? styles["correct"] : styles["wrong"]}
+        >
+            At least 8 characters long
+        </li>
+        <li
+            className={/[A-Z]/.test(data.password) ? styles["correct"] : styles["wrong"]}
+        >
+            At least 1 upper case character
+        </li>
+        <li
+            className={/[0-9]/.test(data.password) ? styles["correct"] : styles["wrong"]}
+        >
+            At least 1 numeric character
+        </li>
+    </ol> */}
+
+{/* <input
+    type="password"
+    id="confirmPassword"
+    placeholder="*****"
+    name="confirmPassword"
+    onChange={onChangeHandler} />
+
+
+<button className="register-btn" type='submit'>
+    Register</button>
+<div className="card-no-account">
+    <p>Already have an account?<Link to="/login" > Sign in</Link>.</p>
+
+</div> */}
+
 
 
     // const onSubmitHandler = (ev, userData) => {

@@ -12,10 +12,11 @@ import { useService } from './hooks/useService.js';
 import { useNavigate, } from "react-router-dom";
 
 import { AuthContext } from './contexts/AuthContext.js';
-import { WoodContext } from './contexts/WoodContext';       
-import {AuthProvider} from '../src/contexts/AuthContext.js'
+import { WoodContext } from './contexts/WoodContext';
+import { AuthProvider } from '../src/contexts/AuthContext.js'
 
 import { useForm } from '../src/hooks/useForm.js';
+
 
 import Navigation from './components/Navigation/Navigation.js'
 import Catalog from './components/Catalog/Catalog.js';
@@ -43,7 +44,7 @@ function App() {
     const [products, setProducts] = useState([])
 
     const productService = productServiceFactory();//auth.accessToken
-
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         productService.getAll()
@@ -51,9 +52,10 @@ function App() {
                 // console.log(data) //console.log(Object.values(data.products))
                 setProducts(data)
             })
+       
     }, []);
 
-  
+
     const onSubmitCreateProduct = async (productData) => {
         console.log('onSubmitCreateProduct');
 
@@ -86,7 +88,7 @@ function App() {
         setProducts(state => state.filter(x => x._id !== productId));
 
         navigate("/catalog", { replace: true });
-       
+
     };
 
     const updateProduct = async (productId, product) => {
@@ -116,6 +118,7 @@ function App() {
 
     return (
         <AuthProvider>
+       
             <WoodContext.Provider value={contextValue}>
                 <>
                     <Navigation />

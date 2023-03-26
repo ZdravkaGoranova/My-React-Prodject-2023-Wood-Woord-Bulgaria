@@ -15,7 +15,7 @@ export const AddComment = ({
                 {/* <input type="text" name="username" placeholder="Ivan" value={username} onChange={onUsernameChange}> </input> */}
 
                 <textarea name="comment" placeholder="Comment......" value={formValues.comment} onChange={onChangeHandler}></textarea>
-                <input className="button" type="submit" value='Add Comment'></input>
+                <input className="btn btn-outline-warning btn-custom" type="submit" value='Add Comment'></input>
             </form>
 
         </article>

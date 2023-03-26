@@ -33,12 +33,13 @@ export const AuthProvider = ({
 
     const onRegisterSubmit = async (values) => {
         const { confirmPassword, ...registerData } = values;
+        console.log(registerData)
         if (confirmPassword !== registerData.password) {
             return;
         }
         try {
             const result = await authService.register(registerData)
-         
+            console.log(result)
             setAuth(result);
             navigate('/catalog');
          

@@ -1,14 +1,14 @@
 import '../Login/register-login.css';
 
-import {  useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext.js';
 import { useForm } from '../../hooks/useForm.js';
 
 export default function Login() {
-    const {  onLoginSubmit } = useContext(AuthContext);
+    const { onLoginSubmit } = useContext(AuthContext);
 
-    const { formValues, onChangeHandler,onSubmit } = useForm({
+    const { formValues, onChangeHandler, onSubmit } = useForm({
         username: "",
         email: "",
         password: "",
@@ -33,11 +33,40 @@ export default function Login() {
             <div className="container">
                 <img src="/img/23.jpg" alt="image" />
 
-                <form onSubmit={onSubmit} className="container-text">
+                <form onSubmit={onSubmit} >
+                <h2>Login</h2>
+                    <p>Welcome, see the new  wood products!</p>
+                    <div className="mb-3">
+                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="email"
+                        value={formValues.email}
+                        onChange={onChangeHandler}/>
+                        
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="exampleInputPassword1"  name="password"
+                        autoComplete="current-password"
+                        value={formValues.password}
+                        onChange={onChangeHandler} />
+                    </div>
+                  
+                    <button type="submit" className="btn btn-outline-warning btn-custom">Submit</button>
+                    <div className="card-no-account">
+                        <p>Don't have an account? <Link to="/register">Sign up</Link>.</p>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+    )
+};
+
+{/* <form onSubmit={onSubmit} className="container-text">
                     <h2>Login</h2>
                     <p>Welcome, see the new  wood products!</p>
 
-                    <label htmlFor="username">Username:</label>
+                    {/* <label htmlFor="username">Username:</label>
                     <input
                         type="text"
                         id="username"
@@ -46,7 +75,10 @@ export default function Login() {
                         autoComplete="username"
                         value={formValues.username}
                         onChange={onChangeHandler}
-                    />
+                    /> */}
+
+
+{/*                     
                     <label htmlFor="email">Email:</label>
                     <input
                         type="text"
@@ -71,9 +103,4 @@ export default function Login() {
                         <p>Don't have an account? <Link to="/register">Sign up</Link>.</p>
                     </div>
 
-                </form>
-            </div>
-        </section>
-    )
-};
-////   <form onSubmit={(e) => onSubmitHandler(e)} className="container-text"></form>
+                </form >  */}

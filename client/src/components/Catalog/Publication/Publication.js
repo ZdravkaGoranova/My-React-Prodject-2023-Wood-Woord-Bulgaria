@@ -14,19 +14,16 @@ export default function Publication({
 }) {
     return (
 
-
-        <div className="card mb-3" >
-            <img src={picture} className="card-img-top" alt={title}  style={{ maxWidth: '500px', maxHeight: '500px' }}/>
+        <div className="card">
+            <img src={picture} alt={title} className="card-img-bottom"  />
             <div className="card-body">
-                <h5 className="card-title">{title}</h5>
+                <h5 className="card-title">Title:   {title}</h5>
                 <p className="card-text">Type: {type}</p>
-
-                <Link to={`/details/${_id}`}  className="btn btn-outline-warning btn-custom">Details</Link>
-              
+                <Link to={`/details/${_id}`}  className="details-btn">Details</Link>
             </div>
+            
         </div>
 
-    
 
         // <article className="card-info">
         //     <article className="card-info-image">

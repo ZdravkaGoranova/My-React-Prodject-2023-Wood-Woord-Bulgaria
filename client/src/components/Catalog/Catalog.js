@@ -16,7 +16,7 @@ export default function Catalog() {
         < section id="gallery" >
             <h1>Wood World Gallery</h1>
             <article className="gallery-container">
-                {/* <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' products={products} >Spoons</Link>
+                {/* <Link to={`/catalog/Spoons`} className="btn-catalog" type='submit' products={products} >Spoons</Link>no-available-publications
                 <Link to={`/catalog/Chairs`} className="btn-catalog" type='submit' >Chairs</Link>
                 <Link to={`/catalog/Ladles`} className="btn-catalog" type='submit' >Ladles</Link>
                 <Link to={`/catalog/Furnitures`} className="btn-catalog" type='submit' >Furnitures </Link>
@@ -28,15 +28,15 @@ export default function Catalog() {
                     {products.length > 0
                         ? products.map(product =>
                             <li key={product._id}>
-                               
+
                                 <Publication {...product} />
-                               
+
                             </li>)
                         :
-                        <article className="no-available-publications">
-                            <h1>No product created yet.</h1>
-                            <a href="/create" className="create-pub">Create product</a>
-                        </article>
+                        <div className="no-events">
+                            <p>This user has no products yet!</p>
+                            <a href="/create" className="  btn btn-outline-warning btn-custom ">Create product</a>
+                        </div>
                     }
                 </ul>
             </article >

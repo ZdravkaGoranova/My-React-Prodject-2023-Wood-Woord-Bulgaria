@@ -54,7 +54,7 @@ export default function Create() {
                         <option value="other" name="other">Оther</option>
                     </select>
 
-                    <button className="create-btn" type='submit' >Create</button>
+                    <button className="btn btn-outline-warning btn-custom" type='submit' >Create</button>
                 </form>
             </div>
         </section>

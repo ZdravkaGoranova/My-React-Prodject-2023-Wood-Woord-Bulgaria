@@ -133,16 +133,3 @@
         color: #8C1415;
     }
 
-    .gender {
-        margin-bottom: -1.15em;
-    }
-
-    .gender label:hover,
-    .gender input:hover {
-        cursor: pointer;
-    }
-
-    .gender-container {
-        display: inline-block;
-        margin-right: 10px;
-      }

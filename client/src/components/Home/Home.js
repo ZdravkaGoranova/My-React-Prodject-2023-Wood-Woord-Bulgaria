@@ -3,6 +3,7 @@ import '../Home/home.css'
 
 import React, { useState, useEffect } from "react";
 import Publication from '../Catalog/Publication/Publication.js'
+import MyProducts from '../Profile/MyProducts.js'
 
 export default function Home({
     products,
@@ -26,17 +27,17 @@ export default function Home({
                 <article className="auto-content">
                     <h1>Wood Woord Bulgaria</h1>
                 </article>
-            </section> 
+            </section>  
             <section id="home-page-content">
                 <h1>Latest Products publication</h1>
-                <div className="home-page-content-publications">
+                
                     {lastTwoProducts
                         ? lastTwoProducts.map(product =>
-                            <Publication key={product._id} {...product} />)
+                            <MyProducts key={product._id} {...product} />)
                         :
                         null
                     }
-                </div>
+                
         </section>
         </>
     )
