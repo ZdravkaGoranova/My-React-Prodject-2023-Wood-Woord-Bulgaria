@@ -33,23 +33,24 @@ import Ladles from './components/Catalog/Ladles.js';
 import Furnitures from './components/Catalog/Furnitures.js';
 import Toolboxes from './components/Catalog/Toolboxes.js';
 import Handtools from './components/Catalog/Handtools.js';
-import Other from './components/Catalog/Оther.js';
+
 
 
 function App() {
     const navigate = useNavigate();
-    const [products, setProducts] = useState([])
+    ///const [products, setProducts] = useState([])
     
-    //const [products, dispatch] = useReducer(productReducer, {});
+    const [products, dispatch] = useReducer(productReducer, {});
 
     const productService = productServiceFactory();//auth.accessToken
-    const [loading, setLoading] = useState(true);
+
+    //const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         productService.getAll()
             .then(data => {
-              // dispatch({type: 'SET_PRODUCTS', payload: data})
-                setProducts(data)
+               dispatch({type: 'SET_PRODUCTS', payload: data})
+                //setProducts(data)
             })
        
     }, []);
@@ -59,8 +60,8 @@ function App() {
         console.log('onSubmitCreateProduct');
 
         const newProduct = await productService.create(productData);
-        setProducts(state => [...state, newProduct]);
-        //dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
+       // setProducts(state => [...state, newProduct]);
+        dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
         navigate("/catalog", { replace: true });
 
         // if (!productData.picture.startsWith("https://")) {
@@ -82,8 +83,8 @@ function App() {
 
         const result = await productService.delProduct(productId)
         console.log(productId)
-        //dispatch({ type: 'DELETE_PRODUCT', payload: { id: productId } });
-        setProducts(state => state.filter(x => x._id !== productId));
+        dispatch({ type: 'DELETE_PRODUCT', payload: { id: productId } });
+        //setProducts(state => state.filter(x => x._id !== productId));
 
         navigate("/catalog", { replace: true });
     };
@@ -95,9 +96,9 @@ function App() {
             try {
                 const result = await productService.update(productId, product)
 
-               // dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
+               dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
 
-               setProducts(state => state.map(x => x._id === product._id ? result : x))
+               //setProducts(state => state.map(x => x._id === product._id ? result : x))
                 //  const updatedProducts = await productService.getAll();
                 //  setProducts(updatedProducts);
 
@@ -118,7 +119,7 @@ function App() {
     return (
         <AuthProvider>
        
-            <WoodContext.Provider value={contextValue}>
+            {/* //<WoodContext.Provider value={contextValue}> */}
                 
                     <Navigation />
                     <Routes>
@@ -137,7 +138,7 @@ function App() {
                         <Route path='/catalog/Furnitures' element={<Furnitures products={products} />} />
                         <Route path='/catalog/Toolboxes' element={<Toolboxes products={products} />} />
                         <Route path='/catalog/Handtools' element={<Handtools products={products} />} />
-                        <Route path='/catalog/Оther' element={<Other products={products} />} />
+                        {/* <Route path='/catalog/Оther' element={<Other products={products} />} /> */}
 
                         <Route path='/edit/:productId' element={<Edit />} />
 
@@ -146,7 +147,7 @@ function App() {
                         <Route path='*' element={<PageNotFound />} />
                     </Routes>
                 
-            </WoodContext.Provider>
+           {/* // </WoodContext.Provider> */}
         </AuthProvider>
     );
 }
