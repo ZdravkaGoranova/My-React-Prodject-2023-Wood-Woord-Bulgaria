@@ -12,7 +12,7 @@ import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
 
 export default function Edit() {
     const productService = useService(productServiceFactory)
-    const { deleteProduct, updateProduct, addProduct } = useProductsContext();
+    const {  updateProduct } = useProductsContext();
 
     const { productId } = useParams();
     //console.log(productId);
@@ -26,9 +26,6 @@ export default function Edit() {
         type: "",
 
     });
-
-   
-
 
     useEffect(() => {
         productService.update(productId)
@@ -44,20 +41,14 @@ export default function Edit() {
         e.preventDefault();
 
         console.log(':):):)')
-        await updateProduct(productId, productData)
-        //или
-        // if (!productData.picture.startsWith("https://")) {
-        //     alert("Please enter a valid URL address");
-        // } else {
-        //     try {
-        //        await  productService.update(productId, productData)
-        //             .then(() => {
-        //                 navigate(`/details/${productId}`, { replace: true });
-        //             });
-        //     } catch (err) {
-        //         alert(err);
-        //     }
-        // }
+        try {
+            await updateProduct(productId, productData)
+
+            navigate(`/details/${productId}`, { replace: true });
+
+        } catch (err) {
+            alert(err);
+        }
 
     };
     const onChangeHandler = (e) => {
@@ -74,19 +65,19 @@ export default function Edit() {
 
                     <h2>Edit</h2>
                     <p>Edit your wood product!</p>
-                    
-                        <label htmlFor="title" className="form-label">Title:</label>
-                        <input type="text" id="title" name="title" value={product?.title} onChange={onChangeHandler} />
-                    
-                        <label htmlFor="painting-tech" className="form-label">Description:</label>
-                        <input type="text" id="painting-tech" name="description" value={product?.description} onChange={onChangeHandler} />
-                    
-                        <label htmlFor="picture" className="form-label">Wood picture:</label>
-                        <input type="text" id="picture" name="picture" value={product?.picture} onChange={onChangeHandler} />
 
-                        <label htmlFor="certificate" className="form-label">Price:</label>
-                        <input type="text" id="certificate" placeholder="Yes" name="price" value={product?.price} onChange={onChangeHandler} />
-             
+                    <label htmlFor="title" className="form-label">Title:</label>
+                    <input type="text" id="title" name="title" value={product?.title} onChange={onChangeHandler} />
+
+                    <label htmlFor="painting-tech" className="form-label">Description:</label>
+                    <input type="text" id="painting-tech" name="description" value={product?.description} onChange={onChangeHandler} />
+
+                    <label htmlFor="picture" className="form-label">Wood picture:</label>
+                    <input type="text" id="picture" name="picture" value={product?.picture} onChange={onChangeHandler} />
+
+                    <label htmlFor="certificate" className="form-label">Price:</label>
+                    <input type="text" id="certificate" placeholder="Yes" name="price" value={product?.price} onChange={onChangeHandler} />
+
 
                     <label htmlFor="type">Type:</label>
                     <select type="type" id="certificate" name="type" value={product?.type} onChange={onChangeHandler} >

@@ -17,15 +17,13 @@ import { productReducer } from '../../reducers/productReducer.js';
 export default function Details(
 
 ) {
-    const { filteredProducts: products } = useContext(WoodContext)
-    // console.log(products)
+
 
     const { deleteProduct } = useProductsContext();
 
-
     const navigate = useNavigate();
 
-    const { onWoodDeleteClick } = useContext(WoodContext);
+    //const { onWoodDeleteClick } = useContext(WoodContext);
 
     const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
     console.log(userId)
@@ -82,7 +80,6 @@ export default function Details(
             payload: response,
             userEmail,
         });
-
 
         // setProduct(state => ({
         //     ...state,

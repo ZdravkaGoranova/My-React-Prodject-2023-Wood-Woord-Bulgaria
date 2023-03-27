@@ -12,8 +12,8 @@ const productService = productServiceFactory();
 
 const initialState = {
     products: [],
-    comments: [],
-    likes: [],
+    // comments: [],
+    // likes: [],
     selectedType: "",
     selectetProduct: [],
     delProduct: [],

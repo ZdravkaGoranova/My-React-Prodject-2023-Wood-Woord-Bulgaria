@@ -1,20 +1,18 @@
 
 import '../Create/create-edit.css'
 
-import { useContext } from 'react';
+import { useContext, } from 'react';
 
 import { useForm } from '../../hooks/useForm.js';
 import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
 
 
 export default function Create() {
-    const { onSubmitCreateProduct } = useContext(WoodContext)
+    //const { onSubmitCreateProduct } = useContext(WoodContext)
 
-    const { products } = useContext(WoodContext)
-    // console.log(products)
-
-
+//navigate("/catalog", { replace: true });
     const { addProduct } = useProductsContext();
+
 
 
     const { product, onChangeHandler, onSubmit } = useForm({
@@ -25,6 +23,7 @@ export default function Create() {
         type: "",
     }, addProduct);
     // },onSubmitCreateProduct);
+
     return (
         <section id="create-container">
             <div className="create-container-info">
