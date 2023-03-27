@@ -6,11 +6,13 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useService } from '../../hooks/useService.js';
 
-import { WoodContext } from '../../contexts/WoodContext.js';
+
+import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
+
 
 export default function Edit() {
     const productService = useService(productServiceFactory)
-    const { updateProduct } = useContext(WoodContext)
+    const { deleteProduct, updateProduct, addProduct } = useProductsContext();
 
     const { productId } = useParams();
     //console.log(productId);
@@ -24,6 +26,9 @@ export default function Edit() {
         type: "",
 
     });
+
+   
+
 
     useEffect(() => {
         productService.update(productId)

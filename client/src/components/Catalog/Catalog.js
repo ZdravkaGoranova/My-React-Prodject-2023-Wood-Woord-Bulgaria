@@ -1,22 +1,17 @@
 import '../Catalog/catalog.css'
 
 
-import React, { useContext, useReducer  } from "react"
+import React, { useContext,   } from "react"
 
 import Publication from './Publication/Publication.js'
 import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js'
-import { productReducer } from '../../reducers/productReducer.js';
+
 
 
 export default function Catalog() {
     const { filteredProducts: products } = useContext(WoodContext)
     // console.log(products)
 
-    const [state, dispatch] = useReducer(productReducer, {});
-
-    function searchProducts(initialState) {
-        dispatch({ type: "FILTER_PRODUCTS", payload: initialState });
-    }
 
     const { cangeProductType } = useProductsContext();
 
@@ -25,6 +20,7 @@ export default function Catalog() {
         < section id="gallery" >
             <h1>Wood World Gallery</h1>
             <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Chairs</button>
+            <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Spoons</button>
             <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Ladles</button>
             <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Furnitures</button>
             <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Toolboxes</button>

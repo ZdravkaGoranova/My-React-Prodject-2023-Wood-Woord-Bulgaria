@@ -1,21 +1,30 @@
 
 import '../Create/create-edit.css'
 
-import {  useContext } from 'react';
-import { WoodContext } from '../../contexts/WoodContext.js'
+import { useContext } from 'react';
+
 import { useForm } from '../../hooks/useForm.js';
+import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
+
 
 export default function Create() {
-    const { onSubmitCreateProduct} = useContext(WoodContext)
+    const { onSubmitCreateProduct } = useContext(WoodContext)
 
-    const{product, onChangeHandler,onSubmit} = useForm({
+    const { products } = useContext(WoodContext)
+    // console.log(products)
+
+
+    const { addProduct } = useProductsContext();
+
+
+    const { product, onChangeHandler, onSubmit } = useForm({
         title: "",
         description: "",
         picture: "",
         price: "",
         type: "",
-    },onSubmitCreateProduct);
-
+    }, addProduct);
+    // },onSubmitCreateProduct);
     return (
         <section id="create-container">
             <div className="create-container-info">
@@ -31,11 +40,11 @@ export default function Create() {
                     <input type="text" id="title" placeholder="Handmade product " name="title" value={product?.title} onChange={onChangeHandler} />
 
                     <label htmlFor="painting-tech">Description:</label>
-                    <input type="text" id="painting-tech" placeholder="Wood product..." name="description" value={product?.description} onChange={onChangeHandler}/>
+                    <input type="text" id="painting-tech" placeholder="Wood product..." name="description" value={product?.description} onChange={onChangeHandler} />
 
                     <label htmlFor="picture">Wood picture:</label>
-                    <input type="text" id="picture" placeholder="http://..." name="picture" value={product?.picture} onChange={onChangeHandler}/>
-                    
+                    <input type="text" id="picture" placeholder="http://..." name="picture" value={product?.picture} onChange={onChangeHandler} />
+
                     <label htmlFor="certificate">Price:</label>
                     <input type="text" id="certificate" placeholder="10" name="price" value={product?.price} onChange={onChangeHandler} />
                     <label htmlFor="type">Type:</label>

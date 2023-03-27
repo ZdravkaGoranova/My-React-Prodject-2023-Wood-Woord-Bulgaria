@@ -27,12 +27,6 @@ import Profile from './components/Profile/Profile.js';
 import Register from './components/Register/Register.js';
 import Edit from './components/Edit/Edit.js';
 import Logout from './components/Logout/Logout.js';
-import Spoons from './components/Catalog/Spoons.js';
-import Chairs from './components/Catalog/Chairs.js';
-import Ladles from './components/Catalog/Ladles.js';
-import Furnitures from './components/Catalog/Furnitures.js';
-import Toolboxes from './components/Catalog/Toolboxes.js';
-import Handtools from './components/Catalog/Handtools.js';
 
 
 
@@ -56,6 +50,7 @@ function App() {
     }, []);
 
     console.log(products)
+
     const onSubmitCreateProduct = async (productData) => {
         console.log('onSubmitCreateProduct');
 
@@ -132,14 +127,7 @@ function App() {
                         <Route path='/profile/:userId' element={<Profile />} />
 
                         <Route path='/catalog' element={<Catalog products={products} />} />
-                        <Route path='/catalog/Spoons' element={<Spoons products={products} />} />
-                        <Route path='/catalog/Chairs' element={<Chairs products={products} />} />
-                        <Route path='/catalog/Ladles' element={<Ladles products={products} />} />
-                        <Route path='/catalog/Furnitures' element={<Furnitures products={products} />} />
-                        <Route path='/catalog/Toolboxes' element={<Toolboxes products={products} />} />
-                        <Route path='/catalog/Handtools' element={<Handtools products={products} />} />
-                        {/* <Route path='/catalog/Оther' element={<Other products={products} />} /> */}
-
+          
                         <Route path='/edit/:productId' element={<Edit />} />
 
                         <Route path='/details/:productId' element={<Details />} />
@@ -148,6 +136,7 @@ function App() {
                     </Routes>
                 
            {/* // </WoodContext.Provider> */}
+
         </AuthProvider>
     );
 }

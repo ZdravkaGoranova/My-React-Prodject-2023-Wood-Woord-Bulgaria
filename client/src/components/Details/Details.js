@@ -3,28 +3,39 @@ import '..//Details/comments.css';
 
 import React from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useEffect, useState, useContext, } from 'react';
+import { useEffect, useState, useContext, useReducer} from 'react';
 
-import { WoodContext } from '../../contexts/WoodContext.js'
+import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
 import { AuthContext } from '../../contexts/AuthContext.js';
 
 import { productServiceFactory } from '../../services/productService.js';
 import { AddComment } from './AddComment/AddComment.js';
 import * as  commentService from '../../services/commentService.js';
 import * as likeService from '../../services/likeService.js';
+import { productReducer } from '../../reducers/productReducer.js';
 
 export default function Details(
 
 ) {
+    const { filteredProducts: products } = useContext(WoodContext)
+    // console.log(products)
+
+    const { deleteProduct } = useProductsContext();
+
+
     const navigate = useNavigate();
 
     const { onWoodDeleteClick } = useContext(WoodContext);
-    const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
-    const { productId } = useParams();
 
+    const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
+    console.log(userId)
+    const { productId } = useParams();
+    console.log(productId)
     const productService = productServiceFactory();
 
-    const [product, setProduct] = useState({});
+    //const [product, setProduct] = useState({});
+    const [product, dispatch] = useReducer(productReducer, {});
+    
 
     const isOwner = product._ownerId === userId;
 
@@ -48,8 +59,9 @@ export default function Details(
                     comments,
                     likes,
                 };
-                setProduct(productState)
-                // dispatch({type: 'GAME_FETCH', payload: gameState})
+                // setProduct(productState)
+                // dispatch({type: 'GAME_FETCH', payload: productState})
+                dispatch({ type: 'GAME_FETCH', payload: productState })
 
             });
 
@@ -65,15 +77,22 @@ export default function Details(
         )
         console.log(response)
 
-        setProduct(state => ({
-            ...state,
-            comments: [...state.comments, {
-                ...response,
-                author: {
-                    email: userEmail
-                }
-            }]
-        }))
+        dispatch({
+            type: 'COMMENT_ADD',
+            payload: response,
+            userEmail,
+        });
+
+
+        // setProduct(state => ({
+        //     ...state,
+        //     comments: [...state.comments, {
+        //         ...response,
+        //         author: {
+        //             email: userEmail
+        //         }
+        //     }]
+        // }))
 
     };
 
@@ -85,10 +104,15 @@ export default function Details(
         )
         console.log(response)
 
-        setProduct(state => ({
-            ...state,
-            likes: [...state.likes, response]
-        }))
+        dispatch({
+            type: "LIKE_ADD",
+            payload: response,
+        });
+
+        // setProduct(state => ({
+        //     ...state,
+        //     likes: [...state.likes, response]
+        // }))
     };
 
     const onBackButtonClick = (e) => {
@@ -149,7 +173,9 @@ export default function Details(
                                     <>
                                         <Link to={`/edit/${product._id}`} className="btn btn-outline-warning btn-custom">Edit</Link>
 
-                                        <button className="btn btn-outline-warning btn-custom" onClick={() => onWoodDeleteClick(productId)} >Delete</button>
+                                        <button className="btn btn-outline-warning btn-custom" onClick={() => deleteProduct(productId)} >Delete</button>
+                                        {/* <button className="btn btn-outline-warning btn-custom" onClick={() => onWoodDeleteClick(productId)} >Delete</button> */}
+                                       
 
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Delete
@@ -166,7 +192,9 @@ export default function Details(
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >No</button>
-                                                        <button type="button" className="btn btn-primary" onClick={() => { onWoodDeleteClick(productId) }}>Yes</button>
+                                                        <button type="button" className="btn btn-primary" onClick={() => { deleteProduct(productId) }}>Yes</button>
+                                                        {/* <button type="button" className="btn btn-primary" onClick={() => { onWoodDeleteClick(productId) }}>Yes</button> */}
+                                                     
                                                     </div>
                                                 </div>
                                             </div>for=
@@ -180,7 +208,8 @@ export default function Details(
                                 {(isAuthenticated && !isOwner && !isLiked) &&
 
                                     <button type="button" className="btn btn-outline-warning btn-custom" onClick={onLike}>Likes </button>
-
+                                    // <button type="button" className="btn btn-outline-warning btn-custom" onClick={onLike}>Likes </button>
+                                 
                                 }
 
                             </div>

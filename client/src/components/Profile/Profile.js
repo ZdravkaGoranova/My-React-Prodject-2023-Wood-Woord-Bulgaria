@@ -7,14 +7,12 @@ import { WoodContext } from '../../contexts/WoodContext.js'
 import MyProducts from './MyProducts.js';
 import { AuthContext } from '../../contexts/AuthContext.js'
 
-
 export default function Profile() {
-    const { userEmail,  } = useContext(AuthContext);
 
     const { products } = useContext(WoodContext)
     console.log(products)
 
-    const { userId } = useContext(AuthContext);
+    const { userId,userEmail } = useContext(AuthContext);
     console.log(userId)
 
     const userProducts = products.filter(product => product._ownerId === userId)

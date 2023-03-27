@@ -15,8 +15,6 @@ export const productReducer = (state, action) => {
             productsLoalding: false,
             productsError: false,
             products: action.payload,
-           
-
         };
     }
     if (action.type === "CHANGE_PRODUCT_TYPE")
@@ -24,6 +22,7 @@ export const productReducer = (state, action) => {
             ...state,
             selectedType: action.payload
         };
+
     if (action.type === "FILTRED_PRODUCT_TYPE") {
         const { products } = state;
         let filtredProducts = [...products]
@@ -38,16 +37,86 @@ export const productReducer = (state, action) => {
         }
     }
 
+    if (action.type === "GAME_FETCH") {
+        return { ...action.payload };
+    }
 
 
+
+    if (action.type === "COMMENT_ADD") {
+       
+        return {
+            ...state,
+            comments: [
+                ...state.comments,
+                {
+                    ...action.payload,
+                    author: {
+                        email: action.userEmail,
+                    }
+                }
+            ],
+        }
+    }
+
+      if (action.type === "LIKE_ADD") {
+
+        return {
+           ...state,
+            likes: [...state.likes, action.payload]
+        }
+    }
+
+    if (action.type === "UPDATE_PRODUCT") {
+        const updatedProduct = action.payload;
+        console.log(updatedProduct)
+
+        console.log(state)
+        const { products } = state;
+
+        const updatedProducts = products.map(product => {
+            if (product.id === updatedProduct.id) {
+                return updatedProduct;
+            }
+            return product
+        });
+        return {
+            ...state,
+            selectetProduct: updatedProduct,
+            products: updatedProducts
+          };
+    }
+    if (action.type === "ADD_PRODUCT") {
+        return {
+            ...state,
+            products: action.payload
+        };
+    }
+    if (action.type === "DELETE_PRODUCT") {
+        const { products } = state;
+        let filtredProducts ;
+        const deleteProduct = products.filter(product => product.id === action.id)
+        console.log(deleteProduct)
+
+        if(deleteProduct!=={}){
+            filtredProducts=products.filter(product => product.id !== action.id)
+            console.log(filtredProducts)
+        }
+        
+        return {
+            ...state,
+            filtredProducts: filtredProducts,
+            delProduct:deleteProduct,
+        }
+            ;
+    }
+
+ 
+
+
+//      
 
 }
-
-
-
-
-
-
 
 
 
@@ -84,40 +153,9 @@ export const productReducer = (state, action) => {
 //                 ...state,
 //                 { delProduct: state.filter(product => product.id !== action.id) }]
 //                 ;
-//         case "FILTER_PRODUCTS":
-
-//             const filteredProducts = state.filter(
-//                 (product) => product.type === action.payload
-
-//             );
-//             return { ...state, filteredProducts: filteredProducts, selectedType: action.payload };
-
-//         case "RESET_FILTER":
-//             return { ...state, filteredProducts: state.products, selectedType: null };
-
-//         default:
-//             return state;
-
-//         // case 'SET_TYPE':
-//         //     return state.filter((product) => product.type === action.payload);
-//         // case 'RESET_TYPE':
-//         //     return action.payload;
+//
 
 
-//         // case 'GAME_FETCH':
-//         //     // return Object.assign({}, action.payload);
-//         //     return { ...action.payload };
-
-
-
-
-
-//         // case "FILTER_PRODUCTS":
-//         //     const type = action.payload;
-//         //     const filteredProducts = state.products.filter(
-//         //         product => product.type === type
-//         //     );
-//         //     return { ...state, filteredProducts, type };
 
 
 //         // case 'SEARCH_PRODUCTS':
@@ -130,32 +168,6 @@ export const productReducer = (state, action) => {
 //         //         filteredProducts: filteredProducts
 //         //     };
 
-//         // case 'FILTER_BY_TYPE':
-//         //     return state.filter(product => product.type === action.filterType);
-
-
-//         //     return state.filter((product) => {
-//         //         if (product.id !== action.payload.id) {
-//         //             return {
-//         //                 ...state,
-//         //                 products: !product.id
-//         //             }
-//         //         } else {
-//         //             return state
-//         //         }
-//         //     }
-//         //     );
-
-
-
-//         // case 'PRODUCT_SELECT':
-//         //     const filteredProducts = state.products.filter((product) =>
-//         //         product.name.toLowerCase().includes(action.searchTerm.toLowerCase())
-//         //     );
-//         //     return {
-//         //         ...state,
-//         //         filteredProducts,
-//         //     };
 
 //         // case 'COMMENT_ADD':
 //         //     return {
