@@ -1,9 +1,12 @@
 export const productReducer = (state, action) => {
+    console.log(action.payload)
     switch (action.type) {
 
         case "FILTER_PRODUCTS":
+       
             const filteredProducts = state.products.filter(
                 (product) => product.type === action.payload
+               
             );
             return { ...state, filteredProducts: filteredProducts, selectedType: action.payload };
         case "RESET_FILTER":

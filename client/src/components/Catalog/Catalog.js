@@ -2,28 +2,28 @@ import '../Catalog/catalog.css'
 
 import Publication from './Publication/Publication.js'
 
-import React, { useContext, useReducer } from "react"
+import React, { useContext, useReducer, useDispatch } from "react"
 import { Link } from 'react-router-dom';
 import { WoodContext } from '../../contexts/WoodContext.js'
 import { productReducer } from '../../reducers/productReducer.js';
 
 
 export default function Catalog() {
-   const { products } = useContext(WoodContext)
-   // console.log(products)
+    const { products } = useContext(WoodContext)
+    // console.log(products)
     //console.log(typeof products)
-    
-    const initialState = {
-        products: products,
-        filteredProducts: products,
-        selectedType: null
-      };
 
-      const [state, dispatch] = useReducer(productReducer, initialState);
+    // const initialState = {
+    //     products: products,
+    //     filteredProducts: products,
+    //     selectedType: null
+    //   };
 
-      function searchProducts(type) {
-        dispatch({ type: "FILTER_PRODUCTS", payload: type });
-      }
+    //  const [state, dispatch] = useReducer(productReducer, {});
+  //  const dispatch = useDispatch
+    function searchProducts(initialState) {
+        dispatch({ type: "FILTER_PRODUCTS", payload: initialState });
+    }
 
     // const products= [
     //       { id: 1, name: 'Product 1', type: 'Type A' },
@@ -46,9 +46,9 @@ export default function Catalog() {
     //         type: 'SEARCH_PRODUCTS',
     //         payload: searchType
     //     });
-       
+
     //               console.log(searchType)
-                  //console.log(filteredProducts)
+    //console.log(filteredProducts)
     //}
 
     // const filteredItems = products.filter(item => item.type === 'toolboxes');
@@ -58,14 +58,14 @@ export default function Catalog() {
         < section id="gallery" >
             <h1>Wood World Gallery</h1>
             <article className="gallery-container">
-                
+
                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("chairs")}>Chairs</button>
                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("ladles")}>Ladles</button>
                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("furnitures")}>Furnitures</button>
                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("toolboxes")}>Toolboxes</button>
                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("handtools")}>Handtools</button>
                 <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("other")}>Оther</button>
-
+{/* 
                 <ul>
                     {state.filteredProducts.map((product) => {
                         return (
@@ -74,7 +74,7 @@ export default function Catalog() {
                             </li>
                         );
                     })}
-                </ul>
+                </ul> */}
 
                 <ul >
                     {products.length > 0
