@@ -12,7 +12,18 @@ export default function Catalog() {
    const { products } = useContext(WoodContext)
    // console.log(products)
     //console.log(typeof products)
+    
+    const initialState = {
+        products: products,
+        filteredProducts: products,
+        selectedType: null
+      };
 
+      const [state, dispatch] = useReducer(productReducer, initialState);
+
+      function searchProducts(type) {
+        dispatch({ type: "FILTER_PRODUCTS", payload: type });
+      }
 
     // const products= [
     //       { id: 1, name: 'Product 1', type: 'Type A' },
@@ -24,17 +35,21 @@ export default function Catalog() {
     // const searchType='Type B';
 
     //const  dispatch ='Type B';
-    const [state, dispatch] = useReducer(productReducer, products);
 
-    function searchProducts(dispatch, searchType) {
-        dispatch({
-            type: 'SEARCH_PRODUCTS',
-            payload: searchType
-        });
+
+
+
+    // const [state, dispatch] = useReducer(productReducer, products);
+
+    // function searchProducts( searchType) {
+    //     dispatch({
+    //         type: 'SEARCH_PRODUCTS',
+    //         payload: searchType
+    //     });
        
-                  console.log(searchType)
+    //               console.log(searchType)
                   //console.log(filteredProducts)
-    }
+    //}
 
     // const filteredItems = products.filter(item => item.type === 'toolboxes');
     // console.log(filteredItems);
@@ -44,14 +59,14 @@ export default function Catalog() {
             <h1>Wood World Gallery</h1>
             <article className="gallery-container">
                 
-                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "chairs")}>Chairs</button>
-                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "ladles")}>Ladles</button>
-                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "furnitures")}>Furnitures</button>
-                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "toolboxes")}>Toolboxes</button>
-                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "handtools")}>Handtools</button>
-                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts(dispatch, "other")}>Оther</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("chairs")}>Chairs</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("ladles")}>Ladles</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("furnitures")}>Furnitures</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("toolboxes")}>Toolboxes</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("handtools")}>Handtools</button>
+                <button type="button" className="btn btn-outline-warning btn-custom" onClick={() => searchProducts("other")}>Оther</button>
 
-                {/* <ul>
+                <ul>
                     {state.filteredProducts.map((product) => {
                         return (
                             <li key={product.id}>
@@ -59,7 +74,7 @@ export default function Catalog() {
                             </li>
                         );
                     })}
-                </ul> */}
+                </ul>
 
                 <ul >
                     {products.length > 0
@@ -75,8 +90,7 @@ export default function Catalog() {
                             <a href="/create" className="  btn btn-outline-warning btn-custom ">Create product</a>
                         </div>
                     }
-                </ul>
-            </article >
+                </ul>            </article >
         </section >
     )
 }
