@@ -2,18 +2,12 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 import { productServiceFactory } from '../services/productService.js';
 import { productReducer } from '../reducers/productReducer.js';
 
-// import { useNavigate, } from "react-router-dom";
-
-
 export const WoodContext = createContext();
 
 const productService = productServiceFactory();
-// const navigate = useNavigate();
 
 const initialState = {
     products: [],
-    // comments: [],
-    // likes: [],
     selectedType: "",
     selectetProduct: [],
     delProduct: [],
@@ -21,7 +15,6 @@ const initialState = {
     productsLoalding: false,
     productsError: false,
 }
-
 
 export const ProductProvider = ({ children }) => {
 
@@ -40,12 +33,11 @@ export const ProductProvider = ({ children }) => {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
     }
+
     const cangeProductType = async (e) => {
         dispatch({ type: "CHANGE_PRODUCT_TYPE", payload: e.target.textContent })
 
     }
-
-
 
     const updateProduct = async (productId, product) => {
 
@@ -59,19 +51,16 @@ export const ProductProvider = ({ children }) => {
         }
     }
 
-
-
-    const deleteProduct = async (productId) => {
-        try {
-            const result = await productService.delProduct(productId)
-            dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
-
-            // navigate("/catalog", { replace: true });
-        } catch (error) {
-            dispatch({ type: "GET_PRODUCT_ERROR" })
-        }
-    }
-
+    // const deleteProduct = async (productId) => {
+    //     try {
+    //         const result = await productService.delProduct(productId)
+    //         dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
+    //         //redirect("/catalog", )
+    //         // navigate("/catalog");
+    //     } catch (error) {
+    //         dispatch({ type: "GET_PRODUCT_ERROR" })
+    //     }
+    // }
 
     const addProduct = async (productData) => {
 
@@ -81,7 +70,7 @@ export const ProductProvider = ({ children }) => {
 
             dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
             // navigate("/catalog", { replace: true });
-
+           
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
@@ -93,16 +82,15 @@ export const ProductProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        dispatch({ type: "FILTRED_PRODUCT_TYPE", })
-
+        dispatch({ type: "FILTRED_PRODUCT_TYPE" })
     }, [state.selectedType, state.products, state.selectetProduct, state.delProduct])
 
+
     return (
-        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, deleteProduct, updateProduct, addProduct }} >
+        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType,  updateProduct, addProduct }} >
             {children}
 
         </WoodContext.Provider>
-
     )
 }
 

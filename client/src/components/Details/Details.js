@@ -1,5 +1,5 @@
 import '../Details/details.css';
-import '..//Details/comments.css';
+import '../Details/AddComment/comments.css';
 
 import React from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom'
@@ -17,9 +17,7 @@ import { productReducer } from '../../reducers/productReducer.js';
 export default function Details(
 
 ) {
-
-
-    const { deleteProduct } = useProductsContext();
+    //const { deleteProduct } = useProductsContext();
 
     const navigate = useNavigate();
 
@@ -27,13 +25,14 @@ export default function Details(
 
     const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
     console.log(userId)
+
     const { productId } = useParams();
     console.log(productId)
+
     const productService = productServiceFactory();
 
     //const [product, setProduct] = useState({});
     const [product, dispatch] = useReducer(productReducer, {});
-    
 
     const isOwner = product._ownerId === userId;
 
@@ -42,7 +41,7 @@ export default function Details(
     const isLiked = productLikes?.some(item => {
         return item.author?._id === userId || item?._ownerId === userId;
     });
-    console.log(isLiked)
+   // console.log(isLiked)
 
     useEffect(() => {
 
@@ -58,14 +57,23 @@ export default function Details(
                     likes,
                 };
                 // setProduct(productState)
-                // dispatch({type: 'GAME_FETCH', payload: productState})
-                dispatch({ type: 'GAME_FETCH', payload: productState })
+                dispatch({ type: 'PRODUCT_FETCH', payload: productState })
 
             });
-
     }, [productId]);
 
     console.log(product)
+
+    const deleteProduct = async (productId) => {
+        try {
+            const result = await productService.delProduct(productId)
+            dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
+          
+             navigate(`/profile/${userId}`);
+        } catch (error) {
+            dispatch({ type: "GET_PRODUCT_ERROR" })
+        }
+    }
 
     const onCommentSubmit = async (values) => {
         const response = await commentService.create(
@@ -126,13 +134,13 @@ export default function Details(
                         <div className="card-body">
                             <h5 className="card-title">Title: {product.title}</h5>
 
-                            {/* <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Type:</strong>  {product.type}</div>
+                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Type:</strong>  {product.type}</div>
                             <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Owner: </strong>   {product._ownerId}</div>
-                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Price:</strong>  {product.price}</div>  */}
-
+                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Price:</strong>  {product.price}</div> 
+{/* 
                             <p className="card-text"><small className="text-body-secondary">Type:   {product.type}</small></p>
                             <p className="card-text"><small className="text-body-secondary">Owner:   {product._ownerId}</small></p>
-                            <p className="card-text"><small className="text-body-secondary">Price:   {product.price}</small></p>
+                            <p className="card-text"><small className="text-body-secondary">Price:   {product.price}</small></p> */}
 
                             <p className="card-text">Description: {product.description}</p>
 
@@ -173,10 +181,10 @@ export default function Details(
                                         <button className="btn btn-outline-warning btn-custom" onClick={() => deleteProduct(productId)} >Delete</button>
                                         {/* <button className="btn btn-outline-warning btn-custom" onClick={() => onWoodDeleteClick(productId)} >Delete</button> */}
                                        
-
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Delete
                                         </button>
+
                                         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div className="modal-dialog">
                                                 <div className="modal-content">
@@ -189,12 +197,12 @@ export default function Details(
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >No</button>
-                                                        <button type="button" className="btn btn-primary" onClick={() => { deleteProduct(productId) }}>Yes</button>
+                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal"  onClick={() => { deleteProduct(productId) }}>Yes</button>
                                                         {/* <button type="button" className="btn btn-primary" onClick={() => { onWoodDeleteClick(productId) }}>Yes</button> */}
                                                      
                                                     </div>
                                                 </div>
-                                            </div>for=
+                                            </div>
                                         </div>
 
                                     </>

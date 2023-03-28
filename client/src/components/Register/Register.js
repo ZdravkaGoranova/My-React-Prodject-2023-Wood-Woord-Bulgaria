@@ -1,13 +1,15 @@
 import '../Register/register-login.css'
 
-import { Link,  } from "react-router-dom";
-import {  useContext } from 'react';
+import { Link, } from "react-router-dom";
+import { useContext, useState } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
 
 export default function Register() {
 
-    const { onRegisterSubmit } = useContext(AuthContext);
+    const { onRegisterSubmit, errorMessage,setErrorMessage } = useContext(AuthContext);
+    const [showErrorBox, setShowErrorBox] = useState(true);
+
     const { formValues, onChangeHandler, onSubmit } = useForm({
 
         email: "",
@@ -15,48 +17,65 @@ export default function Register() {
         confirmPassword: "",
     }, onRegisterSubmit);
 
-
+    const hideErrorBox = () => {
+        setErrorMessage({});
+    };
     return (
-        <section id="register-container">
-            <div className="register-container-info">
-
-                <img src="/img/24.jpeg" alt="image" />
-
-                <form onSubmit={onSubmit} className="container-text">
-                    
-                    <h2>Register</h2>
-                    <p>Register to get ideas and view the latest wood products and tools.</p>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
-                            value={formValues.email}
-                            onChange={onChangeHandler} />
-
-                    </div>
-                    <div className="mb-3">
-                        <label  htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" name="password"
-                            autoComplete="current-password"
-                            value={formValues.password}
-                            onChange={onChangeHandler} />
-                    </div>
-
-                    <div className="mb-3">
-                        <label  htmlFor="confirmPassword" className="form-label">Confirm password</label>
-                        <input type="password" className="form-control" id="confirmPassword" name="confirmPassword"
-                            value={formValues.confirmPassword}
-                            onChange={onChangeHandler} />
-                    </div>
-
-                    <button type="submit" className="btn btn-outline-warning btn-custom">Submit</button>
-                    <div className="card-no-account">
-                        <p>Already have an account?<Link to="/login" > Sign in</Link>.</p>
-
-                    </div>
-                </form>
+        <>
+          <div>
+                <div className={`error-box ${showErrorBox && errorMessage ? 'show' : ''}`}>
+             
+                    {errorMessage && (
+                        <>
+                            <p>{errorMessage}</p>
+                            <button className="close-btn" onClick={hideErrorBox}>
+                                &#10005;
+                            </button>
+                        </>
+                    )}
+                </div>
             </div>
-        </section>
 
+            <section id="register-container">
+                <div className="register-container-info">
+
+                    <img src="/img/24.jpeg" alt="image" />
+
+                    <form onSubmit={onSubmit} className="container-text">
+
+                        <h2>Register</h2>
+                        <p>Register to get ideas and view the latest wood products and tools.</p>
+                        <div className="mb-3">
+                            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+                                value={formValues.email}
+                                onChange={onChangeHandler} />
+
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="exampleInputPassword1" name="password"
+                                autoComplete="current-password"
+                                value={formValues.password}
+                                onChange={onChangeHandler} />
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="confirmPassword" className="form-label">Confirm password</label>
+                            <input type="password" className="form-control" id="confirmPassword" name="confirmPassword"
+                                value={formValues.confirmPassword}
+                                onChange={onChangeHandler} />
+                        </div>
+
+                        <button type="submit" className="btn btn-outline-warning btn-custom">Submit</button>
+                        <div className="card-no-account">
+                            <p>Already have an account?<Link to="/login" > Sign in</Link>.</p>
+
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </>
     )
 }
 

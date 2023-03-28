@@ -86,9 +86,12 @@ export const productReducer = (state, action) => {
     }
     if (action.type === "ADD_PRODUCT") {
         return {
-            ...state,
-            products: action.payload
+           ...state,
+            products: [...state.products, action.payload],
         };
+
+
+
     }
     if (action.type === "DELETE_PRODUCT") {
         const { products } = state;

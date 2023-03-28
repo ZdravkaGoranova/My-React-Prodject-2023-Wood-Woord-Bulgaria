@@ -14,7 +14,7 @@ export default function Publication({
 }) {
     return (
 
-        <div className="card">
+        <div className="card ">
             <img src={picture} alt={title} className="card-img-bottom"  />
             <div className="card-body">
                 <h5 className="card-title">Title:   {title}</h5>

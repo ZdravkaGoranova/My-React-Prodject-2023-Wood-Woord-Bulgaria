@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import { authServiceFactory } from '../services/authService.js'
-import {useLocalStorage} from "../hooks/useLocalStorage.js"
+import { useLocalStorage } from "../hooks/useLocalStorage.js"
 
 export const AuthContext = createContext();
 
@@ -11,23 +11,37 @@ export const AuthProvider = ({
 }) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
     const authService = authServiceFactory(auth.accessToken);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+
 
     const userLogin = async (data) => {
         setAuth(data);
     };
 
+    const errorHandling = async (errorMessage) => {
+        if (errorMessage != "") {
+            setErrorMessage({})
+        }
+    };
+
+
+
     const onLoginSubmit = async (data) => {
         //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
         try {
-            const result = await authService.login(data)//({ ...data, username: data.username })
-            
-                    userLogin(result);//  userLogin({ ...authData, username: data.username })
-                    navigate('/catalog');
-                
+            const result = await authService.login(data)
+
+            userLogin(result);
+            navigate('/catalog');
+
         } catch (error) {
+            //setErrorMessage(error); 
+            setErrorMessage('Invalid username or password. Please try again.');
             console.log(error);
-            navigate('/404');
+            // alert(error.message)
+            return;
+            // navigate('/404');
         }
     };
 
@@ -35,21 +49,26 @@ export const AuthProvider = ({
         const { confirmPassword, ...registerData } = values;
         console.log(registerData)
         if (confirmPassword !== registerData.password) {
-            throw new Error("Passwords dont match");
+            //alert("Passwords dont match")
+            setErrorMessage("Passwords dont match");
+            return;
         }
         try {
             const result = await authService.register(registerData)
             console.log(result)
             setAuth(result);
             navigate('/catalog');
-         
+
         } catch (error) {
+            setErrorMessage('Invalid username or password. Please try again.');
+            //  alert(error.message)
             console.log(error);
-            navigate('/404');
+            return
+            // navigate('/404');
         }
     };
 
-    const onLogout =  () => {
+    const onLogout = () => {
         authService.logout();
 
         setAuth({});
@@ -60,6 +79,8 @@ export const AuthProvider = ({
         onLoginSubmit,
         onRegisterSubmit,
         onLogout,
+        errorMessage,
+        setErrorMessage,
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,

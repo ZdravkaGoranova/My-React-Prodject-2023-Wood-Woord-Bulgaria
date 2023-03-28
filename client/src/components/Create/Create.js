@@ -5,17 +5,25 @@ import { useContext, } from 'react';
 
 import { useForm } from '../../hooks/useForm.js';
 import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Create() {
     //const { onSubmitCreateProduct } = useContext(WoodContext)
 
-//navigate("/catalog", { replace: true });
+    //navigate("/catalog", { replace: true });
+
+    const navigate = useNavigate()
+
     const { addProduct } = useProductsContext();
 
 
+    function submitHandler() {
+        onSubmit()
+        navigate("/catalog", { replace: true });
+    }
 
-    const { product, onChangeHandler, onSubmit } = useForm({
+    const { product, onChangeHandler,onSubmit } = useForm({
         title: "",
         description: "",
         picture: "",
@@ -23,6 +31,9 @@ export default function Create() {
         type: "",
     }, addProduct);
     // },onSubmitCreateProduct);
+
+
+
 
     return (
         <section id="create-container">

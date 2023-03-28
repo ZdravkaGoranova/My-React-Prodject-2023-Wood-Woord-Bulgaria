@@ -6,76 +6,81 @@ import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js'
 
 export default function Navigation() {
     const { isAuthenticated, userEmail, username, userId } = useContext(AuthContext)
-    const { products } = useContext(WoodContext)
-    const { cangeProductType } = useProductsContext();
 
     return (
-
-
-        <nav className="navbar navbar-expand-lg bg-body-tertiary border-0">
+        <nav className="navbar navbar-expand-lg border-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
             <div className="container-fluid">
                 {/* <img src="/img/2.jpg" alt="logo" /> */}
-                <a className="navbar-brand" href="/">Wood World Bulgaria</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                <ul className="nav nav-tabs">
+                <a className="nav-link active" href="/">Wood World Bulgaria</a>
+                </ul>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
+                <ul className="nav nav-tabs">
 
                         {isAuthenticated ?
                             <>
                                 <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href={`/profile/${userId}`}>Welcome, {username}{userEmail}!</a>
+                                    <a class="nav-link active" aria-current="page" href={`/profile/${userId}`}>Welcome, {username}{userEmail}!</a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="/catalog">Gallery</a>
+                                    <a className="nav-link" href="/catalog">
+                                        <img src="/img/magazine-catalog.jpg" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
+                                        Catalog
+                                    </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="/create">Create Product</a>
+                                
+                                    <a className="nav-link" href="/create">
+                                        <img src="/img/create.png" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
+                                        Create Product
+                                    </a>
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href={`/profile/${userId}`}>Profile</a>
+
+                                    <a className="nav-link" href={`/profile/${userId}`}>
+                                        <img src="/img/profile.png" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
+                                        Profile
+                                    </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="/logout">Logout</a>
+
+                                    <a className="nav-link" href="/logout">
+                                        <img src="/img/log.png" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
+                                        Logout
+                                    </a>
                                 </li>
                             </>
                             :
                             <>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/catalog">Catalog</a>
+
+                                    <a className="nav-link" href="/catalog">
+                                        <img src="/img/magazine-catalog.jpg" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
+                                        Catalog
+                                    </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/register">Register</a>
+
+                                    <a className="nav-link" href="/register">
+                                        <img src="/img/Registratioin.jpg" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
+                                        Register
+                                    </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/login">Login</a>
+
+                                    <a className="nav-link" href="/login">
+                                        <img src="/img/log.png" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
+                                        Login
+                                    </a>
+
                                 </li>
                             </>
                         }
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Category
-                            </a>
-                            <ul className="dropdown-menu">
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Chairs</button>
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Spoons</button>
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Ladles</button>
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Furnitures</button>
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Toolboxes</button>
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Handtools</button>
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={cangeProductType}>Оther</button>
-                            </ul>
-                        </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
