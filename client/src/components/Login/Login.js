@@ -1,12 +1,13 @@
 import '../Login/register-login.css';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext.js';
 import { useForm } from '../../hooks/useForm.js';
 
 export default function Login() {
-    const { onLoginSubmit } = useContext(AuthContext);
+    const { onLoginSubmit, errorMessage, setErrorMessage } = useContext(AuthContext);
+    const [showErrorBox, setShowErrorBox] = useState(true);
 
     const { formValues, onChangeHandler, onSubmit } = useForm({
         username: "",
@@ -14,37 +15,60 @@ export default function Login() {
         password: "",
     }, onLoginSubmit);
 
+
+    const hideErrorBox = () => {
+    
+        setErrorMessage({});
+    };
+
     return (
-        <section id="login-container">
-            <div className="container">
-                <img src="/img/23.jpg" alt="image" />
+        <>
+            <div>
+                <div className={`error-box ${showErrorBox && errorMessage ? 'show' : ''}`}>
 
-                <form onSubmit={onSubmit} >
-                <h2>Login</h2>
-                    <p>Welcome, see the new  wood products!</p>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="email"
-                        value={formValues.email}
-                        onChange={onChangeHandler}/>
-                        
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1"  name="password"
-                        autoComplete="current-password"
-                        value={formValues.password}
-                        onChange={onChangeHandler} />
-                    </div>
-                  
-                    <button type="submit" className="btn btn-outline-warning btn-custom">Submit</button>
-                    <div className="card-no-account">
-                        <p>Don't have an account? <Link to="/register">Sign up</Link>.</p>
-                    </div>
-                </form>
-
+                    {errorMessage && (
+                        <>
+                            <p>{errorMessage}</p>
+                            <button className="close-btn" onClick={hideErrorBox}>
+                                &#10005;
+                            </button>
+                        </>
+                    )}
+                </div>
             </div>
-        </section>
+
+
+            <section id="login-container">
+                <div className="login-container-info">
+                    <img src="/img/23.jpg" alt="image" />
+
+                    <form onSubmit={onSubmit} >
+                        <h2>Login</h2>
+                        <p>Welcome, see the new  wood products!</p>
+                        <div className="mb-3">
+                            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+                                value={formValues.email}
+                                onChange={onChangeHandler} />
+
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="exampleInputPassword1" name="password"
+                                autoComplete="current-password"
+                                value={formValues.password}
+                                onChange={onChangeHandler} />
+                        </div>
+
+                        <button type="submit" className="btn btn-outline-warning btn-custom">Submit</button>
+                        <div className="card-no-account">
+                            <p>Don't have an account? <Link to="/register">Sign up</Link>.</p>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </>
     )
 };
 

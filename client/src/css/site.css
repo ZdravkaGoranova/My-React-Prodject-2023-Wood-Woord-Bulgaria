@@ -103,20 +103,38 @@
         font-family: 'Barlow', sans-serif;
     }
     
-    footer {
-        bottom: 0;
-        position: fixed;
-        width: 100%;
-        color: white;
+   
+
+    .error-box {
+        position: absolute;
+        right: 1.6em;
+        z-index: 11111;
+        top: 15%;
         text-align: center;
-        font-family: 'Barlow', sans-serif;
-        opacity: 0.7;
-        height: 50px;
-        font-size: 16px;
-        background-color: #e4a334;
+        border-radius: 1rem;
+        color: #c71414;
+        font-style: italic;
+        height: auto;
+        width: 420px;
+        box-shadow: 0px 0px 8px 7px #db1e1e;
+        display: none; /* скриване на error box по подразбиране */
+        background-color: white; /* бял фон на error box */
     }
     
-    .error-box {
+    .error-box.show {
+        display: block; /* показване на error box и текста на грешката */
+    }
+    
+    .error-box>p {
+        font-size: 25px;
+        font-weight: bold;
+        font-family: 'Barlow', sans-serif;
+        padding: 22px;
+        height: auto;
+    }
+
+
+    /* .error-box {
         position: fixed;
         right: 1.6em;
         display: block;
@@ -137,34 +155,6 @@
         font-family: 'Barlow', sans-serif;
         padding: 22px;
         height: auto;
-    }
+    } */
     
-    .error-box {
-        -moz-animation: cssAnimation 0s ease-in 2s forwards;
-        /* Firefox */
-        -webkit-animation: cssAnimation 0s ease-in 2s forwards;
-        /* Safari and Chrome */
-        -o-animation: cssAnimation 0s ease-in 2s forwards;
-        /* Opera */
-        animation: cssAnimation 0s ease-in 2s forwards;
-        -webkit-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
-    }
-    
-    @keyframes cssAnimation {
-        to {
-            width: 0;
-            height: 0;
-            overflow: hidden;
-            padding: 0;
-        }
-    }
-    
-    @-webkit-keyframes cssAnimation {
-        to {
-            width: 0;
-            height: 0;
-            visibility: hidden;
-            padding: 0;
-        }
-    }
+ 

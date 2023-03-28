@@ -23,6 +23,21 @@
         box-shadow: 0 20px 30px rgba(0, 0, 0, 0.185);
     }
 
+    .login-container-info{
+        background-color: #fff;
+        width: 650px;
+        height: 600px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        place-items: center;
+        line-height: 1.5;
+        left: 28%;
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.185);
+    }
+
+
+
     .register-container-info>img {
         width: 250px;
         height: 470px;
@@ -31,6 +46,13 @@
         object-position: center;
     }
 
+    .login-container-info>img {
+        width: 250px;
+        height: 470px;
+        object-fit: cover;
+        margin-top: -0.6em;
+        object-position: center;
+    }
     .container {
         background-color: #fff;
         width: 650px;
