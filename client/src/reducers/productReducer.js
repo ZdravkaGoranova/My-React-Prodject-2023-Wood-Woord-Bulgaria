@@ -37,14 +37,12 @@ export const productReducer = (state, action) => {
         }
     }
 
-    if (action.type === "GAME_FETCH") {
+    if (action.type === "PRODUCT_FETCH") {
         return { ...action.payload };
     }
 
-
-
     if (action.type === "COMMENT_ADD") {
-       
+
         return {
             ...state,
             comments: [
@@ -59,10 +57,10 @@ export const productReducer = (state, action) => {
         }
     }
 
-      if (action.type === "LIKE_ADD") {
+    if (action.type === "LIKE_ADD") {
 
         return {
-           ...state,
+            ...state,
             likes: [...state.likes, action.payload]
         }
     }
@@ -75,7 +73,7 @@ export const productReducer = (state, action) => {
         const { products } = state;
 
         const updatedProducts = products.map(product => {
-            if (product.id === updatedProduct.id) {
+            if (product._id === updatedProduct._id) {
                 return updatedProduct;
             }
             return product
@@ -84,7 +82,7 @@ export const productReducer = (state, action) => {
             ...state,
             selectetProduct: updatedProduct,
             products: updatedProducts
-          };
+        };
     }
     if (action.type === "ADD_PRODUCT") {
         return {
@@ -94,29 +92,52 @@ export const productReducer = (state, action) => {
     }
     if (action.type === "DELETE_PRODUCT") {
         const { products } = state;
-        let filtredProducts ;
-        const deleteProduct = products.filter(product => product.id === action.id)
+        let filtredProducts;
+        const deleteProduct = products.filter(product => product._id === action._id)
         console.log(deleteProduct)
 
-        if(deleteProduct!=={}){
-            filtredProducts=products.filter(product => product.id !== action.id)
+        if (deleteProduct !== {}) {
+            filtredProducts = products.filter(product => product._id !== action._id)
             console.log(filtredProducts)
         }
-        
+
         return {
             ...state,
             filtredProducts: filtredProducts,
-            delProduct:deleteProduct,
+            delProduct: deleteProduct,
         }
             ;
     }
 
- 
+    // if (action.type === "FILTRED_PRODUCT_TYPE") {
+    //     const { products } = state;
+    //     let filtredProducts = [...products]
+
+    //     if (state.selectedType !== "") {
+    //         filtredProducts = filtredProducts.filter(x => x.type.toLowerCase() === state.selectedType.toLowerCase())
+    //     }
+
+    //     return {
+    //         ...state,
+    //         filteredProducts: filtredProducts
+    //     }
+    // }
+    // if (action.type === 'SEARCH_PRODUCTS') {
+
+    //     const { products } = state;
+    //     let filtredProducts = [...products]
+
+    //     const filteredProducts = state.filter((product) => {
+    //         return product.type === action.type;
+    //     });
+    //     return {
+    //         ...state,
+    //         searchType: action.payload,
+    //         filteredProducts: filteredProducts
+    //     };
 
 
-//      
-
-}
+    }
 
 
 
