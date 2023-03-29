@@ -44,8 +44,6 @@ export default function Edit() {
     const onSubmitHandler = async (e, productData) => {
         e.preventDefault();
 
-        console.log(':):):)')
-
         if (!productData.picture.startsWith("https://")) {
             alert("Please enter a valid URL address");
            // setErrorMessage("Please enter a valid URL address");
@@ -124,7 +122,7 @@ export default function Edit() {
                         <input type="text" id="picture" name="picture" value={product?.picture} onChange={onChangeHandler} />
 
                         <label htmlFor="certificate" className="form-label">Price:</label>
-                        <input type="text" id="certificate" placeholder="Yes" name="price" value={product?.price} onChange={onChangeHandler} />
+                        <input type="text" id="certificate" placeholder="10" name="price" value={product?.price} onChange={onChangeHandler} />
 
 
                         <label htmlFor="type">Type:</label>
