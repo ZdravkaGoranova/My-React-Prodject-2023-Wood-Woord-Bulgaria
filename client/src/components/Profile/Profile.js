@@ -34,7 +34,7 @@ export default function Profile() {
                     {userProducts.length == 0 &&
                         <div className="no-events">
                             <p>This user has no products yet!</p>
-                            <a href="/create" className="  btn btn-outline-warning btn-custom ">Create product</a>
+                            <a href="/create" className="  btn btn-light btn-custom ml-3">Create product</a>
                         </div>
                     }
                     {userProducts.length > 0 &&
