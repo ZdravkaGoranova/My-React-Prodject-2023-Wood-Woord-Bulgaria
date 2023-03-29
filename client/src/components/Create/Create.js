@@ -1,11 +1,12 @@
 
 import '../Create/create-edit.css'
 
-import { useContext, } from 'react';
+import { useContext, useEffect, useState, } from 'react';
 
 import { useForm } from '../../hooks/useForm.js';
 import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext.js';
 
 
 export default function Create() {
@@ -16,32 +17,87 @@ export default function Create() {
     const navigate = useNavigate()
 
     const { addProduct } = useProductsContext();
+    const { userId } = useContext(AuthContext);
 
 
-    function submitHandler() {
-        onSubmit()
-        navigate("/catalog", { replace: true });
-    }
+    // function submitHandler() {
+    //     onSubmit()
+    //     navigate("/catalog", { replace: true });
+    // }
 
-    const { product, onChangeHandler,onSubmit } = useForm({
+    // const { product, onChangeHandler,onSubmit } = useForm({
+    //     title: "",
+    //     description: "",
+    //     picture: "",
+    //     price: "",
+    //     type: "",
+    // }, addProduct);
+    // },onSubmitCreateProduct);
+
+    const [product, setProduct] = useState({
         title: "",
         description: "",
         picture: "",
         price: "",
         type: "",
-    }, addProduct);
-    // },onSubmitCreateProduct);
+
+    });
+
+    // useEffect(() => {
+    //   const result=  addProduct(product)
+
+    //     // productService.update(productId)
+          
+    //             setProduct(result)
+            
+    // }, [product]);
 
 
+    const onSubmitHandler = async (e, productData) => {
+        e.preventDefault();
 
+        console.log(':):):)')
 
+        if (!productData.picture.startsWith("https://")) {
+            alert("Please enter a valid URL address!");
+           // setErrorMessage("Please enter a valid URL address");
+        }
+        else if (productData.title === "") {
+            alert("Please enter a valid title!");
+           // setErrorMessage("Please enter a valid title");
+        }
+        else if (productData.description === "") {
+            alert("Please enter a valid description!");
+            //setErrorMessage("Please enter a valid description");
+        }
+        else if (productData.price === "") {
+            alert("Please enter a valid price!");
+           // setErrorMessage("Please enter a valid description");
+        }
+
+        else {
+            try {
+                //    await  productService.update(productId, productData)
+                await addProduct( productData)
+                    .then(() => {
+                        navigate(`/profile/${userId}`);
+                    });
+            } catch (err) {
+                alert(err);
+            }
+        }
+    }
+        const onChangeHandler = (e) => {
+            setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
+        };
+    
     return (
         <section id="create-container">
             <div className="create-container-info">
 
                 <img src="/img/tools.jpg" alt="image" />
 
-                <form onSubmit={onSubmit} className="container-text">
+                <form onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
 
                     <h2>Create Product</h2>
                     <p>Add your own wood product!</p>
@@ -65,7 +121,7 @@ export default function Create() {
                         <option value="furnitures" name="furnitures">Furnitures</option>
                         <option value="toolboxes" name="toolboxes">Toolboxes</option>
                         <option value="handtools" name="handtools">Handtools</option>
-                        <option value="other" name="other">Оther</option>
+                        <option value="other" name="other">Other</option>
                     </select>
 
                     <button className="btn btn-outline-warning btn-custom" type='submit' >Create</button>

@@ -11,13 +11,31 @@ export const AuthProvider = ({
 }) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
     const authService = authServiceFactory(auth.accessToken);
+
     const [errorMessage, setErrorMessage] = useState('');
+    const [showErrorMessage, setShowErrorMessage] = useState(true);
+
+
     const navigate = useNavigate();
 
 
     const userLogin = async (data) => {
         setAuth(data);
     };
+
+    const hideErrorBox = () => {
+        setShowErrorMessage(false);
+    };
+
+    useEffect(() => {
+        if (showErrorMessage) {
+            const timer = setTimeout(() => {
+                setShowErrorMessage(false);
+            }, 5000); // 5 seconds
+            return () => clearTimeout(timer);
+        }
+    }, [showErrorMessage]);
+
 
     const errorHandling = async (errorMessage) => {
         if (errorMessage != "") {
