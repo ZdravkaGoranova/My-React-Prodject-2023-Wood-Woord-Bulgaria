@@ -15,32 +15,36 @@ export const AuthProvider = ({
     const authService = authServiceFactory(auth.accessToken);
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [showErrorMessage, setShowErrorMessage] = useState(true);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const hideErrorBox = () => {
-        setShowErrorMessage(false);
+        setErrorMessage("");
+        console.log(errorMessage)
+        console.log(showErrorMessage)
+        setShowErrorMessage("false");
+        console.log(showErrorMessage)
     };
 
     useEffect(() => {
-        if (showErrorMessage) {
-            const timer = setTimeout(() => {
-                setShowErrorMessage(false);
-            }, 5000); // 5 seconds
-            return () => clearTimeout(timer);
-        }
-    }, [showErrorMessage]);
-
-    const errorHandling = async (errorMessage) => {
+       
         if (errorMessage != "") {
-            setErrorMessage({})
+            setShowErrorMessage(true);
+            console.log(errorMessage)
+            console.log(showErrorMessage)
         }
-    };
+    }, [errorMessage]);
+
+    // const errorHandling = async (errorMessage) => {
+    //     if (errorMessage != "") {
+    //         setErrorMessage({})
+    //     }
+    // };
 
     const userLogin = async (data) => {
         setAuth(data);
     };
 
-   
+
     const onLoginSubmit = async (data) => {
         //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
         try {

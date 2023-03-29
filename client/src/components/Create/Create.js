@@ -12,12 +12,10 @@ import { AuthContext } from '../../contexts/AuthContext.js';
 export default function Create() {
     //const { onSubmitCreateProduct } = useContext(WoodContext)
 
-    //navigate("/catalog", { replace: true });
-
     const navigate = useNavigate()
 
     const { addProduct } = useProductsContext();
-    const { userId } = useContext(AuthContext);
+    const { userId,errorMessage, showErrorMessage, hideErrorBox ,setErrorMessage } = useContext(AuthContext);
 
 
     // function submitHandler() {
@@ -43,15 +41,6 @@ export default function Create() {
 
     });
 
-    // useEffect(() => {
-    //   const result=  addProduct(product)
-
-    //     // productService.update(productId)
-          
-    //             setProduct(result)
-            
-    // }, [product]);
-
 
     const onSubmitHandler = async (e, productData) => {
         e.preventDefault();
@@ -59,26 +48,27 @@ export default function Create() {
         console.log(':):):)')
 
         if (!productData.picture.startsWith("https://")) {
-            alert("Please enter a valid URL address!");
-           // setErrorMessage("Please enter a valid URL address");
+           // alert("Please enter a valid URL address!");
+            setErrorMessage("Please enter a valid URL address");
+          
         }
         else if (productData.title === "") {
-            alert("Please enter a valid title!");
-           // setErrorMessage("Please enter a valid title");
+            //alert("Please enter a valid title!");
+             setErrorMessage("Please enter a valid title");
         }
         else if (productData.description === "") {
-            alert("Please enter a valid description!");
-            //setErrorMessage("Please enter a valid description");
+            //alert("Please enter a valid description!");
+            setErrorMessage("Please enter a valid description");
         }
         else if (productData.price === "") {
-            alert("Please enter a valid price!");
-           // setErrorMessage("Please enter a valid description");
+           // alert("Please enter a valid price!");
+             setErrorMessage("Please enter a valid price!");
         }
 
         else {
             try {
                 //    await  productService.update(productId, productData)
-                await addProduct( productData)
+                await addProduct(productData)
                     .then(() => {
                         navigate(`/profile/${userId}`);
                     });
@@ -87,48 +77,58 @@ export default function Create() {
             }
         }
     }
-        const onChangeHandler = (e) => {
-            setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
-        };
-    
+    const onChangeHandler = (e) => {
+        setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
+    };
+
     return (
-        <section id="create-container">
-            <div className="create-container-info">
+        <>
+        
+            {showErrorMessage && errorMessage && (
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention!</strong> {errorMessage}
+                    <button type="button" onClick={hideErrorBox} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            )}
 
-                <img src="/img/tools.jpg" alt="image" />
 
-                <form onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
+            <section id="create-container">
+                <div className="create-container-info">
 
-                    <h2>Create Product</h2>
-                    <p>Add your own wood product!</p>
+                    <img src="/img/tools.jpg" alt="image" />
 
-                    <label htmlFor="title">Title:</label>
-                    <input type="text" id="title" placeholder="Handmade product " name="title" value={product?.title} onChange={onChangeHandler} />
+                    <form onSubmit={(e) => onSubmitHandler(e, product)} className="container-text">
 
-                    <label htmlFor="painting-tech">Description:</label>
-                    <input type="text" id="painting-tech" placeholder="Wood product..." name="description" value={product?.description} onChange={onChangeHandler} />
+                        <h2>Create Product</h2>
+                        <p>Add your own wood product!</p>
 
-                    <label htmlFor="picture">Wood picture:</label>
-                    <input type="text" id="picture" placeholder="http://..." name="picture" value={product?.picture} onChange={onChangeHandler} />
+                        <label htmlFor="title">Title:</label>
+                        <input type="text" id="title" placeholder="Handmade product " name="title" value={product?.title} onChange={onChangeHandler} />
 
-                    <label htmlFor="certificate">Price:</label>
-                    <input type="text" id="certificate" placeholder="10" name="price" value={product?.price} onChange={onChangeHandler} />
-                    <label htmlFor="type">Type:</label>
-                    <select type="type" id="certificate" name="type" value={product?.type} onChange={onChangeHandler} >
-                        <option value="spoons" name="spoons">Spoons</option>
-                        <option value="chairs" name="chairs">Chairs</option>
-                        <option value="ladles" name="ladles">Ladles</option>
-                        <option value="furnitures" name="furnitures">Furnitures</option>
-                        <option value="toolboxes" name="toolboxes">Toolboxes</option>
-                        <option value="handtools" name="handtools">Handtools</option>
-                        <option value="other" name="other">Other</option>
-                    </select>
+                        <label htmlFor="painting-tech">Description:</label>
+                        <input type="text" id="painting-tech" placeholder="Wood product..." name="description" value={product?.description} onChange={onChangeHandler} />
 
-                    <button className="btn btn-outline-warning btn-custom" type='submit' >Create</button>
-                </form>
-            </div>
-        </section>
+                        <label htmlFor="picture">Wood picture:</label>
+                        <input type="text" id="picture" placeholder="http://..." name="picture" value={product?.picture} onChange={onChangeHandler} />
 
+                        <label htmlFor="certificate">Price:</label>
+                        <input type="text" id="certificate" placeholder="10" name="price" value={product?.price} onChange={onChangeHandler} />
+                        <label htmlFor="type">Type:</label>
+                        <select type="type" id="certificate" name="type" value={product?.type} onChange={onChangeHandler} >
+                            <option value="spoons" name="spoons">Spoons</option>
+                            <option value="chairs" name="chairs">Chairs</option>
+                            <option value="ladles" name="ladles">Ladles</option>
+                            <option value="furnitures" name="furnitures">Furnitures</option>
+                            <option value="toolboxes" name="toolboxes">Toolboxes</option>
+                            <option value="handtools" name="handtools">Handtools</option>
+                            <option value="other" name="other">Other</option>
+                        </select>
+
+                        <button className="btn btn-outline-warning btn-custom" type='submit' >Create</button>
+                    </form>
+                </div>
+            </section>
+        </>
     )
 }
 

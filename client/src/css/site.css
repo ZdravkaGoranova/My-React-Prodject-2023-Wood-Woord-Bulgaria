@@ -105,7 +105,7 @@
     
    
 
-    .error-box {
+    /* .error-box {
         position: absolute;
         right: 1.6em;
         z-index: 11111;
@@ -118,11 +118,30 @@
         width: 420px;
         box-shadow: 0px 0px 8px 7px #db1e1e;
         display: none; /* скриване на error box по подразбиране */
-        background-color: white; /* бял фон на error box */
-    }
+        /* background-color: white; /* бял фон на error box */
+     */
     
     .error-box.show {
         display: block; /* показване на error box и текста на грешката */
+    }
+    
+   
+
+
+    .error-box {
+        position: fixed;
+        right: 1.6em;
+        display: block;
+        z-index: 11111;
+        top: 15%;
+        text-align: center;
+        border-radius: 1rem;
+        color: #c71414;
+        font-style: italic;
+        height: auto;
+        width: 420px;
+        box-shadow: 0px 0px 8px 7px #c71414;
+        background-color: white;
     }
     
     .error-box>p {
@@ -132,6 +151,44 @@
         padding: 22px;
         height: auto;
     }
+    
+    .error-box {
+        -moz-animation: cssAnimation 0s ease-in 2s forwards;
+        /* Firefox */
+        -webkit-animation: cssAnimation 0s ease-in 2s forwards;
+        /* Safari and Chrome */
+        -o-animation: cssAnimation 0s ease-in 2s forwards;
+        /* Opera */
+        animation: cssAnimation 0s ease-in 2s forwards;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
+    
+    @keyframes cssAnimation {
+        to {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            padding: 0;
+        }
+    }
+    
+    @-webkit-keyframes cssAnimation {
+        to {
+            width: 0;
+            height: 0;
+            visibility: hidden;
+            padding: 0;
+        }
+    }
+
+
+
+
+
+
+
+
 
 
     /* .error-box {

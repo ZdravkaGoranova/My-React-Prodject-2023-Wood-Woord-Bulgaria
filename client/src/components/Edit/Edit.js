@@ -14,21 +14,19 @@ export default function Edit() {
 
     const navigate = useNavigate();
     const { updateProduct } = useContext(WoodContext)
-    const { errorMessage, setErrorMessage } = useContext(AuthContext);
-    const [showErrorBox, setShowErrorBox] = useState(true);
+    const { errorMessage, showErrorMessage, hideErrorBox,setErrorMessage } = useContext(AuthContext);
+
     const productService = useService(productServiceFactory);
 
     const { productId } = useParams();
     //console.log(productId);
 
-  
     const [product, setProduct] = useState({
         title: "",
         description: "",
         picture: "",
         price: "",
         type: "",
-
     });
 
     useEffect(() => {
@@ -45,20 +43,20 @@ export default function Edit() {
         e.preventDefault();
 
         if (!productData.picture.startsWith("https://")) {
-            alert("Please enter a valid URL address");
-           // setErrorMessage("Please enter a valid URL address");
+            // alert("Please enter a valid URL address");
+            setErrorMessage("Please enter a valid URL address");
         }
         else if (productData.title === "") {
-            alert("Please enter a valid title");
-           // setErrorMessage("Please enter a valid title");
+            // alert("Please enter a valid title");
+            setErrorMessage("Please enter a valid title");
         }
         else if (productData.description === "") {
-            alert("Please enter a valid description");
-            //setErrorMessage("Please enter a valid description");
+            // alert("Please enter a valid description");
+            setErrorMessage("Please enter a valid description");
         }
         else if (productData.price === "") {
-            alert("Please enter a valid price :)");
-           // setErrorMessage("Please enter a valid description");
+            // alert("Please enter a valid price :)");
+            setErrorMessage("Please enter a valid price");
         }
 
         else {
@@ -73,33 +71,20 @@ export default function Edit() {
             }
         }
 
-
-
     };
     const onChangeHandler = (e) => {
         setProduct(state => ({ ...state, [e.target.name]: e.target.value }))
     };
 
-    const hideErrorBox = () => {
-        setErrorMessage({});
-    };
-
-
+  
     return (
         <>
-            <div>
-                <div className={`error-box ${showErrorBox && errorMessage ? 'show' : ''}`}>
-
-                    {errorMessage && (
-                        <>
-                            <p>{errorMessage}</p>
-                            <button className="close-btn" onClick={hideErrorBox}>
-                                &#10005;
-                            </button>
-                        </>
-                    )}
+            {showErrorMessage && errorMessage && (
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention!</strong> {errorMessage}
+                    <button type="button" onClick={hideErrorBox} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            </div>
+            )}
 
 
             <section id="edit-container">

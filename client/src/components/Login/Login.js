@@ -24,7 +24,7 @@ export default function Login() {
     return (
         <>
             {/* <div>
-                <div className={`error-box ${showErrorBox && errorMessage ? 'show' : ''}`}>
+                <div className={`error-box ${showErrorMessage && errorMessage ? 'show' : ''}`}>
 
                     {errorMessage && (
                         <>
@@ -37,13 +37,13 @@ export default function Login() {
                 </div>
             </div> */}
 
-            {showErrorMessage && (
+            {showErrorMessage && errorMessage && (
                 <div className="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Attention!</strong> {errorMessage}
                     <button type="button" onClick={hideErrorBox} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             )}
-        
+
 
             {/* {showErrorMessage && (
                 <div className="alert alert-warning alert-dismissible fade show" role="alert">

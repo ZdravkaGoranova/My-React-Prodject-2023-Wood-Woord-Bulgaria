@@ -1,15 +1,14 @@
 import '../Register/register-login.css'
 
 import { Link, } from "react-router-dom";
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
 
 export default function Register() {
 
-    const { onRegisterSubmit, errorMessage,setErrorMessage } = useContext(AuthContext);
-    const [showErrorBox, setShowErrorBox] = useState(true);
-
+    const { onRegisterSubmit,errorMessage, showErrorMessage, hideErrorBox } = useContext(AuthContext);
+  
     const { formValues, onChangeHandler, onSubmit } = useForm({
 
         email: "",
@@ -17,12 +16,20 @@ export default function Register() {
         confirmPassword: "",
     }, onRegisterSubmit);
 
-    const hideErrorBox = () => {
-        setErrorMessage({});
-    };
+   
     return (
         <>
-          <div>
+
+            {showErrorMessage && errorMessage && (
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention!</strong> {errorMessage}
+                    <button type="button" onClick={hideErrorBox} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            )}
+
+
+
+            {/* <div>
                 <div className={`error-box ${showErrorBox && errorMessage ? 'show' : ''}`}>
              
                     {errorMessage && (
@@ -34,7 +41,7 @@ export default function Register() {
                         </>
                     )}
                 </div>
-            </div>
+            </div> */}
 
             <section id="register-container">
                 <div className="register-container-info">
