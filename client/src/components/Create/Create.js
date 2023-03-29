@@ -50,7 +50,6 @@ export default function Create() {
         if (!productData.picture.startsWith("https://")) {
            // alert("Please enter a valid URL address!");
             setErrorMessage("Please enter a valid URL address");
-          
         }
         else if (productData.title === "") {
             //alert("Please enter a valid title!");
@@ -64,16 +63,16 @@ export default function Create() {
            // alert("Please enter a valid price!");
              setErrorMessage("Please enter a valid price!");
         }
-
         else {
             try {
-                //    await  productService.update(productId, productData)
+                //    await  productService.create(productData)
                 await addProduct(productData)
                     .then(() => {
                         navigate(`/profile/${userId}`);
                     });
             } catch (err) {
-                alert(err);
+                //alert(err);
+                setErrorMessage(err)
             }
         }
     }

@@ -67,7 +67,8 @@ export default function Edit() {
                         navigate(`/details/${productId}`);
                     });
             } catch (err) {
-                alert(err);
+               // alert(err);
+                setErrorMessage(err)
             }
         }
 

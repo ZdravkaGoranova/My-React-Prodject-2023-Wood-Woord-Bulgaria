@@ -2,7 +2,7 @@
 import './App.css';
 import './css/site.css';
 
-import { useEffect, useState,useReducer } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { authServiceFactory } from '../src/services/authService.js'
@@ -14,7 +14,7 @@ import { useNavigate, } from "react-router-dom";
 import { AuthContext } from './contexts/AuthContext.js';
 import { WoodContext } from './contexts/WoodContext';
 import { AuthProvider } from '../src/contexts/AuthContext.js'
-import {productReducer} from '../src/reducers/productReducer.js'
+import { productReducer } from '../src/reducers/productReducer.js'
 
 import Navigation from './components/Navigation/Navigation.js'
 import Catalog from './components/Catalog/Catalog.js';
@@ -31,111 +31,102 @@ import Logout from './components/Logout/Logout.js';
 
 
 function App() {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     ///const [products, setProducts] = useState([])
-    
-    const [products, dispatch] = useReducer(productReducer, {});
 
-    const productService = productServiceFactory();//auth.accessToken
+    // const [products, dispatch] = useReducer(productReducer, {});
+
+    // const productService = productServiceFactory();//auth.accessToken
 
     //const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        productService.getAll()
-            .then(data => {
-               dispatch({type: 'SET_PRODUCTS', payload: data})
-                //setProducts(data)
-            })
-       
-    }, []);
+    // useEffect(() => {
+    //     productService.getAll()
+    //         .then(data => {
+    //             dispatch({ type: 'SET_PRODUCTS', payload: data })
+    //             //setProducts(data)
+    //         })
 
-    console.log(products)
+    // }, []);
 
-    const onSubmitCreateProduct = async (productData) => {
-        console.log('onSubmitCreateProduct');
+    // console.log(products)
 
-        const newProduct = await productService.create(productData);
-       // setProducts(state => [...state, newProduct]);
-        dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
-        navigate("/catalog", { replace: true });
+    // const onSubmitCreateProduct = async (productData) => {
+    //     console.log('onSubmitCreateProduct');
 
-        // if (!productData.picture.startsWith("https://")) {
-        //     alert("Please enter a valid URL address");
-        // } else {
-        //     try {
+    //     const newProduct = await productService.create(productData);
+    //     // setProducts(state => [...state, newProduct]);
+        
+    //     dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
+    //     navigate("/catalog", { replace: true });
 
-        //         create({ ...productData })
-        //             .then(() => {
-        //                 navigate("/catalog", { replace: true });
-        //             });
-        //     } catch (err) {
-        //         alert(err);
-        //     }
-        // }
-    };
+    //     // if (!productData.picture.startsWith("https://")) {
+    //     //     alert("Please enter a valid URL address");
+    //     // } else {
+    //     //     try {
 
-    const onWoodDeleteClick = async (productId) => {
+    //     //         create({ ...productData })
+    //     //             .then(() => {
+    //     //                 navigate("/catalog", { replace: true });
+    //     //             });
+    //     //     } catch (err) {
+    //     //         alert(err);
+    //     //     }
+    //     // }
+    // };
 
-        const result = await productService.delProduct(productId)
-        console.log(productId)
-        dispatch({ type: 'DELETE_PRODUCT', payload: { id: productId } });
-        //setProducts(state => state.filter(x => x._id !== productId));
+    // const onWoodDeleteClick = async (productId) => {
 
-        navigate("/catalog", { replace: true });
-    };
+    //     const result = await productService.delProduct(productId)
+    //     console.log(productId)
+    //     dispatch({ type: 'DELETE_PRODUCT', payload: { id: productId } });
+    //     //setProducts(state => state.filter(x => x._id !== productId));
 
-    const updateProduct = async (productId, product) => {
-        if (!product.picture.startsWith("https://")) {
-            alert("Please enter a valid URL address");
-        } else {
-            try {
-                const result = await productService.update(productId, product)
+    //     navigate("/catalog", { replace: true });
+    // };
 
-               dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
+    // const updateProduct = async (productId, product) => {
+    //     if (!product.picture.startsWith("https://")) {
+    //         alert("Please enter a valid URL address");
+    //     } else {
+    //         try {
+    //             const result = await productService.update(productId, product)
 
-               //setProducts(state => state.map(x => x._id === product._id ? result : x))
-                //  const updatedProducts = await productService.getAll();
-                //  setProducts(updatedProducts);
+    //             dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
 
-                navigate(`/details/${productId}`, { replace: true });
-            } catch (err) {
-                alert(err);
-            }
-        }
-    };
+    //             //setProducts(state => state.map(x => x._id === product._id ? result : x))
+    //             //  const updatedProducts = await productService.getAll();
+    //             //  setProducts(updatedProducts);
 
-    const contextValue = {
-        onWoodDeleteClick,
-        onSubmitCreateProduct,
-        updateProduct,
-        products,
-    };
+    //             navigate(`/details/${productId}`, { replace: true });
+    //         } catch (err) {
+    //             alert(err);
+    //         }
+    //     }
+    // };
 
+ 
     return (
         <AuthProvider>
-       
-            {/* //<WoodContext.Provider value={contextValue}> */}
-                
-                    <Navigation />
-                    <Routes>
-                        <Route path="/" element={<Home products={products} />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/register' element={<Register />} />
-                        <Route path="/logout" element={<Logout />} />
 
-                        <Route path='/create' element={<Create />} />
-                        <Route path='/profile/:userId' element={<Profile />} />
+            <Navigation />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route path="/logout" element={<Logout />} />
 
-                        <Route path='/catalog' element={<Catalog products={products} />} />
-          
-                        <Route path='/edit/:productId' element={<Edit />} />
+                <Route path='/create' element={<Create />} />
+                <Route path='/profile/:userId' element={<Profile />} />
 
-                        <Route path='/details/:productId' element={<Details />} />
-                        <Route path='/404' element={<PageNotFound />} />
-                        <Route path='*' element={<PageNotFound />} />
-                    </Routes>
-                
-           {/* // </WoodContext.Provider> */}
+                <Route path='/catalog' element={<Catalog />} />
+
+                <Route path='/edit/:productId' element={<Edit />} />
+
+                <Route path='/details/:productId' element={<Details />} />
+                <Route path='/404' element={<PageNotFound />} />
+                <Route path='*' element={<PageNotFound />} />
+            </Routes>
 
         </AuthProvider>
     );

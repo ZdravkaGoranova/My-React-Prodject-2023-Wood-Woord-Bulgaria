@@ -11,16 +11,12 @@ export default function Home() {
     const { products } = useContext(WoodContext)
     console.log(products);
 
-    const lastTwoProducts = products.slice(-2);
+    const lastTwoProducts = products.slice(-3);
     console.log(lastTwoProducts);
 
     return (
         <>
-            <div>
-                <div className="error-box">
-                    <p></p>
-                </div>
-            </div>
+        
             <section id="home-page">
                 <article className="auto-content">
                     <h1>Wood Woord Bulgaria</h1>
@@ -39,7 +35,6 @@ export default function Home() {
 
 
             {/* <img src="/img/furniture.jpg" className="d-block d-block w-50 h-30" alt="..." /> */}
-
 
             <div id="carouselExampleDark" className="carousel carousel-dark slide">
                 <div className="carousel-indicators">
