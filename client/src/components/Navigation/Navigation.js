@@ -21,7 +21,7 @@ export default function Navigation() {
                         {isAuthenticated ?
                             <>
                                 <li className="nav-item">
-                                    <a class="nav-link active" aria-current="page" href={`/profile/${userId}`}>Welcome, {username}{userEmail}!</a>
+                                    <a className="nav-link active" aria-current="page" href={`/profile/${userId}`}>Welcome, {username}{userEmail}!</a>
                                 </li>
 
                                 <li className="nav-item">

@@ -135,7 +135,7 @@ export default function Details(
                             <h5 className="card-title">Title: {product.title}</h5>
 
                             <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Type:</strong>  {product.type}</div>
-                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Owner: </strong>   {product._ownerId}</div>
+                            {/* <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Owner: </strong>   {product._ownerId}</div> */}
                             <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Price:</strong>  {product.price}</div> 
 {/* 
                             <p className="card-text"><small className="text-body-secondary">Type:   {product.type}</small></p>
@@ -172,15 +172,12 @@ export default function Details(
 
                             <div className="buttons">
 
-                                <button type="button" className="btn btn-outline-warning btn-custom" onClick={onBackButtonClick}>Back</button>
+                                <button type="button" className="btn btn-light btn-custom ml-3" onClick={onBackButtonClick}>Back</button>
 
                                 {isOwner &&
                                     <>
-                                        <Link to={`/edit/${product._id}`} className="btn btn-outline-warning btn-custom">Edit</Link>
+                                        <Link to={`/edit/${product._id}`} className="btn btn-light btn-custom ml-3">Edit</Link>
 
-                                        <button className="btn btn-outline-warning btn-custom" onClick={() => deleteProduct(productId)} >Delete</button>
-                                        {/* <button className="btn btn-outline-warning btn-custom" onClick={() => onWoodDeleteClick(productId)} >Delete</button> */}
-                                       
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Delete
                                         </button>
@@ -207,14 +204,11 @@ export default function Details(
 
                                     </>
                                 }
-
-                                {isLiked && <button className="btn btn-outline-warning btn-custom">You already liked the product!</button>}
+                                {isLiked && <button className="btn btn-light btn-custom ml-3">You already liked the product!</button>}
 
                                 {(isAuthenticated && !isOwner && !isLiked) &&
 
-                                    <button type="button" className="btn btn-outline-warning btn-custom" onClick={onLike}>Likes </button>
-                                    // <button type="button" className="btn btn-outline-warning btn-custom" onClick={onLike}>Likes </button>
-                                 
+                                    <button type="button" className="btn btn-light btn-custom ml-3" onClick={onLike}>Likes </button>
                                 }
 
                             </div>

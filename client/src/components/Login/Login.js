@@ -6,8 +6,8 @@ import { AuthContext } from '../../contexts/AuthContext.js';
 import { useForm } from '../../hooks/useForm.js';
 
 export default function Login() {
-    const { onLoginSubmit, errorMessage, setErrorMessage } = useContext(AuthContext);
-    const [showErrorBox, setShowErrorBox] = useState(true);
+    const { onLoginSubmit, errorMessage, showErrorMessage, hideErrorBox } = useContext(AuthContext);
+
 
     const { formValues, onChangeHandler, onSubmit } = useForm({
         username: "",
@@ -16,14 +16,14 @@ export default function Login() {
     }, onLoginSubmit);
 
 
-    const hideErrorBox = () => {
-    
-        setErrorMessage({});
-    };
+    // const hideErrorBox = () => {
+
+    //     setErrorMessage({});
+    // };
 
     return (
         <>
-            <div>
+            {/* <div>
                 <div className={`error-box ${showErrorBox && errorMessage ? 'show' : ''}`}>
 
                     {errorMessage && (
@@ -35,7 +35,23 @@ export default function Login() {
                         </>
                     )}
                 </div>
-            </div>
+            </div> */}
+
+            {showErrorMessage && (
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention!</strong> {errorMessage}
+                    <button type="button" onClick={hideErrorBox} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            )}
+        
+
+            {/* {showErrorMessage && (
+                <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Attention!</strong> {errorMessage}
+                    <button type="button" onClick={hideErrorBox} className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            )} */}
+
 
 
             <section id="login-container">
@@ -50,7 +66,6 @@ export default function Login() {
                             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
                                 value={formValues.email}
                                 onChange={onChangeHandler} />
-
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
@@ -72,6 +87,9 @@ export default function Login() {
     )
 };
 
+
+
+
 {/* <form onSubmit={onSubmit} className="container-text">
                     <h2>Login</h2>
                     <p>Welcome, see the new  wood products!</p>
@@ -86,7 +104,6 @@ export default function Login() {
                         value={formValues.username}
                         onChange={onChangeHandler}
                     /> */}
-
 
 {/*                     
                     <label htmlFor="email">Email:</label>

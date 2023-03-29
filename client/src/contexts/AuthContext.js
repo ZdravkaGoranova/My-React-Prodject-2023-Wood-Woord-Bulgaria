@@ -9,19 +9,13 @@ export const AuthContext = createContext();
 export const AuthProvider = ({
     children,
 }) => {
+    const navigate = useNavigate();
+
     const [auth, setAuth] = useLocalStorage('auth', {});
     const authService = authServiceFactory(auth.accessToken);
 
     const [errorMessage, setErrorMessage] = useState('');
     const [showErrorMessage, setShowErrorMessage] = useState(true);
-
-
-    const navigate = useNavigate();
-
-
-    const userLogin = async (data) => {
-        setAuth(data);
-    };
 
     const hideErrorBox = () => {
         setShowErrorMessage(false);
@@ -36,15 +30,17 @@ export const AuthProvider = ({
         }
     }, [showErrorMessage]);
 
-
     const errorHandling = async (errorMessage) => {
         if (errorMessage != "") {
             setErrorMessage({})
         }
     };
 
+    const userLogin = async (data) => {
+        setAuth(data);
+    };
 
-
+   
     const onLoginSubmit = async (data) => {
         //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
         try {
@@ -98,7 +94,9 @@ export const AuthProvider = ({
         onRegisterSubmit,
         onLogout,
         errorMessage,
+        showErrorMessage,
         setErrorMessage,
+        hideErrorBox,
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,
