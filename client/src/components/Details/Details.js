@@ -17,11 +17,11 @@ import { productReducer } from '../../reducers/productReducer.js';
 export default function Details(
 
 ) {
-    //const { deleteProduct } = useProductsContext();
+    const { deleteProduct } = useProductsContext();
 
     const navigate = useNavigate();
 
-    //const { onWoodDeleteClick } = useContext(WoodContext);
+    const { onWoodDeleteClick } = useContext(WoodContext);
 
     const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
     console.log(userId)
@@ -64,10 +64,9 @@ export default function Details(
 
     console.log(product)
 
-    const deleteProduct = async (productId) => {
+    const delProduct = async () => {
         try {
-            const result = await productService.delProduct(productId)
-            dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
+            deleteProduct(productId)
           
              navigate(`/profile/${userId}`);
         } catch (error) {
@@ -176,6 +175,7 @@ export default function Details(
 
                                 {isOwner &&
                                     <>
+                                  
                                         <Link to={`/edit/${product._id}`} className="btn btn-light btn-custom ml-3">Edit</Link>
 
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -194,7 +194,7 @@ export default function Details(
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >No</button>
-                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal"  onClick={() => { deleteProduct(productId) }}>Yes</button>
+                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal"  onClick={delProduct}>Yes</button>
                                                         {/* <button type="button" className="btn btn-primary" onClick={() => { onWoodDeleteClick(productId) }}>Yes</button> */}
                                                      
                                                     </div>

@@ -31,12 +31,12 @@ import Logout from './components/Logout/Logout.js';
 
 
 function App() {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     ///const [products, setProducts] = useState([])
 
-    // const [products, dispatch] = useReducer(productReducer, {});
+ const [products, dispatch] = useReducer(productReducer, {});
 
-    // const productService = productServiceFactory();//auth.accessToken
+     const productService = productServiceFactory();//auth.accessToken
 
     //const [loading, setLoading] = useState(true);
 
@@ -75,15 +75,15 @@ function App() {
     //     // }
     // };
 
-    // const onWoodDeleteClick = async (productId) => {
+    const onWoodDeleteClick = async (productId) => {
 
-    //     const result = await productService.delProduct(productId)
-    //     console.log(productId)
-    //     dispatch({ type: 'DELETE_PRODUCT', payload: { id: productId } });
-    //     //setProducts(state => state.filter(x => x._id !== productId));
+        const result = await productService.delProduct(productId)
+        console.log(productId)
+        dispatch({ type: 'DELETE_PRODUCT', payload: { id: productId } });
+        //setProducts(state => state.filter(x => x._id !== productId));
 
-    //     navigate("/catalog", { replace: true });
-    // };
+        navigate("/catalog", { replace: true });
+    };
 
     // const updateProduct = async (productId, product) => {
     //     if (!product.picture.startsWith("https://")) {
