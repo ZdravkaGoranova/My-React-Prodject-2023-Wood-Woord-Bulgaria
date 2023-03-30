@@ -1,12 +1,11 @@
 import '../Catalog/catalog.css'
 
-
 import React, { useContext, } from "react"
 
-import Publication from './Publication/Publication.js'
-import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js'
-import { AuthContext } from '../../contexts/AuthContext.js'
+import Publication from './Publication/Publication.js';
 
+import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js';
+import { AuthContext } from '../../contexts/AuthContext.js';
 
 
 export default function Catalog() {
@@ -40,16 +39,15 @@ export default function Catalog() {
 
                             </li>)
                         :
+                        
                         <div className="no-events-buttons">
+                            <p>No product created in this category!</p>
 
-                            {isAuthenticated ?
+                            {isAuthenticated &&
                                 <>
-                                    <p>No product created in this category!</p>
                                     <p>If you want you can add here:</p>
                                     <a href="/create" className="  btn btn-light btn-custom ml-3 ">Create product</a>
                                 </>
-                                :
-                                <p>No product created in this category! </p>
                             }
                         </div>
                     }

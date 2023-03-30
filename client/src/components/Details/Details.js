@@ -3,7 +3,7 @@ import '../Details/AddComment/comments.css';
 
 import React from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useEffect, useState, useContext, useReducer} from 'react';
+import { useEffect,  useContext, useReducer} from 'react';
 
 import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
 import { AuthContext } from '../../contexts/AuthContext.js';
@@ -20,8 +20,6 @@ export default function Details(
     const { deleteProduct } = useProductsContext();
 
     const navigate = useNavigate();
-
-    const { onWoodDeleteClick } = useContext(WoodContext);
 
     const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
     console.log(userId)
@@ -41,7 +39,6 @@ export default function Details(
     const isLiked = productLikes?.some(item => {
         return item.author?._id === userId || item?._ownerId === userId;
     });
-   // console.log(isLiked)
 
     useEffect(() => {
 
@@ -122,9 +119,10 @@ export default function Details(
     const onBackButtonClick = (e) => {
         navigate('/catalog');
     };
-    return (
+    return ( 
         <>
-            <div className="card mb-3"  >
+       
+            <div className="card mb-3" style={{ margin: "50px auto", maxWidth: "1300px" }}>
                 <div className="row g-0">
                     <div className="col-md-4">
                         <img src={product.picture} className="img-fluid rounded-start" alt={product.title} />
@@ -195,8 +193,7 @@ export default function Details(
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >No</button>
                                                         <button type="button" className="btn btn-primary" data-bs-dismiss="modal"  onClick={delProduct}>Yes</button>
-                                                        {/* <button type="button" className="btn btn-primary" onClick={() => { onWoodDeleteClick(productId) }}>Yes</button> */}
-                                                     
+                                      
                                                     </div>
                                                 </div>
                                             </div>

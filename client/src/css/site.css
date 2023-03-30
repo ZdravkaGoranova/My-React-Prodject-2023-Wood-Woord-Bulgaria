@@ -9,6 +9,16 @@
         background-blend-mode: overlay;
     }
     
+    html:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1); /* тук можете да настройвате степента на затъмнение, като променяте последната стойност (0.5) */
+        z-index: -1;
+      }
     body {
         position: relative;
         height: 0vh;
@@ -29,7 +39,7 @@
     
     nav,
     footer {
-        background-color: rgb(251, 250, 250);
+        background-color: rgb(160, 153, 153);
         width: 100%;
         display: flex;
         font-size: 1rem;
@@ -96,7 +106,7 @@
     nav a:hover {
         font-weight: normal;
      
-        background-color: #efd4ae;
+        background-color: rgb(235, 220, 220);
     }
     
     nav>a {

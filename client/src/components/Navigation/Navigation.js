@@ -8,7 +8,7 @@ export default function Navigation() {
     const { isAuthenticated, userEmail, username, userId } = useContext(AuthContext)
 
     return (
-        <nav className="navbar navbar-expand-lg border-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
+        <nav className="navbar navbar-expand-lg border-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>   
             <div className="container-fluid">
                 {/* <img src="/img/2.jpg" alt="logo" /> */}
                 <ul className="nav nav-tabs">

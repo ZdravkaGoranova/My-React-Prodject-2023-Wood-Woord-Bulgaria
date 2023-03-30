@@ -20,7 +20,7 @@
 .create-comment {
     margin-top: 20px;
 
-    position:relative;
+    position:absolute;
     text-align: center;
     width: 450px;
     height: auto;

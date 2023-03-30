@@ -80,8 +80,7 @@ export const ProductProvider = ({ children }) => {
             console.log('tuk si')
             const result = await productService.delProduct(productId)
             dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
-            //redirect("/catalog", )
-            // navigate("/catalog");
+    
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }

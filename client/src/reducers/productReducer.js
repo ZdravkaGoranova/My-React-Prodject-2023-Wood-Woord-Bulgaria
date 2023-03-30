@@ -95,7 +95,6 @@ export const productReducer = (state, action) => {
     if (action.type === "DELETE_PRODUCT") {
      
         const { products } = state;
-
         let filtredProducts;
 
         const deleteProduct = action.payload;
