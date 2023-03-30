@@ -91,16 +91,19 @@ export const productReducer = (state, action) => {
         };
 
 
-
     }
     if (action.type === "DELETE_PRODUCT") {
+     
         const { products } = state;
+
         let filtredProducts;
-        const deleteProduct = products.filter(product => product._id === action._id)
+
+        const deleteProduct = action.payload;
         console.log(deleteProduct)
+        console.log(deleteProduct.id)
 
         if (deleteProduct !== {}) {
-            filtredProducts = products.filter(product => product._id !== action._id)
+           filtredProducts = products.filter(product => product._id !== deleteProduct.id)
             console.log(filtredProducts)
         }
 
@@ -108,6 +111,7 @@ export const productReducer = (state, action) => {
             ...state,
             filtredProducts: filtredProducts,
             delProduct: deleteProduct,
+            products:filtredProducts,
         }
             ;
     }
