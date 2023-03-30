@@ -12,7 +12,7 @@ export default function Profile() {
     const { products } = useContext(WoodContext)
     console.log(products)
 
-    const { userId,userEmail } = useContext(AuthContext);
+    const { userId, userEmail } = useContext(AuthContext);
     console.log(userId)
 
     const userProducts = products.filter(product => product._ownerId === userId)
@@ -33,8 +33,10 @@ export default function Profile() {
 
                     {userProducts.length == 0 &&
                         <div className="no-events">
-                            <p>This user has no products yet!</p>
+                            <p>You have no own products!</p>
+                            <p>You can create your own products from here:</p>
                             <a href="/create" className="  btn btn-light btn-custom ml-3">Create product</a>
+
                         </div>
                     }
                     {userProducts.length > 0 &&
