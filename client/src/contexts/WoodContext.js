@@ -20,8 +20,18 @@ export const ProductProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(productReducer, initialState)
 
-    const fetchProducts = async () => {
+    useEffect(() => {
 
+        fetchProducts();
+
+    }, []);
+
+    useEffect(() => {
+        dispatch({ type: "FILTRED_PRODUCT_TYPE" });
+
+    }, [state.selectedType, state.products, state.selectetProduct, state.delProduct])
+
+    const fetchProducts = async () => {
         dispatch({ type: "GET_PRODUCT_START" })
 
         try {
@@ -32,62 +42,54 @@ export const ProductProvider = ({ children }) => {
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
-    }
+    };
 
     const cangeProductType = async (e) => {
         dispatch({ type: "CHANGE_PRODUCT_TYPE", payload: e.target.textContent })
+    };
 
-    }
+    const addProduct = async (productData) => {
+        try {
+            const newProduct = await productService.create(productData);
+            // setProducts(state => [...state, newProduct]);
+            console.log(newProduct)
+
+            dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
+
+        } catch (error) {
+            dispatch({ type: "GET_PRODUCT_ERROR" })
+        }
+    };
 
     const updateProduct = async (productId, product) => {
-
         try {
             const result = await productService.update(productId, product)
             dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
 
-            // navigate(`/details/${productId}`, { replace: true });
+            //setProducts(state => state.map(x => x._id === product._id ? result : x))
+            //  const updatedProducts = await productService.getAll();
+            //  setProducts(updatedProducts);
+
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
     }
 
-    // const deleteProduct = async (productId) => {
-    //     try {
-    //         const result = await productService.delProduct(productId)
-    //         dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
-    //         //redirect("/catalog", )
-    //         // navigate("/catalog");
-    //     } catch (error) {
-    //         dispatch({ type: "GET_PRODUCT_ERROR" })
-    //     }
-    // }
-
-    const addProduct = async (productData) => {
-
+    const deleteProduct = async (productId) => {
         try {
-            const newProduct = await productService.create(productData);
-            console.log(newProduct)
-
-            dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
-            // navigate("/catalog", { replace: true });
-           
+            console.log('tuk si')
+            const result = await productService.delProduct(productId)
+            dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
+            //redirect("/catalog", )
+            // navigate("/catalog");
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
     }
-
-    useEffect(() => {
-        fetchProducts();
-
-    }, [])
-
-    useEffect(() => {
-        dispatch({ type: "FILTRED_PRODUCT_TYPE" })
-    }, [state.selectedType, state.products, state.selectetProduct, state.delProduct])
 
 
     return (
-        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType,  updateProduct, addProduct }} >
+        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct }} >
             {children}
 
         </WoodContext.Provider>

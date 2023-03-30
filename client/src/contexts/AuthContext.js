@@ -19,10 +19,7 @@ export const AuthProvider = ({
 
     const hideErrorBox = () => {
         setErrorMessage("");
-        console.log(errorMessage)
-        console.log(showErrorMessage)
         setShowErrorMessage("false");
-        console.log(showErrorMessage)
     };
 
     useEffect(() => {
@@ -34,11 +31,6 @@ export const AuthProvider = ({
         }
     }, [errorMessage]);
 
-    // const errorHandling = async (errorMessage) => {
-    //     if (errorMessage != "") {
-    //         setErrorMessage({})
-    //     }
-    // };
 
     const userLogin = async (data) => {
         setAuth(data);
