@@ -13,12 +13,12 @@ export const productServiceFactory = (token) => {
     };
     const delProduct = async (productId) => {
         const result = await request.delete(`${baseUrl}/${productId}`)
-        return result;
+        return productId;
     };
 
     const update = async (productId, data) => {
-        console.log("updateProduct");
-        console.log(productId);
+        // console.log("updateProduct");
+        // console.log(productId);
 
         const result = await request.put(`${baseUrl}/${productId}`, data)
         console.log(result);
