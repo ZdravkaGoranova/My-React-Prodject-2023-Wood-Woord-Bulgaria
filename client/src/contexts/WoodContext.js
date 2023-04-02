@@ -3,7 +3,6 @@ import { productServiceFactory } from '../services/productService.js';
 import { productReducer } from '../reducers/productReducer.js';
 
 export const WoodContext = createContext();
-
 const productService = productServiceFactory();
 
 const initialState = {
@@ -15,6 +14,7 @@ const initialState = {
     productsLoalding: false,
     productsError: false,
 }
+
 
 export const ProductProvider = ({ children }) => {
 
@@ -63,7 +63,7 @@ export const ProductProvider = ({ children }) => {
 
     const updateProduct = async (productId, product) => {
         try {
-            const result = await productService.update(productId, product)
+           await productService.update(productId, product)
             dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
 
             //setProducts(state => state.map(x => x._id === product._id ? result : x))
@@ -80,15 +80,16 @@ export const ProductProvider = ({ children }) => {
             console.log('tuk si')
             const result = await productService.delProduct(productId)
             dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
-    
+
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
     }
 
 
+
     return (
-        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct }} >
+        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct, deleteProduct }} >
             {children}
 
         </WoodContext.Provider>
@@ -99,3 +100,4 @@ export const useProductsContext = () => {
 
     return useContext(WoodContext)
 }
+

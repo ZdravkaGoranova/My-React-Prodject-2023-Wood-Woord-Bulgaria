@@ -4,11 +4,13 @@ import '../Home/home.css'
 import React, { useContext } from "react";
 
 import MyProducts from '../Profile/MyProducts.js';
-import { WoodContext } from '../../contexts/WoodContext.js';
+import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js';
 
 export default function Home() {
 
-    const { products } = useContext(WoodContext)
+    // const { products } = useContext(WoodContext)
+
+    const { products } = useProductsContext()
     console.log(products);
 
     const lastTwoProducts = products.slice(-3);

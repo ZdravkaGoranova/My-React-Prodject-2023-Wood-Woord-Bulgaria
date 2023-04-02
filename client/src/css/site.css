@@ -105,8 +105,7 @@
     
     nav a:hover {
         font-weight: normal;
-     
-        background-color: rgb(235, 220, 220);
+        background-color: rgba(255, 255, 255, 0.8);
     }
     
     nav>a {

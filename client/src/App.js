@@ -16,6 +16,8 @@ import Profile from './components/Profile/Profile.js';
 import Register from './components/Register/Register.js';
 import Edit from './components/Edit/Edit.js';
 import Logout from './components/Logout/Logout.js';
+import RouteGuard from './components/Common/RouteGuard.js';
+import ProductOwner from './components/Common/ProductOwner.js';
 
 function App() {
 
@@ -27,21 +29,35 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                <Route path="/logout" element={<Logout />} />
 
-                <Route path='/create' element={<Create />} />
                 <Route path='/profile/:userId' element={<Profile />} />
-
                 <Route path='/catalog' element={<Catalog />} />
-
-                <Route path='/edit/:productId' element={<Edit />} />
 
                 <Route path='/details/:productId' element={<Details />} />
                 <Route path='/404' element={<PageNotFound />} />
                 <Route path='*' element={<PageNotFound />} />
-            </Routes>
 
+                <Route element={<RouteGuard />}>
+                    <Route path='/edit/:productId' element={
+                       <ProductOwner>
+                            <Edit />
+                            </ProductOwner>
+                    } />
+                    <Route path='/create' element={<Create />} />
+                    <Route path="/logout" element={<Logout />} />
+                </Route>
+
+            </Routes>
         </AuthProvider>
     );
 }
 export default App;
+
+
+{/* <Route path='/create' element={<RouteGuard >
+                    <Create />
+                </RouteGuard>} />
+
+                <Route path='/edit/:productId' element={<RouteGuard >
+                    <Edit />
+                </RouteGuard>} /> */}

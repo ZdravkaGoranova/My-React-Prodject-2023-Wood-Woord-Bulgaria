@@ -215,9 +215,11 @@ export default function Details(
             </div>
             {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
         </>
+    )
+}
 
 
-        //     <section id="game-details">
+//     <section id="game-details">
         //         <h1>Product Details </h1>
         //         <div className="info-section">
 
@@ -277,7 +279,3 @@ export default function Details(
         //         {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
 
         //     </section>
-    )
-}
-
-
