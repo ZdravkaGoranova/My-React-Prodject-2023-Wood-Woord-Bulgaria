@@ -5,18 +5,20 @@ import { useContext } from 'react'
 import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js'
 
 export default function Navigation() {
+
     const { isAuthenticated, userEmail, username, userId } = useContext(AuthContext)
+    const { cangeProductType } = useProductsContext();
 
     return (
-        <nav className="navbar navbar-expand-lg border-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>   
+        <nav className="navbar navbar-expand-lg border-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
             <div className="container-fluid">
                 {/* <img src="/img/2.jpg" alt="logo" /> */}
                 <ul className="nav nav-tabs">
-                <a className="nav-link active" href="/">Wood World Bulgaria</a>
+                    <a className="nav-link active" href="/">Wood World Bulgaria</a>
                 </ul>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <ul className="nav nav-tabs">
+                    <ul className="nav nav-tabs">
 
                         {isAuthenticated ?
                             <>
@@ -32,7 +34,7 @@ export default function Navigation() {
                                 </li>
 
                                 <li className="nav-item">
-                                
+
                                     <a className="nav-link" href="/create">
                                         <img src="/img/create.png" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
                                         Create Product
@@ -81,6 +83,7 @@ export default function Navigation() {
                             </>
                         }
                     </ul>
+                   
                 </div>
             </div>
         </nav>

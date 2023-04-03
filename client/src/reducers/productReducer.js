@@ -37,6 +37,35 @@ export const productReducer = (state, action) => {
         }
     }
 
+    if (action.type === "CHANGE_PRODUCT_TITLE")
+
+        return {
+            ...state,
+            selectetProducTitle: action.payload
+        };
+
+    if (action.type === "SEARCH_PRODUCT_TITLE") {
+        const { products } = state;
+        let filtredProducts = [...products]
+
+
+        if (typeof state.selectetProducTitle === "string") {
+            filtredProducts = state.products.filter((product) =>
+                product.title.toLowerCase().includes(state.selectetProducTitle.toLowerCase())
+                 || 
+                product.type.toLowerCase().includes(state.selectetProducTitle.toLowerCase())
+            );
+
+            console.log(filtredProducts)
+
+        }
+
+        return {
+            ...state,
+            selectetProductTitle: filtredProducts,
+            filteredProducts: filtredProducts,
+        }
+    }
     if (action.type === "PRODUCT_FETCH") {
         return { ...action.payload };
     }
@@ -86,14 +115,14 @@ export const productReducer = (state, action) => {
     }
     if (action.type === "ADD_PRODUCT") {
         return {
-           ...state,
+            ...state,
             products: [...state.products, action.payload],
         };
 
 
     }
     if (action.type === "DELETE_PRODUCT") {
-     
+
         const { products } = state;
         let filtredProducts;
 
@@ -102,7 +131,7 @@ export const productReducer = (state, action) => {
         console.log(deleteProduct.id)
 
         if (deleteProduct !== {}) {
-           filtredProducts = products.filter(product => product._id !== deleteProduct.id)
+            filtredProducts = products.filter(product => product._id !== deleteProduct.id)
             console.log(filtredProducts)
         }
 
@@ -110,7 +139,7 @@ export const productReducer = (state, action) => {
             ...state,
             filtredProducts: filtredProducts,
             delProduct: deleteProduct,
-            products:filtredProducts,
+            products: filtredProducts,
         }
             ;
     }

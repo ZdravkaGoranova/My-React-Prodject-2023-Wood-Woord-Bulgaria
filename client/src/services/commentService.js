@@ -3,9 +3,9 @@ import { requestFactory } from './requester.js';
 const baseUrl = 'http://localhost:3030/data/comments';
 const request = requestFactory();
 
-export const create = async (productId,comment) => {
+export const create = async (productId, comment) => {
 
-    const result = await request.post(baseUrl, {productId,comment})
+    const result = await request.post(baseUrl, { productId, comment })
     console.log(result);
 
     return result;

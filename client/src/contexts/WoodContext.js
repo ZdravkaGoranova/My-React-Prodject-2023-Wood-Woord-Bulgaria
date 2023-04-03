@@ -3,18 +3,20 @@ import { productServiceFactory } from '../services/productService.js';
 import { productReducer } from '../reducers/productReducer.js';
 
 export const WoodContext = createContext();
+
 const productService = productServiceFactory();
 
 const initialState = {
     products: [],
     selectedType: "",
     selectetProduct: [],
+    selectetProducTitle: "",
+    selectetProductTitle: [],
     delProduct: [],
     filteredProducts: [],
     productsLoalding: false,
     productsError: false,
 }
-
 
 export const ProductProvider = ({ children }) => {
 
@@ -27,10 +29,21 @@ export const ProductProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
+        dispatch({ type: "SEARCH_PRODUCT_TITLE" });
+
+    }, [state.selectetProducTitle])
+
+
+
+    useEffect(() => {
         dispatch({ type: "FILTRED_PRODUCT_TYPE" });
 
     }, [state.selectedType, state.products, state.selectetProduct, state.delProduct])
 
+
+
+
+  
     const fetchProducts = async () => {
         dispatch({ type: "GET_PRODUCT_START" })
 
@@ -48,6 +61,9 @@ export const ProductProvider = ({ children }) => {
         dispatch({ type: "CHANGE_PRODUCT_TYPE", payload: e.target.textContent })
     };
 
+    const searchProductTitle = async (searchTerm) => {
+        dispatch({ type: "CHANGE_PRODUCT_TITLE", payload: searchTerm })
+    };
     const addProduct = async (productData) => {
         try {
             const newProduct = await productService.create(productData);
@@ -63,7 +79,7 @@ export const ProductProvider = ({ children }) => {
 
     const updateProduct = async (productId, product) => {
         try {
-           await productService.update(productId, product)
+            const result = await productService.update(productId, product)
             dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
 
             //setProducts(state => state.map(x => x._id === product._id ? result : x))
@@ -80,16 +96,15 @@ export const ProductProvider = ({ children }) => {
             console.log('tuk si')
             const result = await productService.delProduct(productId)
             dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
-
+    
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
     }
 
 
-
     return (
-        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct, deleteProduct }} >
+        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct,searchProductTitle }} >
             {children}
 
         </WoodContext.Provider>
@@ -100,4 +115,3 @@ export const useProductsContext = () => {
 
     return useContext(WoodContext)
 }
-

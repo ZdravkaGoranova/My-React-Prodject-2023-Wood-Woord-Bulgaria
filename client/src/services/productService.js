@@ -40,21 +40,23 @@ export const productServiceFactory = (token) => {
     };
 
     const getByCategory = async (category) => {
+        console.log(category)
         const result = await getAll();
 
         let filteredProducts = result.filter(product => product.type === category)
+        console.log(filteredProducts)
         return filteredProducts
     }
 
-    const getProductsByUserId = async (userId) => {
-        const result = await getAll();
+    // const getProductsByUserId = async (userId) => {
+    //     const result = await getAll();
        
-        const userProducts = result.filter(product => product._ownerId === userId)
+    //     const userProducts = result.filter(product => product._ownerId === userId)
 
-        console.log( userProducts)
-         console.log( Object.values(userProducts))
-        return userProducts;
-    };
+    //     console.log( userProducts)
+    //      console.log( Object.values(userProducts))
+    //     return userProducts;
+    // };
     // const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json()); const create = async (productData) => {
     //     const { ...data } = productData;
 
@@ -73,7 +75,7 @@ export const productServiceFactory = (token) => {
         getAll,
         getOne,
         getByCategory,
-        getProductsByUserId,
+       // getProductsByUserId,
         getMyPublications,
     }
 }

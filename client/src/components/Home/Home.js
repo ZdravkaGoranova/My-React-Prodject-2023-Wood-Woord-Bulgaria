@@ -76,9 +76,6 @@ export default function Home() {
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
-
-
-
         </>
     )
 }

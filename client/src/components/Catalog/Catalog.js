@@ -1,11 +1,12 @@
 import '../Catalog/catalog.css'
 
-import React, { useContext, } from "react"
+import React, { useContext, useState, } from "react"
 
 import Publication from './Publication/Publication.js';
 
 import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
+import { productServiceFactory } from '../../services/productService.js';
 
 
 export default function Catalog() {
@@ -13,13 +14,27 @@ export default function Catalog() {
     // console.log(products)
 
     const { isAuthenticated } = useContext(AuthContext);
-    const { cangeProductType } = useProductsContext();
+    const { cangeProductType, searchProductTitle, cangeProductTitle } = useProductsContext();
+    const { getByCategory } = productServiceFactory()
+    const [searchTerm, setSearchTerm] = useState("");
 
     return (
 
         < section id="gallery" >
             <h1>Wood World Gallery</h1>
+
             <div className="d-flex justify-content-center mb-4">
+                <form className="d-flex" role="search" onSubmit={(e) => {
+                    e.preventDefault();
+                    searchProductTitle(searchTerm);
+                }}>
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                    <button className="btn btn-light btn-custom ml-3" type="submit" >Search</button>
+                </form>
+            </div>
+
+            <div className="d-flex justify-content-center mb-4">
+                <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>All Products</button>
                 <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>Chairs</button>
                 <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>Spoons</button>
                 <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>Ladles</button>
@@ -39,7 +54,7 @@ export default function Catalog() {
 
                             </li>)
                         :
-                        
+
                         <div className="no-events-buttons">
                             <p>No product created in this category!</p>
 
