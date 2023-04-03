@@ -8,17 +8,11 @@ export default function ProductOwner({ children }) {
 
     const { userId } = useContext(AuthContext)
     const { productId } = useParams();
-    // const { getProduct } = useProductsContext()
-  
-
     const { products } = useProductsContext()
-    console.log(products);
+    //console.log(products);
 
-
-
-        const game = products.find(p=>p._id===productId)
-        console.log(game)
-  
+    const game = products.find(p => p._id === productId)
+    //console.log(game)
 
     const currenetProduct = game;
 
