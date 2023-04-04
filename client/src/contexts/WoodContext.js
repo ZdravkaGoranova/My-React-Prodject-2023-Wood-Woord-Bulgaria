@@ -34,15 +34,10 @@ export const ProductProvider = ({ children }) => {
     }, [state.selectetProducTitle])
 
 
-
     useEffect(() => {
         dispatch({ type: "FILTRED_PRODUCT_TYPE" });
 
     }, [state.selectedType, state.products, state.selectetProduct, state.delProduct])
-
-
-
-
   
     const fetchProducts = async () => {
         dispatch({ type: "GET_PRODUCT_START" })

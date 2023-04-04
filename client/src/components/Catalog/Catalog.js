@@ -15,7 +15,7 @@ export default function Catalog() {
 
     const { isAuthenticated } = useContext(AuthContext);
     const { cangeProductType, searchProductTitle, cangeProductTitle } = useProductsContext();
-    const { getByCategory } = productServiceFactory()
+  
     const [searchTerm, setSearchTerm] = useState("");
 
     return (

@@ -3,9 +3,9 @@ import '../Details/AddComment/comments.css';
 
 import React from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useEffect,  useContext, useReducer} from 'react';
+import { useEffect, useContext, useReducer } from 'react';
 
-import { WoodContext, useProductsContext } from '../../contexts/WoodContext.js'
+import {  useProductsContext } from '../../contexts/WoodContext.js'
 import { AuthContext } from '../../contexts/AuthContext.js';
 
 import { productServiceFactory } from '../../services/productService.js';
@@ -64,8 +64,8 @@ export default function Details(
     const delProduct = async () => {
         try {
             deleteProduct(productId)
-          
-             navigate(`/profile/${userId}`);
+
+            navigate(`/profile/${userId}`);
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
@@ -96,7 +96,7 @@ export default function Details(
         // }))
 
     };
-
+  
     const onLike = async (values) => {
         const response = await likeService.create(
             productId,
@@ -119,9 +119,9 @@ export default function Details(
     const onBackButtonClick = (e) => {
         navigate('/catalog');
     };
-    return ( 
+    return (
         <>
-       
+
             <div className="card mb-3" style={{ margin: "50px auto", maxWidth: "1300px" }}>
                 <div className="row g-0">
                     <div className="col-md-4">
@@ -133,8 +133,8 @@ export default function Details(
 
                             <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Type:</strong>  {product.type}</div>
                             {/* <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Owner: </strong>   {product._ownerId}</div> */}
-                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Price:</strong>  {product.price}</div> 
-{/* 
+                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Price:</strong>  {product.price} $</div>
+                            {/* 
                             <p className="card-text"><small className="text-body-secondary">Type:   {product.type}</small></p>
                             <p className="card-text"><small className="text-body-secondary">Owner:   {product._ownerId}</small></p>
                             <p className="card-text"><small className="text-body-secondary">Price:   {product.price}</small></p> */}
@@ -142,17 +142,18 @@ export default function Details(
                             <p className="card-text">Description: {product.description}</p>
 
 
-                            <button type="button" className="btn btn-primary position-relative btn btn-outline-warning btn-custom">
-                                Likes <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">{product.likes?.length} <span className="visually-hidden">unread messages</span></span>
+                            <button type="button" className="btn btn-primary position-relative btn btn-light btn-custom ml-3 btn-custom " style={{ marginBottom: "10px" }}>
+                                Likes <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" >{product.likes?.length} <span className="visually-hidden">unread messages</span></span>
                             </button>
 
                             <div className="details-comments">
+                                <button type="button" className="btn btn-primary position-relative btn btn-light btn-custom ml-3 btn-custom " style={{ marginBottom: "10px" }}>
+                                    Comments <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">{product.comments?.length} <span className="visually-hidden">unread messages</span></span>
+                                </button>
 
-                                <h4>Comments:</h4>
+                                <ul className="row" >
 
-                                <ul className="list-unstyled comment-list">
-
-                                    {product.comments && product.comments.map(x => (
+                                    {/* {product.comments && product.comments.map(x => (
                                         <li key={x._id} className=" d-inline-block position-relative py-2 px-4 btn btn-outline-warning btn-custom border-dark rounded-pill text-dark comment-item" >
 
                                             <svg width="1em" height="1em" viewBox="0 0 16 16" className="position-absolute top-100 start-50 translate-middle mt-1 text-dark">
@@ -161,30 +162,73 @@ export default function Details(
                                             <p className="ms-5 mb-0">{x.author.email}: {x.comment}</p>
                                         </li>
                                     ))
+                                    } */}
+
+                                    {product.comments && product.comments.map((x, index) => (
+                                        // <div key={x._id} className=" card border-warning col-sm-4 mb-4" >
+                                        //     <div className="card-header" style={{ padding: '0.1rem' }}>Comment</div>
+                                        //     <div className="card-body"  style={{ padding: '0.5rem' }}>
+                                        //         <h5 className="card-title">{x.comment}</h5>
+                                        //         <p className="card-text">Comment by <cite title="Source Title"> {x.author.email}</cite> </p>
+                                        //     </div>
+                                        // </div>
+
+                                        <div className="accordion" id={`accordion${index}`} key={x._id}>
+                                            <div className="accordion-item">
+                                                <h2 className="accordion-header">
+                                                    <button className="accordion-button " style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        Comment #{index + 1}
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" className="accordion-collapse collapse show " data-bs-parent="#accordionExample">
+
+                                                    <div className="accordion-body ">
+                                                        <strong>Title: </strong>{x.comment}
+                                                        <p className="card-text"> <cite title="Source Title"> Comment by {x.author.email}</cite> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
                                     }
                                 </ul>
-                                {product.comments?.length === 0 &&
-                                    (<p className="no-comment">No comments.</p>)}
+
+                                {
+                                    product.comments?.length === 0 &&
+
+                                    (< div className=" card border-warning " >
+                                        <div className="card-body" style={{ padding: '0.4rem' }}>
+                                            <h15 className="card-title">No comments.</h15>
+                                        </div>
+                                    </div>)
+                                }
                             </div>
 
                             <div className="buttons">
 
                                 <button type="button" className="btn btn-light btn-custom ml-3" onClick={onBackButtonClick}>Back</button>
 
+                                {isAuthenticated &&
+                                    <>
+                                        <button type="button" className="btn btn-light btn-custom ml-3 " data-bs-toggle="modal" data-bs-target="#exampleModal" >Add Commend</button>
+                                        
+                                        <AddComment onCommentSubmit={onCommentSubmit} /> 
+                                    </>
+                                }
+
                                 {isOwner &&
                                     <>
-                                  
                                         <Link to={`/edit/${product._id}`} className="btn btn-light btn-custom ml-3">Edit</Link>
 
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                             Delete
                                         </button>
 
-                                        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div className="modal fade" id="exampleModal1" tabIndex="-1" aria-labelledby="exampleModal1Label" aria-hidden="true">
                                             <div className="modal-dialog">
                                                 <div className="modal-content">
                                                     <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel"> Delete a product </h1>
+                                                        <h1 className="modal-title fs-5" id="exampleModal1Label"> Delete a product </h1>
                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div className="modal-body">
@@ -192,8 +236,8 @@ export default function Details(
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >No</button>
-                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal"  onClick={delProduct}>Yes</button>
-                                      
+                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={delProduct}>Yes</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,7 +257,6 @@ export default function Details(
                     </div>
                 </div>
             </div>
-            {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
         </>
     )
 }
