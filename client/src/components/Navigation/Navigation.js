@@ -27,63 +27,39 @@ export default function Navigation() {
                                 </li>
 
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/catalog">
-                                        <img src="/img/magazine-catalog.jpg" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
-                                        Catalog
-                                    </a>
+                                    <a className="nav-link text-white" aria-current="page" href="/catalog">Catalog</a>
                                 </li>
 
                                 <li className="nav-item">
-
-                                    <a className="nav-link" href="/create">
-                                        <img src="/img/create.png" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
-                                        Create Product
-                                    </a>
+                                    <a className="nav-link text-white" aria-current="page" href="/create">Create Product</a>
                                 </li>
 
                                 <li className="nav-item">
-
-                                    <a className="nav-link" href={`/profile/${userId}`}>
-                                        <img src="/img/profile.png" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
-                                        Profile
-                                    </a>
+                                    <a className="nav-link text-white" aria-current="page" href={`/profile/${userId}`}> Profile</a>
                                 </li>
+
                                 <li className="nav-item">
-
-                                    <a className="nav-link" href="/logout">
-                                        <img src="/img/log.png" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
-                                        Logout
-                                    </a>
+                                    <a className="nav-link text-white" aria-current="page" href="/logout">Logout</a>
                                 </li>
+
                             </>
                             :
                             <>
                                 <li className="nav-item">
-
-                                    <a className="nav-link" href="/catalog">
-                                        <img src="/img/magazine-catalog.jpg" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
-                                        Catalog
-                                    </a>
+                                    <a className="nav-link text-white" aria-current="page" href="/catalog">Catalog</a>
                                 </li>
-                                <li className="nav-item">
 
-                                    <a className="nav-link" href="/register">
-                                        <img src="/img/Registratioin.jpg" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
-                                        Register
-                                    </a>
+                                <li className="nav-item">
+                                    <a className="nav-link text-white" aria-current="page" href="/register"> Register</a>
                                 </li>
+
                                 <li className="nav-item">
-
-                                    <a className="nav-link" href="/login">
-                                        <img src="/img/log.png" alt="Logo" width="24" height="24" className="d-inline-block align-text-top" />
-                                        Login
-                                    </a>
-
+                                    <a className="nav-link text-white" aria-current="page" href="/login"> Login</a>
                                 </li>
                             </>
                         }
                     </ul>
-                   
+
                 </div>
             </div>
         </nav>

@@ -14,7 +14,7 @@ export default function Catalog() {
     // console.log(products)
 
     const { isAuthenticated } = useContext(AuthContext);
-    const { cangeProductType, searchProductTitle, cangeProductTitle } = useProductsContext();
+    const { cangeProductType, searchProductTitle,allProducts } = useProductsContext();
   
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -34,7 +34,7 @@ export default function Catalog() {
             </div>
 
             <div className="d-flex justify-content-center mb-4">
-                <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>All Products</button>
+                <button type="button" className="btn btn-light btn-custom ml-3" onClick={allProducts}>All Products</button>
                 <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>Chairs</button>
                 <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>Spoons</button>
                 <button type="button" className="btn btn-light btn-custom ml-3" onClick={cangeProductType}>Ladles</button>

@@ -59,6 +59,19 @@ export const ProductProvider = ({ children }) => {
     const searchProductTitle = async (searchTerm) => {
         dispatch({ type: "CHANGE_PRODUCT_TITLE", payload: searchTerm })
     };
+
+    const allProducts = async () => {
+       
+        try {
+            const response = await productService.getAll();
+            const products = response;
+            
+            dispatch({ type: "GET_All_PRODUCT", payload: products })
+
+        } catch (error) {
+            dispatch({ type: "GET_PRODUCT_ERROR" })
+        }
+    };
     const addProduct = async (productData) => {
         try {
             const newProduct = await productService.create(productData);
@@ -99,7 +112,7 @@ export const ProductProvider = ({ children }) => {
 
 
     return (
-        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct,searchProductTitle }} >
+        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct,searchProductTitle,allProducts }} >
             {children}
 
         </WoodContext.Provider>

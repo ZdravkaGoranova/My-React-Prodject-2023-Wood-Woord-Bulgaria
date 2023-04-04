@@ -5,7 +5,7 @@ import React from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useEffect, useContext, useReducer } from 'react';
 
-import {  useProductsContext } from '../../contexts/WoodContext.js'
+import { useProductsContext } from '../../contexts/WoodContext.js'
 import { AuthContext } from '../../contexts/AuthContext.js';
 
 import { productServiceFactory } from '../../services/productService.js';
@@ -96,7 +96,7 @@ export default function Details(
         // }))
 
     };
-  
+
     const onLike = async (values) => {
         const response = await likeService.create(
             productId,
@@ -129,11 +129,11 @@ export default function Details(
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
-                            <h5 className="card-title">Title: {product.title}</h5>
+                            <h3 className="card-title">Title: {product.title}</h3>
 
                             <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Type:</strong>  {product.type}</div>
-                            {/* <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Owner: </strong>   {product._ownerId}</div> */}
                             <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Price:</strong>  {product.price} $</div>
+
                             {/* 
                             <p className="card-text"><small className="text-body-secondary">Type:   {product.type}</small></p>
                             <p className="card-text"><small className="text-body-secondary">Owner:   {product._ownerId}</small></p>
@@ -172,23 +172,23 @@ export default function Details(
                                         //         <p className="card-text">Comment by <cite title="Source Title"> {x.author.email}</cite> </p>
                                         //     </div>
                                         // </div>
+                                        
+                                            <div className="accordion" id={`accordion${index}`} key={x._id}>
+                                                <div className="accordion-item">
+                                                    <h2 className="accordion-header">
+                                                        <button className="accordion-button " style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                            Comment #{index + 1}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" className="accordion-collapse collapse show " data-bs-parent="#accordionExample">
 
-                                        <div className="accordion" id={`accordion${index}`} key={x._id}>
-                                            <div className="accordion-item">
-                                                <h2 className="accordion-header">
-                                                    <button className="accordion-button " style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        Comment #{index + 1}
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseOne" className="accordion-collapse collapse show " data-bs-parent="#accordionExample">
-
-                                                    <div className="accordion-body ">
-                                                        <strong>Title: </strong>{x.comment}
-                                                        <p className="card-text"> <cite title="Source Title"> Comment by {x.author.email}</cite> </p>
+                                                        <div className="accordion-body ">
+                                                            <strong>Title: </strong>{x.comment}
+                                                            <p className="card-text"> <cite title="Source Title"> Comment by {x.author.email}</cite> </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     ))
                                     }
                                 </ul>
@@ -211,8 +211,8 @@ export default function Details(
                                 {isAuthenticated &&
                                     <>
                                         <button type="button" className="btn btn-light btn-custom ml-3 " data-bs-toggle="modal" data-bs-target="#exampleModal" >Add Commend</button>
-                                        
-                                        <AddComment onCommentSubmit={onCommentSubmit} /> 
+
+                                        <AddComment onCommentSubmit={onCommentSubmit} />
                                     </>
                                 }
 
