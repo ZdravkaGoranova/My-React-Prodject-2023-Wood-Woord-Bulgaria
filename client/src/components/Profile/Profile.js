@@ -7,8 +7,12 @@ import { WoodContext } from '../../contexts/WoodContext.js'
 import MyProducts from './MyProducts.js';
 import { AuthContext } from '../../contexts/AuthContext.js'
 
-export default function Profile() {
+// import { productServiceFactory } from '../../services/productService.js';
+// import { useService } from '../../hooks/useService.js';
 
+export default function Profile() {
+    window.scrollTo(0, 0);
+    
     const { products } = useContext(WoodContext)
     console.log(products)
 
@@ -17,6 +21,14 @@ export default function Profile() {
 
     const userProducts = products.filter(product => product._ownerId === userId)
     console.log(userProducts)
+
+    
+    // const productService = productServiceFactory();
+    // productService.getProductsByUserId(userId)
+    //     .then(data => {
+    //         console.log(data)//userProducts
+    //     })
+
 
     return (
         <section id="profile-page">

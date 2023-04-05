@@ -1,10 +1,9 @@
 
 import { requestFactory } from './requester.js'
 
-const host = process.env.NODE_ENV === 'development' 
+const host = process.env.NODE_ENV === 'development'
     ? 'http://localhost:3030'
     : 'http://localhost:3030'; //http://localhost:3031 TODO: Add server url when deployed  https://react-wood-working.web.app
-//const url = `${baseUrl}/data/games`;
 
 const baseUrl = `${host}/data/woodTypes`;
 
@@ -23,9 +22,7 @@ export const productServiceFactory = (token) => {
     };
 
     const update = async (productId, data) => {
-        // console.log("updateProduct");
-        // console.log(productId);
-
+       
         const result = await request.put(`${baseUrl}/${productId}`, data)
         console.log(result);
         return result;
@@ -39,7 +36,6 @@ export const productServiceFactory = (token) => {
         return products;
     };
 
-
     //  const getAllProducts = async () => {
     //     const searchQuery = encodeURIComponent(`productId="${productId}"`);
     //     const relationQuery = encodeURIComponent(`author=_ownerId:users`);
@@ -47,9 +43,6 @@ export const productServiceFactory = (token) => {
     //     const comments = Object.values(result)
     //     return comments;
     // };
-    
-
-
 
     const getOne = async (productId) => {
         const result = await request.get(`${baseUrl}/${productId}`);
@@ -66,25 +59,13 @@ export const productServiceFactory = (token) => {
         return filteredProducts
     }
 
-    // const getProductsByUserId = async (userId) => {
-    //     const result = await getAll();
-       
-    //     const userProducts = result.filter(product => product._ownerId === userId)
+    const getProductsByUserId = async (userId) => {
+        const result = await getAll();
 
-    //     console.log( userProducts)
-    //      console.log( Object.values(userProducts))
-    //     return userProducts;
-    // };
-    // const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json()); const create = async (productData) => {
-    //     const { ...data } = productData;
-
-    //     const result = await request.post(baseUrl, data);
-
-    //     console.log(result);
-    //     return result;
-    // };
-
-    const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json());
+        const userProducts = result.filter(product => product._ownerId === userId)
+        // console.log( userProducts)
+        return userProducts;
+    };
 
     return {
         create,
@@ -93,11 +74,29 @@ export const productServiceFactory = (token) => {
         getAll,
         getOne,
         getByCategory,
-       // getProductsByUserId,
-        getMyPublications,
+        getProductsByUserId,
+       
     }
 }
 
 
-// export const getOne = (publicId) => fetch(`${baseUrl}/${publicId}`).then(res => res.json());
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const getOne = (publicId) => fetch(`${baseUrl}/${publicId}`).then(res => res.json());
+//const getMyPublications = (ownerId) => fetch(`${baseUrl}/profile/${ownerId}`).then(res => res.json());

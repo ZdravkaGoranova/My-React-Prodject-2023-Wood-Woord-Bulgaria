@@ -109,8 +109,6 @@ export const ProductProvider = ({ children }) => {
             dispatch({ type: "GET_PRODUCT_ERROR" })
         }
     }
-
-
     return (
         <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct,searchProductTitle,allProducts }} >
             {children}

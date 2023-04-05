@@ -23,8 +23,8 @@ export const AuthProvider = ({
     };
 
     useEffect(() => {
-       
-        if (errorMessage != "") {
+
+        if (errorMessage !== "") {
             setShowErrorMessage(true);
             console.log(errorMessage)
             console.log(showErrorMessage)
@@ -36,7 +36,6 @@ export const AuthProvider = ({
         setAuth(data);
     };
 
-
     const onLoginSubmit = async (data) => {
         //const { username, email, password } = Object.fromEntries(new FormData(e.target))=data
         try {
@@ -46,21 +45,28 @@ export const AuthProvider = ({
             navigate('/catalog');
 
         } catch (error) {
-            //setErrorMessage(error); 
-            setErrorMessage('Invalid username or password. Please try again.');
-            console.log(error);
+            setErrorMessage(error.message);
+            // setErrorMessage('Invalid username or password. Please try again.');
             // alert(error.message)
             return;
             // navigate('/404');
         }
     };
-
+    const isEmailValid = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
     const onRegisterSubmit = async (values) => {
         const { confirmPassword, ...registerData } = values;
         console.log(registerData)
+
         if (confirmPassword !== registerData.password) {
             //alert("Passwords dont match")
             setErrorMessage("Passwords dont match");
+            return;
+        }
+        if (!isEmailValid(registerData.email)) {
+            setErrorMessage('Invalid email address. Please enter a valid email.');
             return;
         }
         try {
@@ -70,17 +76,17 @@ export const AuthProvider = ({
             navigate('/catalog');
 
         } catch (error) {
-            setErrorMessage('Invalid username or password. Please try again.');
+            setErrorMessage(error.message);
+            //setErrorMessage('Invalid username or password. Please try again.');
             //  alert(error.message)
-            console.log(error);
             return
-            // navigate('/404');
+
         }
     };
 
     const onLogout = () => {
         authService.logout();
-
+        localStorage.removeItem('key');
         setAuth({});
     };
 
@@ -96,7 +102,7 @@ export const AuthProvider = ({
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,
-       // username: auth.username,
+        // username: auth.username,
         isAuthenticated: !!auth.accessToken,
     };
     return (

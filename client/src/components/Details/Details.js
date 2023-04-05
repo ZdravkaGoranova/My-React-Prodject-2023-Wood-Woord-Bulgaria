@@ -41,6 +41,7 @@ export default function Details(
     });
 
     useEffect(() => {
+        window.scrollTo(0, 0);
 
         Promise.all([
             productService.getOne(productId),
@@ -152,43 +153,25 @@ export default function Details(
                                 </button>
 
                                 <ul className="row" >
-
-                                    {/* {product.comments && product.comments.map(x => (
-                                        <li key={x._id} className=" d-inline-block position-relative py-2 px-4 btn btn-outline-warning btn-custom border-dark rounded-pill text-dark comment-item" >
-
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" className="position-absolute top-100 start-50 translate-middle mt-1 text-dark">
-                                                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                            </svg>
-                                            <p className="ms-5 mb-0">{x.author.email}: {x.comment}</p>
-                                        </li>
-                                    ))
-                                    } */}
-
+                                    
                                     {product.comments && product.comments.map((x, index) => (
-                                        // <div key={x._id} className=" card border-warning col-sm-4 mb-4" >
-                                        //     <div className="card-header" style={{ padding: '0.1rem' }}>Comment</div>
-                                        //     <div className="card-body"  style={{ padding: '0.5rem' }}>
-                                        //         <h5 className="card-title">{x.comment}</h5>
-                                        //         <p className="card-text">Comment by <cite title="Source Title"> {x.author.email}</cite> </p>
-                                        //     </div>
-                                        // </div>
-                                        
-                                            <div className="accordion" id={`accordion${index}`} key={x._id}>
-                                                <div className="accordion-item">
-                                                    <h2 className="accordion-header">
-                                                        <button className="accordion-button " style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                            Comment #{index + 1}
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapseOne" className="accordion-collapse collapse show " data-bs-parent="#accordionExample">
 
-                                                        <div className="accordion-body ">
-                                                            <strong>Title: </strong>{x.comment}
-                                                            <p className="card-text"> <cite title="Source Title"> Comment by {x.author.email}</cite> </p>
-                                                        </div>
+                                        <div className="accordion" id={`accordion${index}`} key={x._id}>
+                                            <div className="accordion-item">
+                                                <h2 className="accordion-header">
+                                                    <button className="accordion-button " style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        Comment #{index + 1}
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" className="accordion-collapse collapse show " data-bs-parent="#accordionExample">
+
+                                                    <div className="accordion-body ">
+                                                        <strong>Title: </strong>{x.comment}
+                                                        <p className="card-text"> <cite title="Source Title"> Comment by {x.author.email}</cite> </p>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     ))
                                     }
                                 </ul>
@@ -198,7 +181,7 @@ export default function Details(
 
                                     (< div className=" card border-warning " >
                                         <div className="card-body" style={{ padding: '0.4rem' }}>
-                                            <h15 className="card-title">No comments.</h15>
+                                            <p className="card-title">No comments.</p>
                                         </div>
                                     </div>)
                                 }
@@ -260,6 +243,33 @@ export default function Details(
         </>
     )
 }
+
+
+
+
+// <div key={x._id} className=" card border-warning col-sm-4 mb-4" >
+//     <div className="card-header" style={{ padding: '0.1rem' }}>Comment</div>
+//     <div className="card-body"  style={{ padding: '0.5rem' }}>
+//         <h5 className="card-title">{x.comment}</h5>
+//         <p className="card-text">Comment by <cite title="Source Title"> {x.author.email}</cite> </p>
+//     </div>
+// </div>
+
+
+
+
+{/* {product.comments && product.comments.map(x => (
+                                        <li key={x._id} className=" d-inline-block position-relative py-2 px-4 btn btn-outline-warning btn-custom border-dark rounded-pill text-dark comment-item" >
+
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" className="position-absolute top-100 start-50 translate-middle mt-1 text-dark">
+                                                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                            </svg>
+                                            <p className="ms-5 mb-0">{x.author.email}: {x.comment}</p>
+                                        </li>
+                                    ))
+                                    } */}
+
+
 
 
 //     <section id="game-details">
