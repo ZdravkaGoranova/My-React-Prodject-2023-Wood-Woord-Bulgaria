@@ -15,7 +15,7 @@ export default function Create() {
     const navigate = useNavigate()
 
     const { addProduct } = useProductsContext();
-    const { userId,errorMessage, showErrorMessage, hideErrorBox ,setErrorMessage } = useContext(AuthContext);
+    const { userId, errorMessage, showErrorMessage, hideErrorBox, setErrorMessage } = useContext(AuthContext);
 
 
     // function submitHandler() {
@@ -46,23 +46,32 @@ export default function Create() {
         e.preventDefault();
 
         console.log(':):):)')
-
+        console.log(typeof productData.price)
         if (!productData.picture.startsWith("https://")) {
-           // alert("Please enter a valid URL address!");
+            // alert("Please enter a valid URL address!");
             setErrorMessage("Please enter a valid URL address");
         }
         else if (productData.title === "") {
             //alert("Please enter a valid title!");
-             setErrorMessage("Please enter a valid title");
+            setErrorMessage("Please enter a valid title");
+        }
+        else if (productData.title.length < 4) {
+            //alert("Please enter a valid title!");
+            setErrorMessage("The length of the title should be at least 4 characters!");
         }
         else if (productData.description === "") {
             //alert("Please enter a valid description!");
             setErrorMessage("Please enter a valid description");
         }
-        else if (productData.price === "") {
-           // alert("Please enter a valid price!");
-             setErrorMessage("Please enter a valid price!");
+        else if (productData.description.length < 10) {
+            //alert("Please enter a valid title!");
+            setErrorMessage("The length of the description should be at least 10 characters!");
         }
+        else if (productData.price === "") {
+            // alert("Please enter a valid price!");
+            setErrorMessage("Please enter a valid price!");
+        }
+      
         else {
             try {
                 //    await  productService.create(productData)
@@ -82,7 +91,7 @@ export default function Create() {
 
     return (
         <>
-        
+
             {showErrorMessage && errorMessage && (
                 <div className="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Attention!</strong> {errorMessage}
@@ -111,7 +120,7 @@ export default function Create() {
                         <input type="text" id="picture" placeholder="http://..." name="picture" value={product?.picture} onChange={onChangeHandler} />
 
                         <label htmlFor="certificate">Price:</label>
-                        <input type="text" id="certificate" placeholder="10" name="price" value={product?.price} onChange={onChangeHandler} />
+                        <input type="text" id="certificate" placeholder="10" name="price" value={product?.price} onChange={onChangeHandler} pattern="^\d+(\.|,)?\d*$" title="Price should only contain numbers" />
                         <label htmlFor="type">Type:</label>
                         <select type="type" id="certificate" name="type" value={product?.type} onChange={onChangeHandler} >
                             <option value="spoons" name="spoons">Spoons</option>

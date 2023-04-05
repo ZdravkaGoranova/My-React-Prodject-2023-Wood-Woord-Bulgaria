@@ -6,8 +6,6 @@ import Publication from './Publication/Publication.js';
 
 import { useProductsContext, WoodContext } from '../../contexts/WoodContext.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
-import { productServiceFactory } from '../../services/productService.js';
-
 
 export default function Catalog() {
     const { filteredProducts:products } = useContext(WoodContext)

@@ -191,3 +191,8 @@
     color: white;
     cursor: pointer;
 }
+
+  .accordion-button:not(.collapsed) {
+    background-color:  #fbf6ee !important;
+    color: rgb(95, 90, 90) !important;
+  }

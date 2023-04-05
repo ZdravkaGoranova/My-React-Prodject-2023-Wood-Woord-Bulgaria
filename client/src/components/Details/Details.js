@@ -116,13 +116,29 @@ export default function Details(
         //     likes: [...state.likes, response]
         // }))
     };
+    const getLastUpdated = (updatedAt) => {
+        const now = new Date();
+        const diffMs = now - new Date(updatedAt); // разликата в милисекунди
+        const diffMins = Math.round(diffMs / 60000); // разликата в минути
+        const diffDays = Math.floor(diffMins / 1440); // разликата в дни
+        const diffHours = Math.floor(diffMins / 60); // разликата в часове
+        const remainingMins = diffMins % 60; // останалите минути
+        const date = new Date(updatedAt).toLocaleDateString();
+        if (diffDays > 0) {
+            return `Last updated ${diffDays} days ago, on ${date}`;
+        } else if (diffHours > 0) {
+            const time = new Date(updatedAt).toLocaleTimeString();
+            return `Last updated ${diffHours} hours and ${remainingMins} mins ago, on ${date} at ${time}`;
+        } else {
+            return `Last updated ${diffMins} mins ago, on ${date}`;
+        }
+    }
 
     const onBackButtonClick = (e) => {
         navigate('/catalog');
     };
     return (
         <>
-
             <div className="card mb-3" style={{ margin: "50px auto", maxWidth: "1300px" }}>
                 <div className="row g-0">
                     <div className="col-md-4">
@@ -132,43 +148,55 @@ export default function Details(
                         <div className="card-body">
                             <h3 className="card-title">Title: {product.title}</h3>
 
-                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Type:</strong>  {product.type}</div>
-                            <div className="alert alert-warning alert-dismissible fade show" role="alert"><strong>Price:</strong>  {product.price} $</div>
+                            <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Type:</strong>  {product.type}</div>
+                            <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Price:</strong>  {product.price} $</div>
 
                             {/* 
                             <p className="card-text"><small className="text-body-secondary">Type:   {product.type}</small></p>
                             <p className="card-text"><small className="text-body-secondary">Owner:   {product._ownerId}</small></p>
                             <p className="card-text"><small className="text-body-secondary">Price:   {product.price}</small></p> */}
 
-                            <p className="card-text">Description: {product.description}</p>
+                            <p className="card-text"><strong>Description:</strong> {product.description}</p>
 
 
-                            <button type="button" className="btn btn-primary position-relative btn btn-light btn-custom ml-3 btn-custom " style={{ marginBottom: "10px" }}>
-                                Likes <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" >{product.likes?.length} <span className="visually-hidden">unread messages</span></span>
-                            </button>
+                            <p type="button" className="btn btn-primary position-relative btn btn-light btn-custom ml-3 btn-custom "
+                                style={{ marginBottom: "10px" }}>
+                                Likes <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" >
+                                    {product.likes?.length} <span className="visually-hidden"></span></span>
+                            </p>
 
                             <div className="details-comments">
-                                <button type="button" className="btn btn-primary position-relative btn btn-light btn-custom ml-3 btn-custom " style={{ marginBottom: "10px" }}>
-                                    Comments <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">{product.comments?.length} <span className="visually-hidden">unread messages</span></span>
-                                </button>
+                                <p type="button" className="btn btn-primary position-relative btn btn-light btn-custom ml-3 btn-custom "
+                                    style={{ marginBottom: "10px" }}>
+                                    Comments <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+                                        {product.comments?.length} <span className="visually-hidden"></span></span>
+                                </p>
 
                                 <ul className="row" >
-                                    
+
                                     {product.comments && product.comments.map((x, index) => (
 
                                         <div className="accordion" id={`accordion${index}`} key={x._id}>
-                                            <div className="accordion-item">
+                                            <div className="card border-warning mb-3 accordion-item">
                                                 <h2 className="accordion-header">
-                                                    <button className="accordion-button " style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        Comment #{index + 1}
+                                                    <button className="accordion-button "
+                                                        style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                      
+                                                        <a class="navbar-brand" href="#">
+                                                            <img src="/img/profile.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" />
+                                                            <cite >   {x.author.email}</cite>
+                                                        </a>
                                                     </button>
                                                 </h2>
-                                                <div id="collapseOne" className="accordion-collapse collapse show " data-bs-parent="#accordionExample">
-
-                                                    <div className="accordion-body ">
-                                                        <strong>Title: </strong>{x.comment}
-                                                        <p className="card-text"> <cite title="Source Title"> Comment by {x.author.email}</cite> </p>
+                                                <div id="collapseOne" className=" accordion-collapse collapse show " data-bs-parent="#accordionExample">
+                                                    <div className="card-body">
+                                                        <p className="card-text"> <strong>Title: </strong>{x.comment}</p>
+                                                        <p class="card-text"><small class="text-body-secondary">{getLastUpdated(x._createdOn)}</small></p>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -189,12 +217,13 @@ export default function Details(
 
                             <div className="buttons">
 
-                                <button type="button" className="btn btn-light btn-custom ml-3" onClick={onBackButtonClick}>Back</button>
+                                <button type="button" className="btn btn-light btn-custom ml-3"
+                                    onClick={onBackButtonClick}>Back</button>
 
                                 {isAuthenticated &&
                                     <>
-                                        <button type="button" className="btn btn-light btn-custom ml-3 " data-bs-toggle="modal" data-bs-target="#exampleModal" >Add Commend</button>
-
+                                        <button type="button" className="btn btn-light btn-custom ml-3 " data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                                            Add Commend</button>
                                         <AddComment onCommentSubmit={onCommentSubmit} />
                                     </>
                                 }
@@ -218,8 +247,10 @@ export default function Details(
                                                         Are you sure you want to delete a product with a title {product.title}?
                                                     </div>
                                                     <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >No</button>
-                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={delProduct}>Yes</button>
+                                                        <button type="button" className="btn btn-secondary"
+                                                            data-bs-dismiss="modal" >No</button>
+                                                        <button type="button" className="btn btn-primary"
+                                                            data-bs-dismiss="modal" onClick={delProduct}>Yes</button>
 
                                                     </div>
                                                 </div>
