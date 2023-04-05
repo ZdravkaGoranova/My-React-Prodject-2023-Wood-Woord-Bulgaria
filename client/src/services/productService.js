@@ -3,7 +3,7 @@ import { requestFactory } from './requester.js'
 
 const host = process.env.NODE_ENV === 'development' 
     ? 'http://localhost:3030'
-    : 'http://localhost:3030'; // TODO: Add server url when deployed  https://react-wood-working.web.app
+    : 'http://localhost:3030'; //http://localhost:3031 TODO: Add server url when deployed  https://react-wood-working.web.app
 //const url = `${baseUrl}/data/games`;
 
 const baseUrl = `${host}/data/woodTypes`;
@@ -38,6 +38,18 @@ export const productServiceFactory = (token) => {
         // console.log(result);
         return products;
     };
+
+
+    //  const getAllProducts = async () => {
+    //     const searchQuery = encodeURIComponent(`productId="${productId}"`);
+    //     const relationQuery = encodeURIComponent(`author=_ownerId:users`);
+    //     const result = await request.get(`${baseUrl}?where=${searchQuery}&load=${relationQuery}`);//search
+    //     const comments = Object.values(result)
+    //     return comments;
+    // };
+    
+
+
 
     const getOne = async (productId) => {
         const result = await request.get(`${baseUrl}/${productId}`);

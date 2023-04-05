@@ -15,15 +15,15 @@ export const productReducer = (state, action) => {
             productsLoalding: false,
             productsError: false,
             products: action.payload,
-            
+            filteredProducts: action.payload,
         };
     }
 
     if (action.type === "GET_All_PRODUCT") {
+
         return {
             ...state,
-            products: action.payload,
-            filtredProducts: action.payload,
+            filteredProducts: action.payload,
         };
     }
     if (action.type === "CHANGE_PRODUCT_TYPE")

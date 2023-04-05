@@ -10,12 +10,12 @@ import { productServiceFactory } from '../../services/productService.js';
 
 
 export default function Catalog() {
-    const { filteredProducts: products } = useContext(WoodContext)
+    const { filteredProducts:products } = useContext(WoodContext)
     // console.log(products)
 
     const { isAuthenticated } = useContext(AuthContext);
-    const { cangeProductType, searchProductTitle,allProducts } = useProductsContext();
-  
+    const { cangeProductType, searchProductTitle, allProducts,fetchProducts } = useProductsContext();
+
     const [searchTerm, setSearchTerm] = useState("");
 
     return (
