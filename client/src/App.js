@@ -16,8 +16,8 @@ import Profile from './components/Profile/Profile.js';
 import Register from './components/Register/Register.js';
 import Edit from './components/Edit/Edit.js';
 import Logout from './components/Logout/Logout.js';
-import RouteGuard from './components/Common/RouteGuard.js';
-import ProductOwner from './components/Common/ProductOwner.js';
+import RouteGuard from './components/RouteGuard/RouteGuard.js';
+import ProductOwner from './components/RouteGuard/ProductOwner.js';
 
 function App() {
 

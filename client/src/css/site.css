@@ -96,7 +96,7 @@
         text-decoration: none;
         padding: 0.5em;
         color: rgb(15, 14, 14);
-        /* text-transform: uppercase;*/
+      
     }
     
     nav>img {
@@ -116,30 +116,11 @@
     }
     
    
-
-    /* .error-box {
-        position: absolute;
-        right: 1.6em;
-        z-index: 11111;
-        top: 15%;
-        text-align: center;
-        border-radius: 1rem;
-        color: #c71414;
-        font-style: italic;
-        height: auto;
-        width: 420px;
-        box-shadow: 0px 0px 8px 7px #db1e1e;
-        display: none; /* скриване на error box по подразбиране */
-        /* background-color: white; /* бял фон на error box */
-     */
-    
     .error-box.show {
-        display: block; /* показване на error box и текста на грешката */
+        display: block; 
     }
     
    
-
-
     .error-box {
         position: fixed;
         right: 1.6em;
@@ -202,28 +183,3 @@
 
 
 
-
-    /* .error-box {
-        position: fixed;
-        right: 1.6em;
-        display: block;
-        z-index: 11111;
-        top: 15%;
-        text-align: center;
-        border-radius: 1rem;
-        color: #c71414;
-        font-style: italic;
-        height: auto;
-        width: 420px;
-        box-shadow: 0px 0px 8px 7px #db1e1e;
-    }
-    
-    .error-box>p {
-        font-size: 25px;
-        font-weight: bold;
-        font-family: 'Barlow', sans-serif;
-        padding: 22px;
-        height: auto;
-    } */
-    
- 

@@ -1,6 +1,12 @@
 
 import { requestFactory } from './requester.js'
-const baseUrl = 'http://localhost:3030/data/woodTypes';
+
+const host = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:3030'
+    : 'http://localhost:3030'; // TODO: Add server url when deployed  https://react-wood-working.web.app
+//const url = `${baseUrl}/data/games`;
+
+const baseUrl = `${host}/data/woodTypes`;
 
 export const productServiceFactory = (token) => {
     const request = requestFactory(token)
