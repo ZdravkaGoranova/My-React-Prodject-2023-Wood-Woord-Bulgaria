@@ -191,8 +191,8 @@ export default function Details(
                                                         style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse"
                                                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 
-                                                        <a class="navbar-brand" href="#">
-                                                            <img src="/img/profile.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" />
+                                                        <a className="navbar-brand" href="#">
+                                                            <img src="/img/profile.jpg" alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
                                                             <cite >   {x.author.email}</cite>
                                                         </a>
                                                     </button>
@@ -200,7 +200,7 @@ export default function Details(
                                                 <div id="collapseOne" className=" accordion-collapse collapse show " data-bs-parent="#accordionExample">
                                                     <div className="card-body">
                                                         <p className="card-text"> <strong>Title: </strong>{x.comment}</p>
-                                                        <p class="card-text"><small class="text-body-secondary">{getLastUpdated(x._createdOn)}</small></p>
+                                                        <p className="card-text"><small className="text-body-secondary">{getLastUpdated(x._createdOn)}</small></p>
                                                     </div>
 
                                                 </div>
