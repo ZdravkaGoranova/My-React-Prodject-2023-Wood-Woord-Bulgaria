@@ -30,7 +30,7 @@ export default function Create() {
     //     price: "",
     //     type: "",
     // }, addProduct);
-    // },onSubmitCreateProduct);
+    // },onSubmitHandler);
 
     const [product, setProduct] = useState({
         title: "",
@@ -45,8 +45,6 @@ export default function Create() {
     const onSubmitHandler = async (e, productData) => {
         e.preventDefault();
 
-        console.log(':):):)')
-        console.log(typeof productData.price)
         if (!productData.picture.startsWith("https://")) {
             // alert("Please enter a valid URL address!");
             setErrorMessage("Please enter a valid URL address");

@@ -1,7 +1,7 @@
 import '../Details/details.css';
 import '../Details/AddComment/comments.css';
 
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useEffect, useContext, useReducer } from 'react';
 
@@ -13,6 +13,7 @@ import { AddComment } from './AddComment/AddComment.js';
 import * as  commentService from '../../services/commentService.js';
 import * as likeService from '../../services/likeService.js';
 import { productReducer } from '../../reducers/productReducer.js';
+import Spinner from '../Spinner/Spinner.js';
 
 export default function Details(
 
@@ -40,13 +41,17 @@ export default function Details(
         return item.author?._id === userId || item?._ownerId === userId;
     });
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        setIsLoading(true);
 
         Promise.all([
             productService.getOne(productId),
             commentService.getAll(productId),//промис чейнинг
             likeService.getAll(productId)
+
         ])
             .then(([productData, comments, likes]) => {
                 const productState = {
@@ -56,7 +61,7 @@ export default function Details(
                 };
                 // setProduct(productState)
                 dispatch({ type: 'PRODUCT_FETCH', payload: productState })
-
+                setIsLoading(false);
             });
     }, [productId]);
 
@@ -139,6 +144,7 @@ export default function Details(
     };
     return (
         <>
+            {isLoading && <Spinner />}
             <div className="card mb-3" style={{ margin: "50px auto", maxWidth: "1300px" }}>
                 <div className="row g-0">
                     <div className="col-md-4">
@@ -184,7 +190,7 @@ export default function Details(
                                                     <button className="accordion-button "
                                                         style={{ padding: '0.5rem' }} type="button" data-bs-toggle="collapse"
                                                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                      
+
                                                         <a class="navbar-brand" href="#">
                                                             <img src="/img/profile.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" />
                                                             <cite >   {x.author.email}</cite>

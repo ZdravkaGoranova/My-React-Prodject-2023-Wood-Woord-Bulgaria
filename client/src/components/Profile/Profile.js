@@ -1,19 +1,14 @@
-
 import '../Profile/profile.css'
-
-import React, { useContext } from "react"
-
+import React, { useContext, useEffect, useState } from "react"
 import { WoodContext } from '../../contexts/WoodContext.js'
 import MyProducts from './MyProducts.js';
 import { AuthContext } from '../../contexts/AuthContext.js'
-
-// import { productServiceFactory } from '../../services/productService.js';
-// import { useService } from '../../hooks/useService.js';
+import Spinner from '../Spinner/Spinner.js'
 
 export default function Profile() {
     window.scrollTo(0, 0);
-    
-    const { products } = useContext(WoodContext)
+
+    const { products, isLoading } = useContext(WoodContext)
     console.log(products)
 
     const { userId, userEmail } = useContext(AuthContext);
@@ -21,13 +16,6 @@ export default function Profile() {
 
     const userProducts = products.filter(product => product._ownerId === userId)
     console.log(userProducts)
-
-    
-    // const productService = productServiceFactory();
-    // productService.getProductsByUserId(userId)
-    //     .then(data => {
-    //         console.log(data)//userProducts
-    //     })
 
 
     return (
@@ -41,26 +29,30 @@ export default function Profile() {
 
                     <h2>Email: {userEmail}</h2>
                 </div>
-                <div className="board">
 
-                    {userProducts.length == 0 &&
-                        <div className="no-events">
-                            <p>You have no own products!</p>
-                            <p>You can create your own products from here:</p>
-                            <a href="/create" className="  btn btn-light btn-custom ml-3">Create product</a>
+                {isLoading ? (
+                    <div className="d-flex justify-content-center">
+                        <Spinner />
+                    </div>
+                ) : (
+                    <div className="board">
+                        {userProducts.length == 0 &&
+                            <div className="no-events">
+                                <p>You have no own products!</p>
+                                <p>You can create your own products from here:</p>
+                                <a href="/create" className="  btn btn-light btn-custom ml-3">Create product</a>
 
-                        </div>
-                    }
-                    {userProducts.length > 0 &&
-                        userProducts.map(product =>
+                            </div>
+                        }
+                        {userProducts.length > 0 && userProducts.map(product =>
                             <li key={product._id}>
                                 <MyProducts {...product} />
-                            </li>)}
-                </div>
-
+                            </li>
+                        )}
+                    </div>
+                )}
             </section>
+
         </section>
     )
 }
-
-

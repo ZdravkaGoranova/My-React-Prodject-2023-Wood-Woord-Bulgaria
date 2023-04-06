@@ -8,10 +8,12 @@ import { useService } from '../../hooks/useService.js';
 
 import { WoodContext } from '../../contexts/WoodContext.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
+import Spinner from '../Spinner/Spinner.js';
 
 
 export default function Edit() {
-
+    const [isLoading, setIsLoading] = useState(false);
+    
     const navigate = useNavigate();
     const { updateProduct } = useContext(WoodContext)
     const { errorMessage, showErrorMessage, hideErrorBox, setErrorMessage } = useContext(AuthContext);
@@ -30,11 +32,13 @@ export default function Edit() {
     });
 
     useEffect(() => {
+        setIsLoading(true);
         productService.update(productId)
             .then(data => {
                 // const product = data['productId'];
                 console.log(data)
                 setProduct(data)
+                setIsLoading(false);
             })
     }, [productId]);
 
@@ -68,14 +72,17 @@ export default function Edit() {
 
         else {
             try {
+                setIsLoading(true);
                 //    await  productService.update(productId, productData)
                 await updateProduct(productId, productData)
                     .then(() => {
                         navigate(`/details/${productId}`);
+                        setIsLoading(false);
                     });
             } catch (err) {
                 // alert(err);
                 setErrorMessage(err)
+                setIsLoading(false);
             }
         }
 
@@ -87,6 +94,7 @@ export default function Edit() {
 
     return (
         <>
+         {isLoading && <Spinner />}
             {showErrorMessage && errorMessage && (
                 <div className="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Attention!</strong> {errorMessage}

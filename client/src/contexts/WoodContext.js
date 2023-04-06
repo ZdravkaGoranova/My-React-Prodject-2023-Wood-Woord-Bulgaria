@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { productServiceFactory } from '../services/productService.js';
 import { productReducer } from '../reducers/productReducer.js';
 
@@ -19,7 +19,7 @@ const initialState = {
 }
 
 export const ProductProvider = ({ children }) => {
-
+    const [isLoading, setIsLoading] = useState(false);
     const [state, dispatch] = useReducer(productReducer, initialState)
 
     useEffect(() => {
@@ -41,14 +41,15 @@ export const ProductProvider = ({ children }) => {
   
     const fetchProducts = async () => {
         dispatch({ type: "GET_PRODUCT_START" })
-
+        setIsLoading(true);
         try {
             const response = await productService.getAll();
             const products = response;
             dispatch({ type: "GET_PRODUCT_SUCCESS", payload: products })
-
+            setIsLoading(false);
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
+            setIsLoading(false);
         }
     };
 
@@ -61,58 +62,65 @@ export const ProductProvider = ({ children }) => {
     };
 
     const allProducts = async () => {
-       
+        setIsLoading(true);
         try {
             const response = await productService.getAll();
             const products = response;
             
             dispatch({ type: "GET_All_PRODUCT", payload: products })
-
+            setIsLoading(false);
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
+            setIsLoading(false);
         }
     };
     const addProduct = async (productData) => {
+        setIsLoading(true);
         try {
             const newProduct = await productService.create(productData);
             // setProducts(state => [...state, newProduct]);
             console.log(newProduct)
 
             dispatch({ type: 'ADD_PRODUCT', payload: newProduct });
-
+            setIsLoading(false);
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
+            setIsLoading(false);
         }
     };
 
     const updateProduct = async (productId, product) => {
+        setIsLoading(true);
         try {
             const result = await productService.update(productId, product)
             dispatch({ type: 'UPDATE_PRODUCT', payload: { ...product, id: productId } });
-
+            setIsLoading(false);
             //setProducts(state => state.map(x => x._id === product._id ? result : x))
             //  const updatedProducts = await productService.getAll();
             //  setProducts(updatedProducts);
 
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
+            setIsLoading(false);
         }
     }
 
     const deleteProduct = async (productId) => {
+        setIsLoading(true);
         try {
             console.log('tuk si')
             const result = await productService.delProduct(productId)
             dispatch({ type: "DELETE_PRODUCT", payload: { id: productId } })
-    
+            setIsLoading(false);
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
+            setIsLoading(false);
         }
     }
     return (
-        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct,searchProductTitle,allProducts }} >
+        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct,searchProductTitle,allProducts,isLoading  }} >
             {children}
-
+          
         </WoodContext.Provider>
     )
 }
