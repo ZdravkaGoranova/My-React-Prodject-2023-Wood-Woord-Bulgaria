@@ -1,138 +1,89 @@
 # My-React-Prodject-2023
-# Getting Started with Create React App
 
 
- ![CryAboutItRubiksCubeGIF](https://user-images.githubusercontent.com/106737347/215473675-dc45e64a-b079-472f-8956-53a64e28a4ea.gif)
-# Workshop Project : Cubicle  
+#  Wood Woord Bulgaria
 
-"Cubicle" is a place, where you can browse some of the most popular Rubik cubes in the world and add some new cubes that you have discovered. 
-## Installing Dependencies 
- - [MongoDB Download Center](https://www.mongodb.com/download-center)
- - [MongoDB Node.JS Driver](https://www.npmjs.com/package/mongodb)
- - [Mongoose](https://www.npmjs.com/package/mongoose)
+"Wood Woord Bulgaria" is a place, where you can browse some of the most popular Wood working product,tools, furnitures and other product in the world and add some new product that you have created. Authenticated users can like and comment on products in the app. Sellers can use the platform to add, update and delete products from their profile page.
 
-## Database Connection with ExpressJS
+The  "Wood Woord Bulgaria"  application contains the following views: login page, registration page, logout page, personal profile page, catalog page and details page.
 
-The `index.js file` should require the exported mongoose connection (database) before the server starts. 
+The front end of the project has been deploy in Firebase:  https://react-wood-working.web.app
 
+## Short description
+ - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ - Single Page App (SPA) - React.js.Single Page App (SPA) - React.js.
+ 
+ ## Usage
+- `server` cd server `node server.js`
+- `client` cd client  `npm start`
+- email - peter@abv.bg
+- password - 123456
+ 
+## Languages and libraries used
+ - React.js
+ - Javascript
+ - HTML/CSS
+ - Bootstrap
+ 
+ ## Architecture - the project is structured
+ - `client` folder contains the whole project.
+ - `public` folder contains global asssets for the app(including the json file for simulating Web API calls).
+ - `src` folder contains the App.js, index.js and folders for the components, contexts, reducers, contexts hooks and service.
+ - `components` folder - properly named folder for each component that includes the component itself, the css  for the component).
+ - `reducers` folder - contains custom reducer
+ - `hooks` folder - contains custom hooks
+ - `contexts` folder -  contains custom contexts
+ - `services` folder - contains unified requester and service (for each resource) for handling AJAX requests.
+contexts folder.
+ 
 # Routes views
 
 ## Home Page
 ![](/HomePage.jpg)
 
-## About Page
-![](/2.jpg)
+## Register Page
+![](/PageRegister.jpg)
 
-## Create Cube  Page
-![](/3.jpg)
+## Login Page 
+![](/PageLogin.jpg)
 
-## Details Page
-![](/4.jpg)
+## Profile Page
+![](/ProfilePage.jpg)
 
-## Search Page
-![](/5.jpg)
+## Catalog Guest Page
+![](/GuestPageCatalog.jpg)
 
-##  Not Found Page
-![](/6.jpg)
+## Catalog Profile Page
+![](/CatalogProfilePage.jpg)
 
-## Create Accessory Page View
-![](/7.jpg)
+## Create  Page and Validation
+![](CreatePageValidation.jpg)
+![](CreateValidation.jpg)
 
-##  Attach new accessory view
-![](/9.jpg)
+## Edit Page
+![](/EditPage.jpg)
 
-## Updated Details Page View
-![](/10.jpg)
-![](/12.jpg)
+## Delete Product
+![](/DeletePage.jpg)
 
-## This cube has all available accessories 
-![](/13.jpg)
+## Owner Details Page
+![](/OwnerDetailsPage.jpg)
 
-## This cube has no accessories yet...
-![](/14.jpg)
-![](/8.jpg)
+## Details Comment Page.jpg
+![](/DetailsCommentPage.jpg)
 
+## Details Page Comment
+![](/ListComment.jpg)
+![](/ListComment2.jpg)
 
-
-
-
-
-
-
+## Details Page Add Comment
+![](/AddComment.jpg)
 
 
+## Details Page Like Product
+![](/LikeProductNonOwner.jpg)
+
+## PageNotFound
+![](/404.jpg)
 
 
-
-
-
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
