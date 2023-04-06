@@ -18,7 +18,7 @@ The `index.js file` should require the exported mongoose connection (database) b
 # Routes views
 
 ## Home Page
-![](/1.jpg)
+![](/HomePage.jpg)
 
 ## About Page
 ![](/2.jpg)
