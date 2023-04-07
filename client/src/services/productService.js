@@ -22,7 +22,7 @@ export const productServiceFactory = (token) => {
     };
 
     const update = async (productId, data) => {
-       
+
         const result = await request.put(`${baseUrl}/${productId}`, data)
         console.log(result);
         return result;
@@ -36,13 +36,6 @@ export const productServiceFactory = (token) => {
         return products;
     };
 
-    //  const getAllProducts = async () => {
-    //     const searchQuery = encodeURIComponent(`productId="${productId}"`);
-    //     const relationQuery = encodeURIComponent(`author=_ownerId:users`);
-    //     const result = await request.get(`${baseUrl}?where=${searchQuery}&load=${relationQuery}`);//search
-    //     const comments = Object.values(result)
-    //     return comments;
-    // };
 
     const getOne = async (productId) => {
         const result = await request.get(`${baseUrl}/${productId}`);
@@ -75,7 +68,8 @@ export const productServiceFactory = (token) => {
         getOne,
         getByCategory,
         getProductsByUserId,
-       
+      
+
     }
 }
 

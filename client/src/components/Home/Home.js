@@ -11,10 +11,10 @@ export default function Home() {
 
     const { products, isLoading } = useProductsContext();
     // const { products } = useContext(WoodContext)
-    console.log(products);
+    //console.log(products);
 
     const lastTwoProducts = products.slice(-2);
-    console.log(lastTwoProducts);
+    //console.log(lastTwoProducts);
 
     return (
         <>

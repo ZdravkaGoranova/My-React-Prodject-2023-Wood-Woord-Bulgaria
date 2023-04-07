@@ -22,7 +22,8 @@ export default function Details(
 
     const navigate = useNavigate();
 
-    const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
+    const { userId, userEmail, isAuthenticated, setErrorMessage } = useContext(AuthContext);
+
     console.log(userId)
 
     const { productId } = useParams();
@@ -35,6 +36,10 @@ export default function Details(
 
     const isOwner = product._ownerId === userId;
 
+
+
+
+
     const productLikes = product?.likes
 
     const isLiked = productLikes?.some(item => {
@@ -46,23 +51,28 @@ export default function Details(
     useEffect(() => {
         window.scrollTo(0, 0);
         setIsLoading(true);
+        try {
+            Promise.all([
+                productService.getOne(productId),
+                commentService.getAll(productId),//промис чейнинг
+                likeService.getAll(productId)
 
-        Promise.all([
-            productService.getOne(productId),
-            commentService.getAll(productId),//промис чейнинг
-            likeService.getAll(productId)
+            ])
+                .then(([productData, comments, likes]) => {
+                    const productState = {
+                        ...productData,
+                        comments,
+                        likes,
+                    };
+                    // setProduct(productState)
+                    dispatch({ type: 'PRODUCT_FETCH', payload: productState })
+                    setIsLoading(false);
+                });
+        } catch (error) {
 
-        ])
-            .then(([productData, comments, likes]) => {
-                const productState = {
-                    ...productData,
-                    comments,
-                    likes,
-                };
-                // setProduct(productState)
-                dispatch({ type: 'PRODUCT_FETCH', payload: productState })
-                setIsLoading(false);
-            });
+            setErrorMessage(error.message);
+        }
+
     }, [productId]);
 
     console.log(product)
@@ -74,52 +84,60 @@ export default function Details(
             navigate(`/profile/${userId}`);
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
+            setErrorMessage(error.message);
         }
     }
 
     const onCommentSubmit = async (values) => {
-        const response = await commentService.create(
-            productId,
-            values.comment,
-            userEmail,
-        )
-        console.log(response)
-
-        dispatch({
-            type: 'COMMENT_ADD',
-            payload: response,
-            userEmail,
-        });
-
-        // setProduct(state => ({
-        //     ...state,
-        //     comments: [...state.comments, {
-        //         ...response,
-        //         author: {
-        //             email: userEmail
-        //         }
-        //     }]
-        // }))
-
+        try {
+            const response = await commentService.create(
+                productId,
+                values.comment,
+                userEmail,
+            )
+            console.log(response)
+            dispatch({
+                type: 'COMMENT_ADD',
+                payload: response,
+                userEmail,
+            });
+            // setProduct(state => ({
+            //     ...state,
+            //     comments: [...state.comments, {
+            //         ...response,
+            //         author: {
+            //             email: userEmail
+            //         }
+            //     }]
+            // }))
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
     };
 
     const onLike = async (values) => {
-        const response = await likeService.create(
-            productId,
-            values.like,
-            userEmail,
-        )
-        console.log(response)
+        try {
+            const response = await likeService.create(
+                productId,
+                values.like,
+                userEmail,
+            )
+            console.log(response)
 
-        dispatch({
-            type: "LIKE_ADD",
-            payload: response,
-        });
+            dispatch({
+                type: "LIKE_ADD",
+                payload: response,
+            });
 
-        // setProduct(state => ({
-        //     ...state,
-        //     likes: [...state.likes, response]
-        // }))
+            // setProduct(state => ({
+            //     ...state,
+            //     likes: [...state.likes, response]
+            // }))
+
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
+
     };
     const getLastUpdated = (updatedAt) => {
         const now = new Date();

@@ -28,7 +28,8 @@ export default function Catalog() {
                     e.preventDefault();
                     searchProductTitle(searchTerm);
                 }}>
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                     <button className="btn btn-light btn-custom ml-3" type="submit" >Search</button>
                 </form>
             </div>

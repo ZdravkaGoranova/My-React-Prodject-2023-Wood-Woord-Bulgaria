@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { productServiceFactory } from '../services/productService.js';
 import { productReducer } from '../reducers/productReducer.js';
+import { AuthContext } from './AuthContext.js';
 
 export const WoodContext = createContext();
 
-const productService = productServiceFactory();
+
 
 const initialState = {
     products: [],
@@ -22,6 +23,25 @@ export const ProductProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [state, dispatch] = useReducer(productReducer, initialState)
 
+    const productService = productServiceFactory();
+
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+    const hideErrorBox = () => {
+        setErrorMessage("");
+        setShowErrorMessage("false");
+    };
+
+    useEffect(() => {
+
+        if (errorMessage !== "") {
+            setShowErrorMessage(true);
+            console.log(errorMessage)
+            console.log(showErrorMessage)
+        }
+    }, [errorMessage]);
+
     useEffect(() => {
 
         fetchProducts();
@@ -38,7 +58,7 @@ export const ProductProvider = ({ children }) => {
         dispatch({ type: "FILTRED_PRODUCT_TYPE" });
 
     }, [state.selectedType, state.products, state.selectetProduct, state.delProduct])
-  
+
     const fetchProducts = async () => {
         dispatch({ type: "GET_PRODUCT_START" })
         setIsLoading(true);
@@ -50,6 +70,7 @@ export const ProductProvider = ({ children }) => {
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
             setIsLoading(false);
+            setErrorMessage(error.message);
         }
     };
 
@@ -66,12 +87,13 @@ export const ProductProvider = ({ children }) => {
         try {
             const response = await productService.getAll();
             const products = response;
-            
+
             dispatch({ type: "GET_All_PRODUCT", payload: products })
             setIsLoading(false);
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
             setIsLoading(false);
+            setErrorMessage(error.message);
         }
     };
     const addProduct = async (productData) => {
@@ -86,6 +108,7 @@ export const ProductProvider = ({ children }) => {
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
             setIsLoading(false);
+            setErrorMessage(error.message);
         }
     };
 
@@ -102,6 +125,7 @@ export const ProductProvider = ({ children }) => {
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
             setIsLoading(false);
+            setErrorMessage(error.message);
         }
     }
 
@@ -115,12 +139,13 @@ export const ProductProvider = ({ children }) => {
         } catch (error) {
             dispatch({ type: "GET_PRODUCT_ERROR" })
             setIsLoading(false);
+            setErrorMessage(error.message);
         }
     }
     return (
-        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct,deleteProduct,searchProductTitle,allProducts,isLoading  }} >
+        <WoodContext.Provider value={{ ...state, fetchProducts, cangeProductType, updateProduct, addProduct, deleteProduct, searchProductTitle, allProducts, isLoading }} >
             {children}
-          
+
         </WoodContext.Provider>
     )
 }

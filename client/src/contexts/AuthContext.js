@@ -12,7 +12,7 @@ export const AuthProvider = ({
     const navigate = useNavigate();
 
     const [auth, setAuth] = useLocalStorage('auth', {});
-    const authService = authServiceFactory(auth.accessToken);
+    const authService = authServiceFactory();//auth.accessToken
 
     const [errorMessage, setErrorMessage] = useState('');
     const [showErrorMessage, setShowErrorMessage] = useState(false);

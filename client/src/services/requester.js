@@ -36,12 +36,11 @@ const requester = async (method, url, data) => {
         throw new Error('response is  null or undefined');
     }
 
-
     // console.log(response)
     // console.log(response.status)
 
     const result = await response.json();
-
+   // console.log(result)
     if (!response.ok) {
         throw result;
     }
