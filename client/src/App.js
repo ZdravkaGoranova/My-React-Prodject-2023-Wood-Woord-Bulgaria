@@ -1,5 +1,5 @@
 
-import './App.css';
+
 import './css/site.css';
 
 import { Routes, Route } from 'react-router-dom';
