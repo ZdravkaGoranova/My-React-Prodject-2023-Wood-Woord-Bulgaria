@@ -14,7 +14,7 @@ export default function MyProducts({
   return (
     <div className="eventBoard">
     <div className="event-info">
-        <img src={picture} />
+        <img src={picture} alt={title}/>
         <h2>Title:  {title}</h2>
         <Link to={`/details/${_id}`} className="details-button">Details</Link>
     </div>
